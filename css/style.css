@@ -1,0 +1,77 @@
+#container {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+
+    overflow: hidden;
+}
+
+#error {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: flex;
+    position: absolute;
+}
+
+@media (orientation: portrait) {
+    #container {
+        display: none;
+    }
+
+    #error {
+        opacity: 1;
+        font-size: 10dvw;
+    }
+}
+
+.loading {
+    position: absolute;
+    color: aliceblue;
+}
+
+#texture {
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    background-image: url(../assets/images/texture2.png);
+
+    opacity: 0.1;
+
+    z-index: 100000;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.transparent {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.vale {
+    position: fixed;
+    top: 0;
+    left: calc(-100dvw - 4em);
+    width: 100dvw;
+    height: 100dvh;
+    background-color: #111;
+    z-index: 1000;
+
+    box-shadow: 0px 0px 4em 4em #111;
+}
+
+button.active {
+    &::before {
+        content: "▶";
+        animation: rotateX 2s infinite linear;
+        line-height: 0.9;
+    }
+}

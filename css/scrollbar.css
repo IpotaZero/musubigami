@@ -1,0 +1,29 @@
+/* シンプルなスクロールバー */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+::-webkit-outer-spin-button,
+::-webkit-inner-spin-button {
+    display: none;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+}

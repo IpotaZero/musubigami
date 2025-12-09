@@ -1,0 +1,15 @@
+/* @font-face {
+    font-family: mincho;
+    src: url(../assets/fonts/Hangyaku-G3rpg.ttf);
+} */
+
+@font-face {
+    font-family: mincho;
+    src: url(../assets/fonts/KH-Dot-Hibiya-32.ttf);
+}
+
+/* 
+@font-face {
+    font-family: dot;
+    src: url(../assets/fonts/KH-Dot-Hibiya-32.ttf);
+} */

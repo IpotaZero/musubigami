@@ -1,0 +1,57 @@
+.vertex {
+    stroke-width: 1;
+    fill: #111;
+    stroke: whitesmoke;
+
+    transition: fill 0.4s ease-out, stroke 0.4s ease-out;
+
+    &[data-active="true"] {
+        cursor: pointer;
+
+        stroke: limegreen;
+        fill: rgb(27, 31, 27);
+
+        &:hover {
+            transition: none;
+            stroke: gold;
+        }
+    }
+}
+
+.edge {
+    pointer-events: none;
+
+    transition: stroke 0.4s ease-out;
+
+    &[data-left="0"] {
+        stroke: gold;
+    }
+
+    &[data-left="1"] {
+        stroke: #888;
+    }
+
+    &[data-left="2"] {
+        stroke: rgb(73, 73, 130);
+    }
+
+    &[data-left="3"] {
+        stroke: rgb(35, 93, 118);
+    }
+}
+
+.game-pen {
+    position: absolute;
+    height: 13dvh;
+    aspect-ratio: 1;
+
+    pointer-events: none;
+    background-image: url("../assets/images/yubi.png");
+    background-size: contain;
+
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.game-svg {
+    background-color: transparent;
+}

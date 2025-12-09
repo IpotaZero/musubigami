@@ -1,0 +1,26 @@
+[
+    [
+        { "type": "character", "icon": "assets/images/icons/y=yu.png" },
+        "よし、ええとお……。どうやるんだっけ?",
+        {
+            "type": "character",
+            "icon": "assets/images/icons/nabla.png"
+        },
+        "∇゛",
+        { "type": "character", "icon": "assets/images/icons/y=yu.png" },
+        "あっ、そうだ。四角をクリックして指を動かすんだった。",
+        "全ての辺を黄色くすれば万事解決だっ!"
+    ],
+    [
+        { "type": "character", "icon": "assets/images/icons/y=yu.png" },
+        "ん……? 青っぽい辺がある。なんだろ?",
+        {
+            "type": "character",
+            "icon": "assets/images/icons/nabla.png"
+        },
+        "∇゛",
+        { "type": "character", "icon": "assets/images/icons/y=yu.png" },
+        "へえ、2回通らなくちゃあいけないんだね。分かった!"
+    ],
+    ["この矢印は……一方通行かな?"]
+]

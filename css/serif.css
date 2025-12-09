@@ -1,0 +1,90 @@
+#serif-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0.5em;
+
+    cursor: pointer;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &.shown {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+#serif-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    border-top: rgb(1, 14, 5) 1.8em solid;
+    border-bottom: rgb(1, 14, 5) 1.8em solid;
+
+    transition: opacity 1s ease;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+#serif-window {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 100%;
+    height: auto;
+    min-height: 5em;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 0.1em solid #111;
+    padding: 0.5em;
+    gap: 0.5em;
+}
+
+#serif-icon-container {
+    height: 3.8em;
+    aspect-ratio: 1;
+    border: #111 0.1em solid;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+#serif-text-container {
+    height: 100%;
+    width: 100%;
+    line-height: 1.2em;
+
+    button {
+        margin-top: 0.5em;
+        display: block;
+        width: 100%;
+        border: #111 0.05em solid;
+        padding: 0.2em;
+        font-size: 1em;
+        cursor: pointer;
+    }
+}

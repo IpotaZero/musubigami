@@ -1,0 +1,219 @@
+<div class="page" id="first">
+    <h1>ムスビガミ</h1>
+
+    <p id="click">Please Click</p>
+
+    <p id="credit">Presented by MCR</p>
+
+    <div id="buttons">
+        <button data-link="start" data-position="0,0">始める</button>
+        <button data-link="how-to-play" data-position="1,0">遊び方</button>
+        <button data-link="setting" data-position="2,0">設定</button>
+        <button data-link="fullscreen" data-position="3,0">全画面</button>
+        <button data-link="credit" data-position="4,0">Credit</button>
+    </div>
+</div>
+
+<div class="page" id="how-to-play">
+    <button data-back="1">戻る</button>
+    頂点をクリックして指を動かし、全ての辺を黄色くしよう。
+</div>
+
+<div class="page" id="setting">
+    <div for="bgm-volume">
+        BGM Volume
+        <input type="range" name="bgm-volume" id="bgm-volume" min="0" max="9" value="9" />
+    </div>
+    <div for="se-volume">
+        SE Volume
+        <input type="range" name="se-volume" id="se-volume" min="0" max="9" value="9" />
+    </div>
+    <button data-link="delete-adventure-data" data-position="0,0">探索データを消す</button>
+    <button data-link="delete-data" data-position="1,0">全てのデータを消す</button>
+
+    <button data-back="1">戻る</button>
+</div>
+
+<div class="page" id="credit">
+    <button data-back="1">戻る</button>
+
+    <p>フォント: <a href="http://jikasei.me/font/kh-dotfont/" target="_blank">日比谷32(明朝体)</a></p>
+    <br />
+    <p>企画: いぽた</p>
+    <p>制作: <a href="https://x.com/ocu_mcr" target="_blank">MCR</a></p>
+</div>
+
+<style>
+    .page {
+        padding: 1em;
+    }
+
+    #first {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        cursor: pointer;
+
+        #credit {
+            position: absolute;
+            bottom: 1em;
+            left: 1em;
+            font-size: 4dvh;
+            color: gray;
+        }
+
+        &.show {
+            cursor: default;
+
+            h1 {
+                left: 0.5em;
+                transform: translateX(0);
+            }
+
+            #click {
+                opacity: 0;
+                animation: none;
+            }
+
+            #buttons {
+                opacity: 1;
+                transform: translateX(0);
+                pointer-events: auto;
+            }
+        }
+
+        h1 {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 1em;
+            height: 100%;
+
+            font-size: 16dvh;
+            font-weight: unset;
+            line-height: 1.4em;
+
+            writing-mode: vertical-rl;
+
+            transition: left 1s ease, transform 1s ease;
+        }
+
+        #click {
+            position: absolute;
+            bottom: 1em;
+            font-size: 4dvh;
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+
+            color: gray;
+
+            animation: blink 1s steps(1, end) infinite;
+        }
+
+        #buttons {
+            /* keep it renderable so transitions work (don't use display:none) */
+            display: flex;
+            position: absolute;
+            right: 1em;
+            bottom: 1em;
+
+            flex-direction: column;
+            align-self: flex-end;
+            gap: 0.5em;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 2s ease, transform 1s ease;
+            pointer-events: none;
+
+            & button {
+                align-self: flex-end;
+                text-align: right;
+            }
+        }
+    }
+
+    #how-to-play {
+        flex-direction: column;
+        gap: 1em;
+
+        align-items: flex-start;
+    }
+
+    [data-back] {
+        position: fixed;
+        left: 1em;
+        top: 1em;
+        font-size: 6dvh;
+    }
+
+    #past {
+        justify-content: flex-start;
+
+        gap: 1em;
+
+        overflow-x: auto;
+
+        flex-wrap: wrap;
+
+        padding: 4em 1em;
+
+        & button[data-link] {
+            padding: 0.5em;
+            border: whitesmoke 1px solid;
+
+            &.uncleared-stage {
+                opacity: 0.2;
+                cursor: auto;
+
+                &:hover {
+                    scale: 1;
+                }
+            }
+        }
+    }
+
+    #setting {
+        flex-direction: column;
+
+        gap: 1em;
+
+        & input {
+            pointer-events: all;
+            width: 100%;
+        }
+    }
+
+    .particle0 {
+        top: -100%;
+        animation: fall linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes fall {
+        0% {
+            top: 0;
+            transform: rotate(0);
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 0.4;
+        }
+
+        100% {
+            top: 100%;
+            transform: rotate(calc(360deg * var(--rotation)));
+            opacity: 0;
+        }
+    }
+
+    #credit {
+        flex-direction: column;
+    }
+</style>

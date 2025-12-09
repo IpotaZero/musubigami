@@ -1,0 +1,104 @@
+.text-end::after {
+    content: "/";
+    animation: blink 1s steps(1, end) infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-out {
+    animation: fade-out 1s steps(10, end) forwards;
+    opacity: 1;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-in {
+    animation: fade-in 0.5s forwards;
+    opacity: 0;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.move-right {
+    animation: move-right 1s steps(10, end) forwards;
+}
+
+@property --theta {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.yurayura {
+    animation: theta 0.4s linear infinite;
+    transform: translate(calc(sin(var(--theta) * 3) * 0.3dvh), calc(sin(var(--theta) * 2) * 0.3dvh));
+}
+
+@keyframes theta {
+    from {
+        --theta: 0deg;
+    }
+
+    to {
+        --theta: 360deg;
+    }
+}
+
+.fade {
+    animation: fade 1.5s 1;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+        transform: translateY(10%);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-10%);
+    }
+}
+
+@keyframes rotateX {
+    from {
+        rotate: x 0;
+    }
+
+    to {
+        rotate: x 360deg;
+    }
+}

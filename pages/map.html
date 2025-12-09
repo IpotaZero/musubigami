@@ -1,0 +1,102 @@
+<div id="ch0" class="page">
+    <x-graph src="assets/maps/ch0.json"></x-graph>
+    <button class="map-arrow-right hidden" data-link="ch1"><img src="assets/images/right.png" alt="" /></button>
+</div>
+
+<div id="ch1" class="page">
+    <button class="map-arrow-left" data-link="ch0"><img src="assets/images/left.png" alt="" /></button>
+    <button class="map-arrow-right hidden" data-link="ch2"><img src="assets/images/right.png" alt="" /></button>
+    <x-graph src="assets/maps/ch0.json"></x-graph>
+</div>
+
+<div id="ch2" class="page">
+    <button class="map-arrow-left" data-link="ch1"><img src="assets/images/left.png" alt="" /></button>
+    <x-graph src="assets/maps/ch0.json"></x-graph>
+</div>
+
+<button id="back" data-link="back"><img src="assets/images/back.png" alt="" /></button>
+<span id="Z">[Z]長押しでスキップ</span>
+
+<!-- 最初の方に分岐があるのは良くない -->
+<!-- 分岐は早めに合流した方がいい -->
+
+<style>
+    #Z {
+        position: absolute;
+        pointer-events: none;
+        opacity: 0;
+        right: 1em;
+        bottom: 1em;
+        z-index: 100000;
+        color: #1118;
+        font-size: 0.9em;
+    }
+
+    #back {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        img {
+            width: 3em;
+        }
+    }
+
+    .page {
+        x-graph {
+            display: flex;
+            height: 100%;
+            align-items: center;
+
+            svg {
+                height: 100%;
+            }
+        }
+    }
+
+    .map-arrow-right {
+        position: absolute;
+        right: 0.2em;
+        width: 3em;
+        height: 3em;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .map-arrow-left {
+        position: absolute;
+        left: 0.2em;
+        width: 3em;
+        height: 3em;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .path {
+        stroke: #555;
+        stroke-width: 1;
+        fill: transparent;
+    }
+
+    .stage {
+        cursor: pointer;
+
+        stroke: #111;
+        stroke-width: 0.75;
+        fill: whitesmoke;
+
+        &:hover {
+            fill: #ddd;
+        }
+    }
+
+    .star-icon {
+        pointer-events: none;
+    }
+</style>
