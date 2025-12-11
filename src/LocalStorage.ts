@@ -46,6 +46,12 @@ export class LocalStorage {
     static clear() {
         localStorage.removeItem(this.#KEY)
     }
+
+    static allWin() {
+        for (let i = 0; i < 21; i++) {
+            this.setStageData(i, { cleared: true })
+        }
+    }
 }
 
 type Data = {
@@ -58,3 +64,4 @@ type StageData = {
 }
 
 type Flag = "始まり"
+;(window as any).LocalStorage = LocalStorage

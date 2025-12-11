@@ -4,10 +4,11 @@ export type SerifCommand = string | { type: "character"; icon: string } | { type
 
 export class Serif {
     static readonly #container = document.createElement("div")
-    static readonly #background = document.createElement("div")
-    static readonly #window = document.createElement("div")
-    static readonly #textContainer = document.createElement("div")
-    static readonly #iconContainer = document.createElement("div")
+    static #background: HTMLDivElement
+    static #window: HTMLDivElement
+    static #iconContainer: HTMLDivElement
+    static #textContainer: HTMLDivElement
+    static #Z: HTMLSpanElement
 
     static #mode: "say" | "ask" = "say"
 
@@ -16,19 +17,20 @@ export class Serif {
     static #cue: SerifCommand[] = []
 
     static init() {
-        this.#background.id = "serif-background"
-        this.#container.appendChild(this.#background)
+        this.#container.innerHTML = `
+            <div id="serif-background"></div>
+            <div id="serif-window">
+                <div id="serif-icon-container" class="hidden"></div>
+                <div id="serif-text-container" class="text-end"></div>
+                <span id="serif-Z">[Z]長押しでスキップ</span>
+            </div>
+        `
 
-        this.#window.id = "serif-window"
-        this.#container.appendChild(this.#window)
-
-        this.#iconContainer.id = "serif-icon-container"
-        this.#iconContainer.classList.add("hidden")
-        this.#window.appendChild(this.#iconContainer)
-
-        this.#textContainer.id = "serif-text-container"
-        this.#textContainer.classList.add("text-end")
-        this.#window.appendChild(this.#textContainer)
+        this.#background = this.#container.querySelector("#serif-background")!
+        this.#window = this.#container.querySelector("#serif-window")!
+        this.#iconContainer = this.#container.querySelector("#serif-icon-container")!
+        this.#textContainer = this.#container.querySelector("#serif-text-container")!
+        this.#Z = this.#container.querySelector("#serif-Z")!
 
         this.#container.id = "serif-container"
         document.body.appendChild(this.#container)
@@ -50,6 +52,7 @@ export class Serif {
 
     static ask(title: string, choices: string[]): Promise<number> {
         this.#mode = "ask"
+        this.#Z.classList.add("hidden")
         this.#reset()
 
         this.#textContainer.innerHTML = title + "<br/>"
@@ -77,6 +80,7 @@ export class Serif {
 
     static say(...texts: SerifCommand[]) {
         this.#mode = "say"
+        this.#Z.classList.remove("hidden")
         this.#reset()
 
         this.#textContainer.innerHTML = ""

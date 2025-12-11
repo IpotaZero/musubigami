@@ -6,32 +6,20 @@
 <div id="ch1" class="page">
     <button class="map-arrow-left" data-link="ch0"><img src="assets/images/left.png" alt="" /></button>
     <button class="map-arrow-right hidden" data-link="ch2"><img src="assets/images/right.png" alt="" /></button>
-    <x-graph src="assets/maps/ch0.json"></x-graph>
+    <x-graph src="assets/maps/ch1.json"></x-graph>
 </div>
 
 <div id="ch2" class="page">
     <button class="map-arrow-left" data-link="ch1"><img src="assets/images/left.png" alt="" /></button>
-    <x-graph src="assets/maps/ch0.json"></x-graph>
+    <x-graph src="assets/maps/ch2.json"></x-graph>
 </div>
 
 <button id="back" data-link="back"><img src="assets/images/back.png" alt="" /></button>
-<span id="Z">[Z]長押しでスキップ</span>
 
 <!-- 最初の方に分岐があるのは良くない -->
 <!-- 分岐は早めに合流した方がいい -->
 
 <style>
-    #Z {
-        position: absolute;
-        pointer-events: none;
-        opacity: 0;
-        right: 1em;
-        bottom: 1em;
-        z-index: 100000;
-        color: #1118;
-        font-size: 0.9em;
-    }
-
     #back {
         position: absolute;
         top: 0;

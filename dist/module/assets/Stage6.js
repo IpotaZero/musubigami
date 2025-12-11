@@ -1,2 +1,2 @@
 function t(){return{vertices:[[-150,-100],[-150,100],[150,100],[150,-100],[-50,-50],[-50,50],[50,50],[50,-50]],edges:[[0,1],[0,3],[0,4],[1,2],[6,2,1,!0],[2,7],[2,3],[3,7],[4,5,3,!0],[4,7,2],[5,6,3],[5,1,2,!0],[6,7,2]]}}export{t as stage};
-//# sourceMappingURL=Stage7-OzFRfmOd.js.map
+//# sourceMappingURL=Stage6.js.map

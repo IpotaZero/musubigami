@@ -98,13 +98,8 @@ export class SceneMap extends Scene {
      * ステージがクリックされた時の処理
      */
     async #onStageClick(stageId: number) {
-        const Z = Dom.container.querySelector("#Z")!
-        Z.classList.add("fade-in")
-
         const commands = await fetch(`../../assets/stories/start.json`).then((r) => r.json())
         await Serif.say(...commands[stageId])
-
-        Z.classList.remove("fade-in")
 
         const choice = await Serif.ask("やる?", ["やる", "やらない"])
         if (choice !== 0) return
@@ -164,9 +159,8 @@ class MapGraphView {
      * SVG内の特定のステージにクリア済みの星マークを追加する
      */
     static markupStar(svg: SVGSVGElement, button: SVGRectElement) {
-        const rect = button.getBBox()
-        const x = rect.x + rect.width
-        const y = rect.y
+        const x = Number(button.getAttribute("x"))
+        const y = Number(button.getAttribute("y"))
 
         const img = document.createElementNS("http://www.w3.org/2000/svg", "image")
         img.classList.add("star-icon")

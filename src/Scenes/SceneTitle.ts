@@ -28,13 +28,15 @@ export class SceneTitle extends Scene {
             // KeyboardOperation.update(page)
         })
 
-        this.#pages.on("start", async (pages) => {
+        this.#pages.before("start", async (pages) => {
             const { SceneMap } = await import("./SceneMap")
             await SceneChanger.goto(() => new SceneMap(0))
 
             if (!LocalStorage.getFlags().includes("始まり")) {
                 this.#始まり()
             }
+
+            return true
         })
 
         this.#pages.before("delete-data", async () => {

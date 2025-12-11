@@ -88,3 +88,13 @@
         cursor: pointer;
     }
 }
+
+#serif-Z {
+    position: absolute;
+    pointer-events: none;
+    right: 1em;
+    bottom: 1em;
+    z-index: 100000;
+    color: #1114;
+    font-size: 0.7em;
+}

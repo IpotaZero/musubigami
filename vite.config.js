@@ -9,6 +9,8 @@ export default defineConfig({
             output: {
                 entryFileNames: "run.js",
                 dir: "dist/module",
+                chunkFileNames: `assets/[name].js`,
+                assetFileNames: `assets/[name].[ext]`,
             },
         },
         sourcemap: true,

@@ -16,7 +16,11 @@
 
 <div class="page" id="how-to-play">
     <button data-back="1">戻る</button>
-    頂点をクリックして指を動かし、全ての辺を黄色くしよう。
+    <h3>MAP</h3>
+    <p>ステージを一つずつクリアしていく。</p>
+
+    <h3>GAME</h3>
+    <p>頂点をクリックして指を動かし、全ての辺を黄色くしよう。</p>
 </div>
 
 <div class="page" id="setting">
@@ -28,8 +32,8 @@
         SE Volume
         <input type="range" name="se-volume" id="se-volume" min="0" max="9" value="9" />
     </div>
-    <button data-link="delete-adventure-data" data-position="0,0">探索データを消す</button>
-    <button data-link="delete-data" data-position="1,0">全てのデータを消す</button>
+    <!-- <button data-link="delete-adventure-data" data-position="0,0">探索データを消す</button> -->
+    <button data-link="delete-data" data-position="1,0">データを消す</button>
 
     <button data-back="1">戻る</button>
 </div>
@@ -142,6 +146,9 @@
         flex-direction: column;
         gap: 1em;
 
+        padding: 3em;
+
+        justify-content: flex-start;
         align-items: flex-start;
     }
 

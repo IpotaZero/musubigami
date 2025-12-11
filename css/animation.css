@@ -73,7 +73,7 @@
 }
 
 .fade {
-    animation: fade 1.5s 1;
+    animation: fade 2s 1;
 }
 
 @keyframes fade {
