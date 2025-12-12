@@ -32,12 +32,12 @@ export class SceneGame extends Scene {
 
     #setupButtons(ch: Chapters, stageId: number) {
         this.#pages.before("back", async () => {
-            const { SceneMap } = await import("./SceneMap")
+            const { SceneMap } = await import("./SceneMap.js")
             SceneChanger.goto(() => new SceneMap(ch))
         })
 
         this.#pages.before("next", async () => {
-            const { SceneMap } = await import("./SceneMap")
+            const { SceneMap } = await import("./SceneMap.js")
             await SceneChanger.goto(() => new SceneMap(ch))
 
             const commands = await fetch(`../../assets/stories/end.json`).then((res) => res.json())
@@ -53,8 +53,21 @@ export class SceneGame extends Scene {
     async #setupGame(ch: Chapters, stageId: number) {
         const container = this.#pages.pages.get("first")!
 
+        // if式欲しい......欲しくない?
+        const s = (() => {
+            if (stageId >= 13) {
+                return stageId - 13
+            }
+
+            if (stageId >= 7) {
+                return stageId - 7
+            }
+
+            return stageId
+        })()
+
         const stageLabel = container.querySelector("#stage-id")!
-        stageLabel.textContent = `Stage: ${ch}-${stageId}`
+        stageLabel.textContent = `Stage: ${ch}-${s}`
 
         const center = container.querySelector("#center")!
         center.appendChild(this.#game.svg)

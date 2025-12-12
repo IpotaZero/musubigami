@@ -29,7 +29,7 @@ export class SceneTitle extends Scene {
         })
 
         this.#pages.before("start", async (pages) => {
-            const { SceneMap } = await import("./SceneMap")
+            const { SceneMap } = await import("./SceneMap.js")
             await SceneChanger.goto(() => new SceneMap(0))
 
             if (!LocalStorage.getFlags().includes("始まり")) {

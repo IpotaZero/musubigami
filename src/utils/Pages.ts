@@ -1,5 +1,4 @@
 import { Awaits } from "./Awaits"
-import { parseToNumber } from "./Utils"
 import { RegExpDict } from "./RegExpDict"
 
 type OnHandler = (pages: Pages) => void
@@ -150,4 +149,12 @@ export class Pages {
             this.#onHandlers.getAll(id).forEach((handler) => handler(this))
         })
     }
+}
+
+function parseToNumber(str: string | undefined | null, defaultValue: number) {
+    if (!str) return defaultValue
+
+    if (Number.isNaN(Number(str))) return defaultValue
+
+    return Number(str)
 }

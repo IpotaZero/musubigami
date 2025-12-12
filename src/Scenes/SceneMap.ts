@@ -88,7 +88,7 @@ export class SceneMap extends Scene {
 
     #setupBackButton() {
         this.#pages.before("back", async () => {
-            const { SceneTitle } = await import("./SceneTitle")
+            const { SceneTitle } = await import("./SceneTitle.js")
             SceneChanger.goto(() => new SceneTitle())
             return true
         })
@@ -120,7 +120,7 @@ export class SceneMap extends Scene {
     }
 
     async #transitionToGame(stageId: number) {
-        const { SceneGame } = await import("./SceneGame")
+        const { SceneGame } = await import("./SceneGame.js")
 
         await SceneChanger.goto(() => new SceneGame(this.#currentCh, stageId), {
             fadeOut: Awaits.valeOut,

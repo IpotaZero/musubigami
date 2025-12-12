@@ -4,8 +4,10 @@ import { SceneChanger } from "./Scenes/SceneChanger"
 
 import { Graph } from "./utils/Graph"
 import { KeyboardOperation } from "./utils/KeyboardOperation"
+import { PsdElement } from "./utils/PsdElement"
 import { Serif } from "./utils/Serif"
 
+PsdElement
 Graph
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -19,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         LocalStorage.clear()
     }
 
-    const { SceneTitle } = await import("./Scenes/SceneTitle")
+    const { SceneTitle } = await import("./Scenes/SceneTitle.js")
     SceneChanger.init(new SceneTitle())
 })
 
