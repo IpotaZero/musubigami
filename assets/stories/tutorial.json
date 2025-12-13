@@ -1,8 +1,10 @@
 [
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait", "url": "assets/images/character/rha.psd", "name": "rha" },
         { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "ユユ:<br>よし、ええとお……。どうやるんだっけ?",
+        { "type": "portrait-change", "name": "rha", "layers": "normal" },
         "∇゛",
         "ユユ:<br>あっ、そうだ。四角をクリックして指を動かすんだった。",
         { "type": "portrait-change", "name": "yuyu", "layers": "smile" },
@@ -10,8 +12,10 @@
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait", "url": "assets/images/character/rha.psd", "name": "rha" },
         { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "ユユ:<br>ん……? 青っぽい辺がある。なんだろ?",
+        { "type": "portrait-change", "name": "rha", "layers": "normal" },
         "∇゛",
         "ユユ:<br>へえ、2回通らなくちゃあいけないんだね。分かった!"
     ],

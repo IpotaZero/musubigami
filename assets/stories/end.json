@@ -1,8 +1,10 @@
 [
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait", "url": "assets/images/character/rha.psd", "name": "rha" },
         { "type": "portrait-change", "name": "yuyu", "layers": "smile" },
         "スズ:<br>やったあ! ユユ! 見つかったよお!",
+        { "type": "portrait-change", "name": "rha", "layers": "normal" },
         "ユユ:<br>(万事解決だね、ラﾞァくんっ!)"
     ],
     [

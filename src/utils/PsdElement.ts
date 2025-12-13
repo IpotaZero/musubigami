@@ -4,12 +4,11 @@ type PsdElementOptions = Partial<{ url: string; layers: string }>
 
 class PsdElement extends HTMLElement {
     static readonly observedAttributes = ["src", "layers"] as const
+    private resizeObserver: ResizeObserver
 
     private psd: Psd | null = null
     private shadow: ShadowRoot
     private container: HTMLDivElement = document.createElement("div")
-
-    private resizeObserver: ResizeObserver
 
     private baseWidth = 0
     private baseHeight = 0
@@ -35,9 +34,20 @@ class PsdElement extends HTMLElement {
                 transform-origin: center;
             }
 
-            canvas {
+            .psd-canvas {
                 position: absolute;     /* 全レイヤーが同一原点に重なる */
                 image-rendering: pixelated;
+                animation: fade-in 0.1s linear; 
+            }
+
+            @keyframes fade-in {
+                from {
+                    opacity: 0.5;
+                }
+
+                to {
+                    opacity: 1;
+                }
             }
         `
         this.shadow.appendChild(style)
@@ -148,6 +158,7 @@ class PsdElement extends HTMLElement {
             layer.canvas = PsdElement.createCanvas(layer.imageData as ImageData)
             layer.canvas.style.left = `${layer.left}px`
             layer.canvas.style.top = `${layer.top}px`
+            layer.canvas.classList.add("psd-canvas")
         }
 
         this.container.appendChild(layer.canvas)

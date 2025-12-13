@@ -1,6 +1,7 @@
 [
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait", "url": "assets/images/character/rha.psd", "name": "rha" },
         { "type": "portrait-change", "name": "yuyu", "layers": "smile" },
         "ユユ:<br>おっはよー!",
         "スズ:<br>おはよーユユ。ねえ聞いてよ!",
@@ -9,9 +10,15 @@
         "スズ:<br>あたしのキーホルダー、どっか行っちゃったの!",
         { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "ユユ:<br>うーむ、困ったなあ。",
+        { "type": "portrait-change", "name": "rha", "layers": "normal" },
         "∇゛",
         { "type": "portrait-change", "name": "yuyu", "layers": "smile" },
         "ユユ:<br>(そうだね、ラﾞァくん。縁を結んであげよう!)"
+    ],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait", "url": "assets/images/character/rha.psd", "name": "rha" },
+        ""
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
@@ -42,8 +49,6 @@
     ],
     [""],
     [""],
-    [""],
-    [""],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
@@ -53,6 +58,7 @@
         "縁切りの神:<br>ならその力は何だ。君も神なのさ。神同士仲よくしようじゃあないか。",
         "ユユ:<br>できるわけないだろ! 人を不幸にするような奴と仲良くなんて!",
         "縁切りの神:<br>笑えるな! 君も同じだと言うのに!",
+        { "type": "portrait-change", "name": "yuyu", "layers": "kime" },
         "ユユ:<br>黙れっ! もういい! 縁結びバトルだっ!"
     ],
     []
