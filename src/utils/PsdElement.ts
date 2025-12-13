@@ -1,5 +1,7 @@
 import { readPsd, Psd, Layer } from "ag-psd"
 
+type PsdElementOptions = Partial<{ url: string; layers: string }>
+
 class PsdElement extends HTMLElement {
     static readonly observedAttributes = ["src", "layers"] as const
 
@@ -12,11 +14,12 @@ class PsdElement extends HTMLElement {
     private baseWidth = 0
     private baseHeight = 0
 
-    constructor() {
+    constructor(options: PsdElementOptions = {}) {
         super()
-        this.shadow = this.attachShadow({ mode: "open" })
+        this.#setupAttribute(options)
 
         this.container.classList.add("container")
+        this.shadow = this.attachShadow({ mode: "closed" })
 
         // --- Default CSS injection ---
         const style = document.createElement("style")
@@ -37,13 +40,31 @@ class PsdElement extends HTMLElement {
                 image-rendering: pixelated;
             }
         `
-        this.shadow.appendChild(this.container)
         this.shadow.appendChild(style)
+        this.shadow.appendChild(this.container)
 
         this.resizeObserver = new ResizeObserver(() => {
             this.updateScale()
         })
         this.resizeObserver.observe(this)
+    }
+
+    #setupAttribute(options: PsdElementOptions) {
+        if (options.url) {
+            this.setAttribute("src", options.url)
+        }
+
+        if (options.layers) {
+            this.setAttribute("layers", options.layers)
+        }
+    }
+
+    set layers(layers: string) {
+        this.setAttribute("layers", layers)
+    }
+
+    get layers() {
+        return this.getAttribute("layers") ?? ""
     }
 
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
@@ -57,7 +78,7 @@ class PsdElement extends HTMLElement {
     }
 
     private async loadPsd(url: string): Promise<void> {
-        this.renderLoading()
+        // this.renderLoading()
         this.psd = null
 
         try {
@@ -96,24 +117,33 @@ class PsdElement extends HTMLElement {
 
         const layerNames = layersAttr.split(",").map((name) => name.trim())
 
-        layerNames.forEach((name) => {
+        for (const name of layerNames) {
             const layer = PsdElement.findLayerByName(this.psd!.children!, name)
 
-            if (layer) {
-                this.appendLayerCanvas(layer)
-            } else {
+            if (!layer) {
                 console.error(`PsdElement: layer-name ${name} is not found.`)
                 console.error(
                     `layers:`,
                     this.psd?.children?.map((c) => c.name),
                 )
+                break
             }
-        })
+
+            this.appendLayerCanvas(layer)
+        }
 
         this.updateScale()
     }
 
     private appendLayerCanvas(layer: Layer): void {
+        // layerがフォルダの場合
+        if (layer.children) {
+            for (const l of layer.children) {
+                this.appendLayerCanvas(l)
+            }
+            return
+        }
+
         if (!layer.canvas) {
             layer.canvas = PsdElement.createCanvas(layer.imageData as ImageData)
             layer.canvas.style.left = `${layer.left}px`

@@ -1,6 +1,12 @@
 import { Awaits } from "./Awaits"
+import { PsdElement } from "./PsdElement"
 
-export type SerifCommand = string | { type: "character"; icon: string } | { type: "background"; image: string }
+export type SerifCommand =
+    | string
+    | { type: "character"; icon: string }
+    | { type: "background"; image: string }
+    | { type: "portrait"; url: string; name: string }
+    | { type: "portrait-change"; name: string; layers: string }
 
 export class Serif {
     static readonly #container = document.createElement("div")
@@ -8,7 +14,7 @@ export class Serif {
     static #window: HTMLDivElement
     static #iconContainer: HTMLDivElement
     static #textContainer: HTMLDivElement
-    static #Z: HTMLSpanElement
+    static #ZHint: HTMLSpanElement
 
     static #mode: "say" | "ask" = "say"
 
@@ -17,6 +23,12 @@ export class Serif {
     static #cue: SerifCommand[] = []
 
     static init() {
+        this.#setupContainer()
+        this.#cacheElements()
+        this.#bindEvents()
+    }
+
+    static #setupContainer() {
         this.#container.innerHTML = `
             <div id="serif-background"></div>
             <div id="serif-window">
@@ -26,15 +38,19 @@ export class Serif {
             </div>
         `
 
+        this.#container.id = "serif-container"
+        document.body.appendChild(this.#container)
+    }
+
+    static #cacheElements() {
         this.#background = this.#container.querySelector("#serif-background")!
         this.#window = this.#container.querySelector("#serif-window")!
         this.#iconContainer = this.#container.querySelector("#serif-icon-container")!
         this.#textContainer = this.#container.querySelector("#serif-text-container")!
-        this.#Z = this.#container.querySelector("#serif-Z")!
+        this.#ZHint = this.#container.querySelector("#serif-Z")!
+    }
 
-        this.#container.id = "serif-container"
-        document.body.appendChild(this.#container)
-
+    static #bindEvents() {
         this.#container.addEventListener("click", () => {
             if (this.#mode === "say") {
                 this.#say()
@@ -52,12 +68,10 @@ export class Serif {
 
     static ask(title: string, choices: string[]): Promise<number> {
         this.#mode = "ask"
-        this.#Z.classList.add("hidden")
+        this.#ZHint.classList.add("hidden")
         this.#reset()
 
         this.#textContainer.innerHTML = title + "<br/>"
-        this.#textContainer.classList.remove("fade-in")
-        this.#textContainer.classList.remove("text-end")
 
         requestAnimationFrame(() => {
             this.#textContainer.classList.add("fade-in")
@@ -67,45 +81,52 @@ export class Serif {
             choices.forEach((choice, index) => {
                 const button = document.createElement("button")
                 button.textContent = choice
-                button.addEventListener("click", () => {
-                    this.#container.classList.remove("shown")
 
+                button.onclick = () => {
+                    this.#container.classList.remove("shown")
                     resolve(index)
-                })
+                }
+
                 this.#textContainer.appendChild(button)
             })
+
             this.#container.classList.add("shown")
         })
     }
 
     static say(...texts: SerifCommand[]) {
         this.#mode = "say"
-        this.#Z.classList.remove("hidden")
+        this.#ZHint.classList.remove("hidden")
         this.#reset()
 
-        this.#textContainer.innerHTML = ""
-        this.#container.classList.add("shown")
         this.#cue = texts
         this.#textContainer.classList.add("text-end")
-        this.#say()
 
-        const promise = new Promise<void>((resolve) => {
-            this.#resolve = resolve
+        requestAnimationFrame(() => {
+            this.#container.classList.add("shown")
         })
 
-        return promise
+        this.#say()
+
+        return new Promise<void>((resolve) => {
+            this.#resolve = resolve
+        })
     }
 
     static #say() {
         if (this.#cue.length === 0) {
             this.#container.classList.remove("shown")
-            Awaits.sleep(200).then(() => {
+            Awaits.sleep(400).then(() => {
                 this.#reset()
             })
             this.#resolve()
             return
         }
 
+        this.#processCommand()
+    }
+
+    static #processCommand() {
         const command = this.#cue.shift()!
 
         if (typeof command === "string") {
@@ -126,6 +147,17 @@ export class Serif {
         } else if (command.type === "background") {
             this.#background.innerHTML = `<img src="${command.image}" alt="" class="fade-in"/>`
             this.#say()
+        } else if (command.type === "portrait") {
+            const psd = new PsdElement({ url: `${command.url}`, layers: "normal" })
+            psd.classList.add("serif-portrait", "hidden")
+            psd.id = command.name
+            this.#container.appendChild(psd)
+            this.#say()
+        } else if (command.type === "portrait-change") {
+            const psd = this.#container.querySelector<PsdElement>(`#${command.name}`)!
+            psd.layers = command.layers
+            psd.classList.remove("hidden")
+            this.#say()
         }
     }
 
@@ -133,5 +165,9 @@ export class Serif {
         this.#container.style.cursor = { "say": "pointer", "ask": "default" }[this.#mode]
         this.#background.innerHTML = ""
         this.#iconContainer.classList.add("hidden")
+        this.#textContainer.classList.remove("fade-in")
+        this.#textContainer.classList.remove("text-end")
+        // this.#textContainer.innerHTML = ""
+        this.#container.querySelectorAll("psd-viewer").forEach((p) => p.remove())
     }
 }

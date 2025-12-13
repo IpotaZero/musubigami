@@ -1,1 +1,7 @@
-["これは神と友達になった少女の物語。", "ユユ:<br>いこっ! ラﾞァくん!", "∇゛"]
+[
+    { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+    "これは神と友達になった少女の物語。",
+    { "type": "portrait-change", "name": "yuyu", "layers": "smile" },
+    "ユユ:<br>いこっ! ラﾞァくん!",
+    "∇゛"
+]

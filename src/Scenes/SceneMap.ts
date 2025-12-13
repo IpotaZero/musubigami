@@ -4,6 +4,7 @@ import { LocalStorage } from "../LocalStorage"
 import { Awaits } from "../utils/Awaits"
 import { Graph } from "../utils/Graph"
 import { Pages } from "../utils/Pages"
+import { PsdElement } from "../utils/PsdElement"
 import { Serif } from "../utils/Serif"
 import { Scene } from "./Scene"
 import { SceneChanger } from "./SceneChanger"
@@ -13,10 +14,16 @@ export class SceneMap extends Scene {
     readonly #pages = new Pages()
     #currentCh: 0 | 1 | 2
 
+    #intervalId!: number
+
     constructor(ch: 0 | 1 | 2) {
         super()
         this.#currentCh = ch
         this.ready = this.#setup()
+    }
+
+    async end(): Promise<void> {
+        clearInterval(this.#intervalId)
     }
 
     async #setup() {
@@ -61,8 +68,6 @@ export class SceneMap extends Scene {
         const graphs = Dom.container.querySelectorAll<Graph>("x-graph")
 
         graphs.forEach((graph, chapterIndex) => {
-            if (!graph) return
-
             const svg = graph.querySelector("svg")!
             const stageButtons = svg.querySelectorAll<SVGRectElement>(".stage")
 

@@ -59,6 +59,7 @@
     border: 0.1em solid #111;
     padding: 0.5em;
     gap: 0.5em;
+    z-index: 10;
 }
 
 #serif-icon-container {
@@ -97,4 +98,10 @@
     z-index: 100000;
     color: #1114;
     font-size: 0.7em;
+}
+
+.serif-portrait {
+    position: absolute;
+    height: 100%;
+    transform: translateX(-25%);
 }

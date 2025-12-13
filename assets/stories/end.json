@@ -1,22 +1,33 @@
 [
     [
-        { "type": "character", "icon": "assets/images/icons/y=yu.png" },
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "smile" },
+        "スズ:<br>やったあ! ユユ! 見つかったよお!",
+        "ユユ:<br>(万事解決だね、ラﾞァくんっ!)"
+    ],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "surprised" },
         "ユユ:<br>学校中にジャキがいるみたい!",
         "ユユ:<br>やっつけに行こう。ラﾞァくん!"
     ],
     [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "シン:<br>もう放っといてくれ! もう、何も見たくない……。",
         "ユユ:<br>……。",
         "ユユ:<br>こんなものがあるから!",
         "(神の力を捨てる画像)",
         "シン:<br>お前……!",
         "ユユ:<br>独りぼっちでは生きていけない事、分かってるでしょ。",
-        "ユユ:<br>嫌なことから逃げずに、自分の為になることをしなくちゃ。",
+        "ユユ:<br>痛みから逃げずに、自分の為になることをしなくちゃ。",
         "シン:<br>俺には、そんな勇気はないんだ。誰かに頼る勇気すら、持ち得ないんだ。",
         "ユユ:<br>それでも、やらなくちゃあいけないんだ。",
+        "ユユ:<br>そうじゃなきゃあ、今生に夢以上の価値がなくなっちゃうでしょう?",
+        "シン:<br>……。",
         "ユユ:<br>頼ってよ。私にさ。",
         "シン:<br>お前に……?",
-        "ユユ:<br>まあ、年下の女の子に頼るなんて恥ずかしいかもしれないけどさ。頼ってよ。",
+        "ユユ:<br>まあ、年下の女の子になんて恥ずかしいかもしれないけどさ。頼ってよ。",
         "シン:<br>いい……のか?",
         "ユユ:<br>当たり前じゃん!",
         "シン:<br>……ありがとう。",
