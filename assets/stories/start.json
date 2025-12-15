@@ -18,10 +18,20 @@
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         { "type": "portrait", "url": "assets/images/character/rha.psd", "name": "rha" },
-        ""
+        "テル:<br>ねえ、ユユ。ちょっといい?",
+        "ユユ:<br>なあに? テル。",
+        "テル:<br>ユユが縁を結ぶ力を持ってるって、ホント?",
+        "ユユ:<br>ナ、ナンノコトカナー。",
+        "テル:<br>ねえ、若しホントなら、私とキノの縁を繋いでほしいの……。",
+        "ユユ:<br>えっ、キノと?",
+        "テル:<br>……///",
+        "ユユ:<br>(いいのかな、ラﾞァくん、こんなこと。)",
+        "∇゛",
+        "ユユ:<br>(うん。やっちゃおう!)"
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait", "url": "assets/images/character/jaki.psd", "name": "jaki", "side": "right" },
         "学校……",
         { "type": "portrait-change", "name": "yuyu", "layers": "smile" },
         "ユユ:<br>おっはよー!",
@@ -36,6 +46,7 @@
         "ジュウシ:<br>……。",
         "ユユ:<br>(ん……? あそこにいるのはっ)",
         "(場面転換)",
+        { "type": "portrait-change", "name": "jaki", "layers": "normal" },
         "ユユ:<br>(ジャキだっ!)",
         { "type": "portrait-change", "name": "yuyu", "layers": "angry" },
         "ユユ:<br>修正してやる! 人の縁を絶ち切りやがってえ!",
@@ -48,7 +59,16 @@
         ""
     ],
     [""],
-    [""],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "angry" },
+        "ユユ:<br>待てえっ!",
+        "(ツ)",
+        "???:<br>あまり私の眷属を虐めないでくれるかな?",
+        "ユユ:<br>うわっ! なんだお前!",
+        "???:<br>まあまあとりあえずは、",
+        "ユユ:<br>ええいっ、縁結びバトルかっ!"
+    ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
@@ -61,5 +81,5 @@
         { "type": "portrait-change", "name": "yuyu", "layers": "kime" },
         "ユユ:<br>黙れっ! もういい! 縁結びバトルだっ!"
     ],
-    []
+    [""]
 ]

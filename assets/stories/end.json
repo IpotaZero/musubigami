@@ -9,10 +9,20 @@
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait", "url": "assets/images/character/rha.psd", "name": "rha" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
+        "ユユ:<br>テル、上手くいったかな。"
+    ],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         { "type": "portrait-change", "name": "yuyu", "layers": "surprised" },
         "ユユ:<br>学校中にジャキがいるみたい!",
         "ユユ:<br>やっつけに行こう。ラﾞァくん!"
     ],
+    [],
+    [],
+    [],
+    [],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
@@ -30,10 +40,11 @@
         "ユユ:<br>頼ってよ。私にさ。",
         "シン:<br>お前に……?",
         "ユユ:<br>まあ、年下の女の子になんて恥ずかしいかもしれないけどさ。頼ってよ。",
-        "シン:<br>いい……のか?",
-        "ユユ:<br>当たり前じゃん!",
-        "シン:<br>……ありがとう。",
+        "シン:<br>……くそっ!",
         "(神の力を捨てる画像)",
+        "(走り去るシン)",
+        "ユユ:<br>シン……。",
+        "(次第に薄くなっていくラﾞァ)",
         "ユユ:<br>バイバイ、ラﾞァくん……。"
     ]
 ]
