@@ -102,6 +102,15 @@
 
 .serif-portrait {
     position: absolute;
-    height: 100%;
-    transform: translateX(-25%);
+    height: 100dvh;
+    width: 50dvw;
+    top: 0;
+
+    &.left {
+        left: 0;
+    }
+
+    &.right {
+        right: 0;
+    }
 }

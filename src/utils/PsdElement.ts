@@ -25,8 +25,8 @@ class PsdElement extends HTMLElement {
         style.textContent = `
             :host {
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                justify-content: center;             
+                align-items: center;             
             }
 
             .container {
@@ -156,8 +156,8 @@ class PsdElement extends HTMLElement {
 
         if (!layer.canvas) {
             layer.canvas = PsdElement.createCanvas(layer.imageData as ImageData)
-            layer.canvas.style.left = `${layer.left}px`
-            layer.canvas.style.top = `${layer.top}px`
+            layer.canvas.dataset["baseLeft"] = String(layer.left)
+            layer.canvas.dataset["baseTop"] = String(layer.top)
             layer.canvas.classList.add("psd-canvas")
         }
 
@@ -186,7 +186,15 @@ class PsdElement extends HTMLElement {
         const scaleY = this.clientHeight / this.baseHeight
         const scale = Math.min(scaleX, scaleY)
 
-        this.container.style.transform = `scale(${scale})`
+        this.container.style.width = `${this.baseWidth * scale}px`
+        this.container.style.height = `${this.baseHeight * scale}px`
+
+        this.shadow.querySelectorAll("canvas").forEach((c) => {
+            c.style.left = `${Number(c.dataset["baseLeft"]) * scale}px`
+            c.style.top = `${Number(c.dataset["baseTop"]) * scale}px`
+            c.style.width = `${c.width * scale}px`
+            c.style.height = `${c.height * scale}px`
+        })
     }
 
     private static findLayerByName(layers: Layer[], name: string): Layer | null {

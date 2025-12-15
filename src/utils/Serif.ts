@@ -5,7 +5,7 @@ export type SerifCommand =
     | string
     | { type: "character"; icon: string }
     | { type: "background"; image: string }
-    | { type: "portrait"; url: string; name: string }
+    | { type: "portrait"; url: string; name: string; side?: string }
     | { type: "portrait-change"; name: string; layers: string }
 
 export class Serif {
@@ -150,6 +150,7 @@ export class Serif {
         } else if (command.type === "portrait") {
             const psd = new PsdElement({ url: `${command.url}`, layers: "normal" })
             psd.classList.add("serif-portrait", "hidden")
+            psd.classList.add(command.side ?? "left")
             psd.id = command.name
             this.#container.appendChild(psd)
             this.#say()

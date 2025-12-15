@@ -32,11 +32,11 @@
     }
 
     &[data-left="2"] {
-        stroke: rgb(73, 73, 130);
+        stroke: rgb(27, 110, 143);
     }
 
     &[data-left="3"] {
-        stroke: rgb(35, 93, 118);
+        stroke: rgb(116, 41, 126);
     }
 }
 
