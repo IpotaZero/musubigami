@@ -2,6 +2,7 @@
 import { Dom } from "../Dom"
 import { LocalStorage } from "../LocalStorage"
 import { Awaits } from "../utils/Awaits"
+import { BGM } from "../utils/BGM"
 import { Graph } from "../utils/Graph"
 import { Pages } from "../utils/Pages"
 import { PsdElement } from "../utils/PsdElement"
@@ -127,11 +128,13 @@ export class SceneMap extends Scene {
     async #transitionToGame(stageId: number) {
         const { SceneGame } = await import("./SceneGame.js")
 
+        BGM.ffp("assets/sounds/bgm/why_was_faith_lost.mp3", { loop: true, loopStartS: 1.276 })
+
         await SceneChanger.goto(() => new SceneGame(this.#currentCh, stageId), {
             fadeOut: Awaits.valeOut,
             fadeIn: Awaits.valeIn,
-            msOut: 800,
-            msIn: 800,
+            msOut: 700,
+            msIn: 700,
         })
     }
 

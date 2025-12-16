@@ -5,6 +5,8 @@ export class LocalStorage {
         return {
             stageDataList: Array.from({ length: 3 * 7 }, () => ({ cleared: false })),
             flags: [],
+            bgmVolume: 0,
+            seVolume: 0,
         }
     }
 
@@ -43,6 +45,28 @@ export class LocalStorage {
         this.#setData(data)
     }
 
+    static getBGMVolume() {
+        const data = this.#getData()
+        return data.bgmVolume
+    }
+
+    static getSEVolume() {
+        const data = this.#getData()
+        return data.seVolume
+    }
+
+    static setBGMVolume(volume: number) {
+        const data = this.#getData()
+        data.bgmVolume = volume
+        this.#setData(data)
+    }
+
+    static setSEVolume(volume: number) {
+        const data = this.#getData()
+        data.seVolume = volume
+        this.#setData(data)
+    }
+
     static clear() {
         localStorage.removeItem(this.#KEY)
     }
@@ -57,6 +81,8 @@ export class LocalStorage {
 type Data = {
     stageDataList: StageData[]
     flags: Flag[]
+    bgmVolume: number
+    seVolume: number
 }
 
 type StageData = {

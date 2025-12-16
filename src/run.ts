@@ -1,6 +1,7 @@
 import { Dom } from "./Dom"
 import { LocalStorage } from "./LocalStorage"
 import { SceneChanger } from "./Scenes/SceneChanger"
+import { BGM } from "./utils/BGM"
 
 import { Graph } from "./utils/Graph"
 import { KeyboardOperation } from "./utils/KeyboardOperation"

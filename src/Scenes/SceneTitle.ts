@@ -1,6 +1,8 @@
 import { Dom } from "../Dom"
 import { LocalStorage } from "../LocalStorage"
+import { SE } from "../SE"
 import { Awaits } from "../utils/Awaits"
+import { BGM } from "../utils/BGM"
 import { KeyboardOperation } from "../utils/KeyboardOperation"
 import { Pages } from "../utils/Pages"
 import { PsdElement } from "../utils/PsdElement"
@@ -22,12 +24,13 @@ export class SceneTitle extends Scene {
         await this.#pages.load(Dom.container, html)
 
         this.#setupFirstPage()
+        this.#setupVolumeSetting()
 
-        this.#pages.on(".*", (pages) => {
-            const page = pages.pages.get(pages.getCurrentPageId())
-            if (!page) return
-            // KeyboardOperation.update(page)
-        })
+        // this.#pages.on(".*", (pages) => {
+        //     const page = pages.pages.get(pages.getCurrentPageId())
+        //     if (!page) return
+        //     // KeyboardOperation.update(page)
+        // })
 
         this.#pages.before("start", async (pages) => {
             const { SceneMap } = await import("./SceneMap.js")
@@ -77,5 +80,27 @@ export class SceneTitle extends Scene {
         })
 
         // Serif.say("test")
+    }
+
+    #setupVolumeSetting() {
+        const page = this.#pages.pages.get("setting")!
+
+        const bgmV = page.querySelector<HTMLInputElement>("#bgm-volume")!
+        const seV = page.querySelector<HTMLInputElement>("#se-volume")!
+
+        bgmV.value = String(LocalStorage.getBGMVolume())
+        seV.value = String(LocalStorage.getSEVolume())
+        BGM.setVolume(LocalStorage.getBGMVolume() / 9)
+        SE.setVolume(LocalStorage.getSEVolume() / 9)
+
+        bgmV.oninput = () => {
+            LocalStorage.setBGMVolume(+bgmV.value)
+            BGM.setVolume(LocalStorage.getBGMVolume() / 9)
+        }
+        seV.oninput = () => {
+            LocalStorage.setSEVolume(+seV.value)
+            SE.setVolume(LocalStorage.getSEVolume() / 9)
+            SE.move.play()
+        }
     }
 }

@@ -7,6 +7,8 @@ type LeftHandler = (pages: Pages) => void
 
 type FadeOption = Partial<{ msIn: number; msOut: number }>
 
+type PageButton = HTMLElement | SVGElement
+
 export class Pages {
     static readonly #defaultMSIn = 250
     static readonly #defaultMSOut = 250
@@ -47,6 +49,10 @@ export class Pages {
         this.setupButtonsOnclick()
     }
 
+    getCurrentPage() {
+        return this.pages.get(this.#currentPageId)
+    }
+
     getCurrentPageId(): string {
         return this.#currentPageId
     }
@@ -64,32 +70,34 @@ export class Pages {
     }
 
     setupButtonsOnclick() {
-        type Button = HTMLElement | SVGElement
-
-        this.#container.querySelectorAll<Button>("[data-back]").forEach(this.#setupBackButton.bind(this))
-        this.#container.querySelectorAll<Button>("[data-link]").forEach(this.#setupLinkButton.bind(this))
+        this.#container.querySelectorAll<PageButton>("[data-back]").forEach(this.#setupBackButton.bind(this))
+        this.#container.querySelectorAll<PageButton>("[data-link]").forEach(this.#setupLinkButton.bind(this))
     }
 
-    #setupBackButton(button: HTMLElement | SVGElement) {
+    #setupBackButton(button: PageButton) {
         const depth = Number(button.dataset.back) || 1
         const msIn = parseToNumber(button.dataset["ms-in"], Pages.#defaultMSIn)
         const msOut = parseToNumber(button.dataset["ms-Out"], Pages.#defaultMSOut)
 
-        button.onclick = () => {
-            this.back(depth, { msIn, msOut })
+        button.onclick = async () => {
+            this.#togglePointerEvents(false)
+            await this.back(depth, { msIn, msOut })
+            this.#togglePointerEvents(true)
         }
     }
 
-    #setupLinkButton(button: HTMLElement | SVGElement) {
+    #setupLinkButton(button: PageButton) {
         const id = button.dataset.link || "first"
         const msIn = parseToNumber(button.dataset["ms-in"], Pages.#defaultMSIn)
         const msOut = parseToNumber(button.dataset["ms-Out"], Pages.#defaultMSOut)
 
-        button.onclick = () => {
-            this.goto(id, {
+        button.onclick = async () => {
+            this.#togglePointerEvents(false)
+            await this.goto(id, {
                 msIn,
                 msOut,
             })
+            this.#togglePointerEvents(true)
         }
     }
 
@@ -107,7 +115,8 @@ export class Pages {
 
     async goto(id: string, { msIn = Pages.#defaultMSIn, msOut = Pages.#defaultMSOut }: FadeOption = {}) {
         // 入る前に実行される物。キャンセルされたら入らない。
-        if (await this.#runBefore(id)) return
+        const canceled = await this.#runBefore(id)
+        if (canceled) return
 
         // 現在のページを去る際に実行される物。
         this.#runLeft(this.#currentPageId)
@@ -115,6 +124,7 @@ export class Pages {
         const from = this.pages.get(this.#currentPageId)
         const to = this.pages.get(id)
 
+        // fade out
         if (from) {
             await Awaits.fadeOut(from, msOut)
             from.classList.add("hidden")
@@ -127,7 +137,7 @@ export class Pages {
         // 新しいページに入った時に実行される物。
         this.#runOn(this.#currentPageId)
 
-        // fade
+        // fade in
         if (to) {
             to.classList.remove("hidden")
             await Awaits.fadeIn(to, msIn)
@@ -147,6 +157,16 @@ export class Pages {
     #runOn(id: string) {
         requestAnimationFrame(() => {
             this.#onHandlers.getAll(id).forEach((handler) => handler(this))
+        })
+    }
+
+    #togglePointerEvents(available: boolean) {
+        const page = this.getCurrentPage()
+
+        if (!page) return
+
+        page.querySelectorAll<PageButton>("[data-link], [data-back]").forEach((b) => {
+            b.style.pointerEvents = available ? "" : "none"
         })
     }
 }

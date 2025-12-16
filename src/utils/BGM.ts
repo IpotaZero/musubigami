@@ -8,13 +8,13 @@ type BGMOptions = {
 }
 
 export class BGM {
-    static readonly #context: AudioContext = new AudioContext()
-    static readonly #wholeGain: GainNode = this.#context.createGain()
+    static readonly context: AudioContext = new AudioContext()
+    static readonly wholeGain: GainNode = this.context.createGain()
     static #volume = 1
     static #currentBGM: BGM | null = null
 
     static {
-        this.#wholeGain.connect(this.#context.destination)
+        this.wholeGain.connect(this.context.destination)
     }
 
     // instance
@@ -30,9 +30,9 @@ export class BGM {
         this.#path = path
         this.#localVolume = options.volume ?? 1
 
-        this.#gain = BGM.#context.createGain()
+        this.#gain = BGM.context.createGain()
         this.#gain.gain.value = this.#localVolume
-        this.#gain.connect(BGM.#wholeGain)
+        this.#gain.connect(BGM.wholeGain)
 
         this.#ready = this.#localFetch(options)
     }
@@ -40,9 +40,9 @@ export class BGM {
     async #localFetch(options: BGMOptions) {
         const response = await fetch(this.#path)
         const arrayBuffer = await response.arrayBuffer()
-        const buffer = await BGM.#context.decodeAudioData(arrayBuffer)
+        const buffer = await BGM.context.decodeAudioData(arrayBuffer)
 
-        this.#source = BGM.#context.createBufferSource()
+        this.#source = BGM.context.createBufferSource()
         this.#source.buffer = buffer
         this.#source.loopStart = options.loopStartS ?? 0
         this.#source.loopEnd = options.loopEndS ?? buffer.duration
@@ -51,8 +51,8 @@ export class BGM {
     }
 
     async #localFadeOut(durationMS: number) {
-        this.#gain.gain.setValueAtTime(this.#localVolume, BGM.#context.currentTime)
-        this.#gain.gain.linearRampToValueAtTime(0, BGM.#context.currentTime + durationMS / 1000)
+        this.#gain.gain.setValueAtTime(this.#localVolume, BGM.context.currentTime)
+        this.#gain.gain.linearRampToValueAtTime(0, BGM.context.currentTime + durationMS / 1000)
 
         await new Promise((resolve) => setTimeout(resolve, durationMS))
         this.#gain.disconnect()
@@ -81,13 +81,13 @@ export class BGM {
 
     static #play(when: number) {
         if (!this.#currentBGM) return
-        this.#currentBGM.#source?.start(this.#context.currentTime + when)
+        this.#currentBGM.#source?.start(this.context.currentTime + when)
         this.#currentBGM.#isStarted = true
     }
 
     static setVolume(volume: number) {
         this.#volume = volume
-        this.#wholeGain.gain.value = this.#volume
+        this.wholeGain.gain.value = this.#volume
     }
 
     static async #fadeOut(durationMS: number) {

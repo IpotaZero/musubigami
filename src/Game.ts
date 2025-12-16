@@ -5,6 +5,7 @@ const SVG_NS = "http://www.w3.org/2000/svg"
 
 export class Game {
     onClear = () => {}
+    onMove = () => {}
 
     readonly svg: SVGSVGElement
 
@@ -112,6 +113,7 @@ export class Game {
         if (!this.#firstClicked) {
             this.#penIndex = index
             this.#firstClicked = true
+            this.onMove()
             this.#updateGraphics()
             return
         }
@@ -132,6 +134,8 @@ export class Game {
         })
 
         if (edgeIndex === -1) return
+
+        this.onMove()
 
         // 辺の残数を減らす
         this.#leftEdges[edgeIndex]--

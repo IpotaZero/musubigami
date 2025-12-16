@@ -1,6 +1,9 @@
 import { Dom } from "../Dom"
 import { Edge, Game, Vertex } from "../Game"
 import { LocalStorage } from "../LocalStorage"
+import { SE } from "../SE"
+import { BGM } from "../utils/BGM"
+import { MusicVisualizer } from "../utils/MusicVisualizer"
 import { Pages } from "../utils/Pages"
 import { Serif, SerifCommand } from "../utils/Serif"
 import { Scene } from "./Scene"
@@ -13,12 +16,15 @@ export class SceneGame extends Scene {
     readonly #pages = new Pages()
     readonly #game = new Game()
 
+    private mvUpdate = true
+
     constructor(ch: Chapters, stageId: number) {
         super()
         this.ready = this.#setup(ch, stageId)
     }
 
     override async end(): Promise<void> {
+        this.mvUpdate = false
         this.#game.remove()
     }
 
@@ -28,6 +34,7 @@ export class SceneGame extends Scene {
 
         this.#setupButtons(ch, stageId)
         this.#setupGame(ch, stageId)
+        // this.#setupCanvas()
     }
 
     #setupButtons(ch: Chapters, stageId: number) {
@@ -46,6 +53,7 @@ export class SceneGame extends Scene {
 
         this.#pages.before("retry", async () => {
             this.#game.retry()
+            SE.reset.play()
             return true
         })
     }
@@ -80,13 +88,35 @@ export class SceneGame extends Scene {
 
         this.#game.render(stage())
 
-        const followed = container.querySelector("#followed")
+        const followed = container.querySelector("#followed")!
 
         this.#game.onClear = () => {
+            SE.clear.play()
             LocalStorage.setStageData(stageId, { cleared: true })
             const nextButton = container.querySelector("[data-link=next]")!
             nextButton.classList.add("fade-in")
-            followed?.classList.add("fade")
+            followed.classList.remove("fade")
+            requestAnimationFrame(() => {
+                followed.classList.add("fade")
+            })
+        }
+
+        this.#game.onMove = () => {
+            SE.move.play()
         }
     }
+
+    // #setupCanvas() {
+    //     const cvs = Dom.container.querySelector("canvas")!
+    //     cvs.width = Dom.container.clientWidth
+    //     cvs.height = Dom.container.clientHeight
+    //     const mv = new MusicVisualizer(cvs, BGM.wholeGain, BGM.context)
+
+    //     const loop = () => {
+    //         mv.update()
+    //         if (this.mvUpdate) requestAnimationFrame(loop)
+    //     }
+
+    //     requestAnimationFrame(loop)
+    // }
 }

@@ -9,11 +9,7 @@ export class Awaits {
 
         await Awaits.frame(() => {
             container.style.transition = `opacity ${ms}ms`
-        })
-
-        await Awaits.frame(() => {
             container.style.opacity = "0"
-            container.style.pointerEvents = "none"
         })
 
         await Awaits.sleep(ms)
@@ -29,14 +25,14 @@ export class Awaits {
 
         await Awaits.frame(() => {
             container.style.transition = `opacity ${ms}ms`
-        })
-
-        await Awaits.frame(() => {
             container.style.opacity = "1"
-            container.style.pointerEvents = ""
         })
 
         await Awaits.sleep(ms)
+
+        await Awaits.frame(() => {
+            container.style.pointerEvents = ""
+        })
     }
 
     static async valeOut(container: HTMLElement, ms: number = 200) {

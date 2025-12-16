@@ -21,13 +21,9 @@ export class Sound {
 }
 
 export class SE {
-    static voice = new Sound("assets/sounds/voice.wav")
-    static what = new Sound("assets/sounds/what.wav")
-    static surprised = new Sound("assets/sounds/surprised.wav")
-    static strong = new Sound("assets/sounds/strong.wav")
-    static say = new Sound("assets/sounds/say.mp3")
-
-    static clear = new Sound("assets/sounds/clear.mp3", 1)
+    static clear = new Sound("assets/sounds/se/clear.mp3", 1)
+    static move = new Sound("assets/sounds/se/マウススプレー・口内.mp3", 0.3)
+    static reset = new Sound("assets/sounds/se/窓を開ける.mp3", 1)
 
     static setVolume(volume: number) {
         Object.values(this).forEach((se) => {
