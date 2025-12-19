@@ -1,7 +1,7 @@
-import { Vertex } from "../Game"
+import { GraphData, VertexData } from "../Game/Graph"
 
-export function stage() {
-    const vertices: Vertex[] = [
+export function stage(): GraphData {
+    const vertices: VertexData[] = [
         [-150, 0],
         [-50, 0],
         [0, -100],
@@ -19,7 +19,7 @@ export function stage() {
             [1, 2],
             [1, 3],
             [1, 4],
-            [2, 3, 2],
+            [2, 3, { multiplicity: 2 }],
             [2, 4],
             [2, 5],
             [3, 4],

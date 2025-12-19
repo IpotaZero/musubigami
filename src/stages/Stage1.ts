@@ -1,7 +1,7 @@
-import { Vertex } from "../Game"
+import { GraphData, VertexData } from "../Game/Graph"
 
-export function stage() {
-    const vertices: Vertex[] = []
+export function stage(): GraphData {
+    const vertices: VertexData[] = []
 
     for (let i = 0; i < 5; i++) {
         vertices.push([Math.sin(((i - 1) * 2 * Math.PI) / 5) * 120, 20 - Math.cos(((i - 1) * 2 * Math.PI) / 5) * 120])

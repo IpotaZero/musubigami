@@ -1,5 +1,5 @@
 import { Dom } from "../Dom"
-import { Edge, Game, Vertex } from "../Game"
+import { Game } from "../Game/Game"
 import { LocalStorage } from "../LocalStorage"
 import { SE } from "../SE"
 import { BGM } from "../utils/BGM"
@@ -14,7 +14,7 @@ type Chapters = 0 | 1 | 2
 export class SceneGame extends Scene {
     readonly ready: Promise<void>
     readonly #pages = new Pages()
-    readonly #game = new Game()
+    readonly #game = new Game(400, 300)
 
     private mvUpdate = true
 

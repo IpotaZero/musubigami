@@ -5,7 +5,7 @@
 
     transition: fill 0.4s ease-out, stroke 0.4s ease-out;
 
-    &[data-active="true"] {
+    &[data-mode="active"] {
         cursor: pointer;
 
         stroke: rgb(88, 235, 88);
