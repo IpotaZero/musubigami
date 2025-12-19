@@ -1,8 +1,10 @@
 export class Sound {
     #audio: HTMLAudioElement
+    #baseVolume: number
 
     constructor(path: string, volume: number = 0.5) {
         this.#audio = new Audio(path)
+        this.#baseVolume = volume
         this.#audio.volume = volume
     }
 
@@ -15,14 +17,14 @@ export class Sound {
         this.#audio.play()
     }
 
-    setVolume(volume: number) {
-        this.#audio.volume = volume
+    setVolume(ratio: number) {
+        this.#audio.volume = ratio * this.#baseVolume
     }
 }
 
 export class SE {
     static clear = new Sound("assets/sounds/se/clear.mp3", 1)
-    static move = new Sound("assets/sounds/se/マウススプレー・口内.mp3", 0.3)
+    static move = new Sound("assets/sounds/se/マウススプレー・口内.mp3", 0.5)
     static reset = new Sound("assets/sounds/se/窓を開ける.mp3", 1)
 
     static setVolume(volume: number) {

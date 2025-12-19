@@ -1,0 +1,70 @@
+.page {
+    background-color: #111;
+
+    color: whitesmoke;
+
+    button {
+        color: whitesmoke;
+        width: fit-content;
+    }
+}
+
+#first {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+    box-shadow: inset 0 0 4em #111;
+}
+
+#sound {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#left,
+#right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 22%;
+    height: 100%;
+
+    padding: 1em;
+}
+
+#left {
+    #stage-id {
+        white-space: nowrap;
+    }
+}
+
+#right {
+    align-items: flex-end;
+
+    [data-link="next"] {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1s;
+
+        &.fade-in {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+}
+
+#center {
+    flex: 1;
+}
+
+#followed {
+    position: absolute;
+    width: 60%;
+    opacity: 0;
+    z-index: 100;
+    pointer-events: none;
+}

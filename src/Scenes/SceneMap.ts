@@ -133,8 +133,8 @@ export class SceneMap extends Scene {
         await SceneChanger.goto(() => new SceneGame(this.#currentCh, stageId), {
             fadeOut: Awaits.valeOut,
             fadeIn: Awaits.valeIn,
-            msOut: 700,
-            msIn: 700,
+            msOut: 850,
+            msIn: 850,
         })
     }
 

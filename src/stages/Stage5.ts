@@ -2,8 +2,8 @@ import { Vertex } from "../Game"
 
 export function stage() {
     const vertices: Vertex[] = Array.from({ length: 5 }, (_, i) => [
-        Math.sin((i * (2 * Math.PI)) / 5) * 100,
-        -Math.cos((i * (2 * Math.PI)) / 5) * 100,
+        Math.sin((i * (2 * Math.PI)) / 5) * 120,
+        -Math.cos((i * (2 * Math.PI)) / 5) * 120,
     ])
 
     return {

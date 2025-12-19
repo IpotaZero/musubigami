@@ -34,7 +34,7 @@ export class SceneGame extends Scene {
 
         this.#setupButtons(ch, stageId)
         this.#setupGame(ch, stageId)
-        // this.#setupCanvas()
+        this.#setupCanvas()
     }
 
     #setupButtons(ch: Chapters, stageId: number) {
@@ -106,17 +106,17 @@ export class SceneGame extends Scene {
         }
     }
 
-    // #setupCanvas() {
-    //     const cvs = Dom.container.querySelector("canvas")!
-    //     cvs.width = Dom.container.clientWidth
-    //     cvs.height = Dom.container.clientHeight
-    //     const mv = new MusicVisualizer(cvs, BGM.wholeGain, BGM.context)
+    #setupCanvas() {
+        const cvs = Dom.container.querySelector("canvas")!
+        cvs.width = Dom.container.clientWidth
+        cvs.height = Dom.container.clientHeight
+        const mv = new MusicVisualizer(cvs, BGM.wholeGain, BGM.context)
 
-    //     const loop = () => {
-    //         mv.update()
-    //         if (this.mvUpdate) requestAnimationFrame(loop)
-    //     }
+        const loop = () => {
+            mv.drawFrequency("rgba(212, 209, 168, 0.07)", cvs.width / 2, cvs.height / 2, cvs.height / 4, cvs.height)
+            if (this.mvUpdate) requestAnimationFrame(loop)
+        }
 
-    //     requestAnimationFrame(loop)
-    // }
+        requestAnimationFrame(loop)
+    }
 }

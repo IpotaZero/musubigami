@@ -1,0 +1,203 @@
+.page {
+    padding: 1em;
+}
+
+#first {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    cursor: pointer;
+
+    #credit {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 4dvh;
+        color: gray;
+    }
+
+    &.show {
+        cursor: default;
+
+        h1 {
+            left: 0.5em;
+            transform: translateX(0);
+        }
+
+        #click {
+            opacity: 0;
+            animation: none;
+        }
+
+        #buttons {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+    }
+
+    h1 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 1em;
+        height: 100%;
+
+        font-size: 16dvh;
+        font-weight: unset;
+        line-height: 1.4em;
+
+        writing-mode: vertical-rl;
+
+        transition: left 1s ease, transform 1s ease;
+
+        background: linear-gradient(270deg, rgb(246, 242, 187), rgba(238, 192, 77, 1));
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    #click {
+        position: absolute;
+        bottom: 1em;
+        font-size: 4dvh;
+        opacity: 0.7;
+        transition: opacity 0.5s ease;
+
+        color: gray;
+
+        animation: blink 1s steps(1, end) infinite;
+    }
+
+    #buttons {
+        /* keep it renderable so transitions work (don't use display:none) */
+        display: flex;
+        position: absolute;
+        right: 1em;
+        bottom: 1em;
+
+        flex-direction: column;
+        align-self: flex-end;
+        gap: 0.5em;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: opacity 2s ease, transform 1s ease;
+        pointer-events: none;
+
+        & button {
+            align-self: flex-end;
+            text-align: right;
+        }
+    }
+}
+
+#how-to-play {
+    flex-direction: column;
+    gap: 1em;
+
+    padding: 3em;
+
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#story {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em 0;
+
+    #story-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        font-size: 28px;
+        gap: 0.5em;
+        padding: 1em;
+
+        /* border: #666 0.5dvh solid; */
+        border-radius: 1dvh;
+
+        p {
+            font-size: 28px;
+        }
+    }
+}
+
+[data-back] {
+    position: fixed;
+    left: 1em;
+    top: 1em;
+    font-size: 6dvh;
+}
+
+#past {
+    justify-content: flex-start;
+
+    gap: 1em;
+
+    overflow-x: auto;
+
+    flex-wrap: wrap;
+
+    padding: 4em 1em;
+
+    & button[data-link] {
+        padding: 0.5em;
+        border: whitesmoke 1px solid;
+
+        &.uncleared-stage {
+            opacity: 0.2;
+            cursor: auto;
+
+            &:hover {
+                scale: 1;
+            }
+        }
+    }
+}
+
+#setting {
+    flex-direction: column;
+
+    gap: 1em;
+
+    & input {
+        pointer-events: all;
+        width: 100%;
+    }
+}
+
+.particle0 {
+    top: -100%;
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    0% {
+        top: 0;
+        transform: rotate(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        top: 100%;
+        transform: rotate(calc(360deg * var(--rotation)));
+        opacity: 0;
+    }
+}
+
+#credit {
+    flex-direction: column;
+}

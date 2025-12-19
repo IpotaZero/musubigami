@@ -5,8 +5,8 @@ export class LocalStorage {
         return {
             stageDataList: Array.from({ length: 3 * 7 }, () => ({ cleared: false })),
             flags: [],
-            bgmVolume: 0,
-            seVolume: 0,
+            bgmVolume: 9,
+            seVolume: 9,
         }
     }
 

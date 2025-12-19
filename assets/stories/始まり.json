@@ -1,9 +1,6 @@
 [
     { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-    { "type": "portrait", "url": "assets/images/character/rha.psd", "name": "rha" },
-    "これは神と友達になった少女の物語。",
-    { "type": "portrait-change", "name": "yuyu", "layers": "smile" },
-    "ユユ:<br>いこっ! ラﾞァくん!",
-    { "type": "portrait-change", "name": "rha", "layers": "normal" },
-    "∇゛"
+    "あなたは縁結びの神です。",
+    { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
+    "ユユを導いてあげてください。"
 ]

@@ -8,8 +8,8 @@
     &[data-active="true"] {
         cursor: pointer;
 
-        stroke: limegreen;
-        fill: rgb(27, 31, 27);
+        stroke: rgb(88, 235, 88);
+        fill: rgb(45, 56, 45);
 
         &:hover {
             transition: none;

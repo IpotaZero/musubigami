@@ -1,28 +1,31 @@
 [
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait", "url": "assets/images/character/rha.psd", "name": "rha" },
-        { "type": "portrait-change", "name": "yuyu", "layers": "smile" },
         "スズ:<br>やったあ! ユユ! 見つかったよお!",
-        { "type": "portrait-change", "name": "rha", "layers": "normal" },
-        "ユユ:<br>(万事解決だね、ラﾞァくんっ!)"
+        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
+        "ユユ:<br>よかったね。"
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait", "url": "assets/images/character/rha.psd", "name": "rha" },
-        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "ユユ:<br>テル、上手くいったかな。"
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait-change", "name": "yuyu", "layers": "surprised" },
-        "ユユ:<br>学校中にジャキがいるみたい!",
-        "ユユ:<br>やっつけに行こう。ラﾞァくん!"
+        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
+        "ユユ:<br>シン……。",
+        "ユユ:<br>ありがとう、神様。"
     ],
-    [],
-    [],
-    [],
-    [],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
+        "ユユ:<br>ありがとう、神様。"
+    ],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
+        "ユユ:<br>ありがとう、神様。"
+    ],
+    ["縁切りの神:<br>なかなかやるね。", "ユユ:<br>お前がジャキの親玉だというなら、私はお前を許さない。", ""],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
