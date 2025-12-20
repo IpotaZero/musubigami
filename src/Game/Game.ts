@@ -78,6 +78,8 @@ export class Game {
             return
         }
 
+        if (this.vertices[index].life <= 0) return
+
         //
         if (index === this.penIndex) return
 

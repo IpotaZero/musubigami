@@ -122,6 +122,9 @@ export class SceneMap extends Scene {
             case 5:
                 await this.#playTutorial(2)
                 break
+            case 7:
+                await this.#playTutorial(3)
+                break
         }
     }
 
