@@ -16,11 +16,27 @@
             stroke: gold;
         }
     }
+
+    &[data-mode="no-available"] {
+        stroke: rgb(235, 88, 88);
+        fill: rgb(56, 45, 45);
+    }
+
+    &[data-switch="true"] {
+        rx: 32;
+        ry: 32;
+    }
+}
+
+.game-text {
+    font-size: 24px;
+    fill: white;
+    pointer-events: none;
 }
 
 .edge {
     pointer-events: none;
-
+    stroke-linecap: butt;
     transition: stroke 0.4s ease-out;
 
     &[data-left="0"] {

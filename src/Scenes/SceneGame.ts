@@ -29,7 +29,7 @@ export class SceneGame extends Scene {
     }
 
     async #setup(ch: Chapters, stageId: number) {
-        const html = await fetch("pages/game.html").then((res) => res.text())
+        const html = await fetch("assets/pages/game.html").then((res) => res.text())
         await this.#pages.load(Dom.container, html)
 
         this.#setupButtons(ch, stageId)

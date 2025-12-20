@@ -4,10 +4,12 @@ export class Edge {
     svg: SVGPolygonElement
 
     left: number
+    valid: boolean
 
     readonly from: number
     readonly to: number
     readonly baseLeft: number
+    readonly baseValid: boolean
     readonly arrow: boolean
 
     constructor(a: VertexData, b: VertexData, e: EdgeData) {
@@ -20,11 +22,20 @@ export class Edge {
         this.left = this.baseLeft
 
         this.arrow = e[2]?.arrow ?? false
+        this.baseValid = e[2]?.valid ?? true
+        this.valid = this.baseValid
 
         this.updateGraphic()
     }
 
+    toggleValid() {
+        this.valid = !this.valid
+        this.updateGraphic()
+    }
+
     matches(from: number, to: number) {
+        if (!this.valid) return false
+
         const i = this.left > 0 && this.from === from && this.to === to
 
         if (this.arrow) {
@@ -41,10 +52,12 @@ export class Edge {
 
     private updateGraphic() {
         this.svg.dataset.left = String(this.left)
+        this.svg.setAttribute("stroke-dasharray", this.valid ? "" : "8")
     }
 
     resetLeft() {
         this.left = this.baseLeft
+        this.valid = this.baseValid
         this.updateGraphic()
     }
 }

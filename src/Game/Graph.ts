@@ -1,5 +1,5 @@
-export type VertexData = [x: number, y: number]
-export type EdgeData = [from: number, to: number, option?: { multiplicity?: number; arrow?: boolean }]
+export type VertexData = [x: number, y: number, option?: { switch?: boolean; life?: number }]
+export type EdgeData = [from: number, to: number, option?: { multiplicity?: number; arrow?: boolean; valid?: boolean }]
 
 export type GraphData = {
     vertices: VertexData[]

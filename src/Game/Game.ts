@@ -62,6 +62,7 @@ export class Game {
         this.firstClicked = false
         this.penIndex = 0
         this.edges.forEach((e) => e.resetLeft())
+        this.vertices.forEach((v) => v.resetLife())
         this.#updateGraphics()
     }
 
@@ -72,10 +73,8 @@ export class Game {
 
     #onClickVertex(index: number) {
         if (!this.firstClicked) {
-            this.penIndex = index
             this.firstClicked = true
-            this.onMove()
-            this.#updateGraphics()
+            this.#onMove(index)
             return
         }
 
@@ -86,10 +85,20 @@ export class Game {
         const edgeIndex = this.#findEdgeIndex(index, this.penIndex)
         if (edgeIndex === -1) return
 
-        this.onMove()
-
         // 辺の残数を減らす
         this.edges[edgeIndex].decrementLeft()
+
+        this.#onMove(index)
+    }
+
+    #onMove(index: number) {
+        this.onMove()
+
+        this.vertices.forEach((v) => v.life--)
+
+        if (this.vertices[index].switch) {
+            this.edges.forEach((e) => e.toggleValid())
+        }
 
         // ペンを移動
         this.penIndex = index

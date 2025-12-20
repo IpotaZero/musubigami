@@ -5,29 +5,23 @@ export function stage(): GraphData {
         [-150, -100],
         [-150, 100],
         [150, 100],
-        [150, -100],
+        [150, -100, { life: 3 }],
         [-50, -50],
         [-50, 50],
         [50, 50],
-        [50, -50],
+        [50, -50, { switch: true }],
     ]
 
     return {
         vertices,
         edges: [
-            [0, 1],
-            [0, 3],
-            [0, 4],
+            [0, 1, { valid: false }],
             [1, 2],
-            [6, 2, { multiplicity: 1, arrow: true }],
-            [2, 7],
             [2, 3],
-            [3, 7],
-            [4, 5, { multiplicity: 3, arrow: true }],
-            [4, 7, { multiplicity: 2 }],
-            [5, 6, { multiplicity: 3 }],
-            [5, 1, { multiplicity: 2, arrow: true }],
-            [6, 7, { multiplicity: 2 }],
+            [3, 4],
+            [4, 5],
+            [5, 6],
+            [6, 7],
         ],
     }
 }

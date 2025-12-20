@@ -20,7 +20,7 @@ export class SceneTitle extends Scene {
     }
 
     async #setup() {
-        const html = await fetch("pages/title.html").then((res) => res.text())
+        const html = await fetch("assets/pages/title.html").then((res) => res.text())
         await this.#pages.load(Dom.container, html)
 
         this.#setupFirstPage()

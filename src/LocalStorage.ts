@@ -3,7 +3,7 @@ export class LocalStorage {
 
     static #createDefaultData() {
         return {
-            stageDataList: Array.from({ length: 3 * 7 }, () => ({ cleared: false })),
+            stageDataList: Array.from({ length: 18 }, () => ({ cleared: false })),
             flags: [],
             bgmVolume: 9,
             seVolume: 9,
@@ -72,7 +72,7 @@ export class LocalStorage {
     }
 
     static allWin() {
-        for (let i = 0; i < 21; i++) {
+        for (let i = 0; i < 18; i++) {
             this.setStageData(i, { cleared: true })
         }
     }

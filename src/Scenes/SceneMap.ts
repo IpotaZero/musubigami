@@ -28,7 +28,7 @@ export class SceneMap extends Scene {
     }
 
     async #setup() {
-        const html = await fetch("pages/map.html").then((res) => res.text())
+        const html = await fetch("assets/pages/map.html").then((res) => res.text())
         await this.#pages.load(Dom.container, html, { history: ["ch" + this.#currentCh] })
 
         this.#pages.on("ch[012]", (pages) => {

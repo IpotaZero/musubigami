@@ -23,9 +23,15 @@
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
-        "ユユ:<br>ありがとう、神様。"
+        "ユユ:<br>逃げるなっ!"
     ],
-    ["縁切りの神:<br>なかなかやるね。", "ユユ:<br>お前がジャキの親玉だというなら、私はお前を許さない。", ""],
+    [
+        "???:<br>なかなかやるね。",
+        "ユユ:<br>お前がジャキの親玉だというなら、私はお前を許さない。",
+        "???:<br>許さなかったらなんだというのさ。",
+        "ユユ:<br>貴様!"
+    ],
+    ["縁切りの神:<br>思った以上に強いみたいだね。"],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
