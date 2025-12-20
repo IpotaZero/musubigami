@@ -5,6 +5,7 @@ import { Vertex } from "./Vertex"
 export class Game {
     onClear = () => {}
     onMove = () => {}
+    onSwitch = () => {}
 
     readonly svg: SVGSVGElement
     readonly pen = document.createElement("span")
@@ -100,6 +101,7 @@ export class Game {
 
         if (this.vertices[index].switch) {
             this.edges.forEach((e) => e.toggleValid())
+            this.onSwitch()
         }
 
         // ペンを移動
@@ -169,7 +171,7 @@ function createMarker(svg: SVGSVGElement) {
     marker.setAttribute("orient", "auto")
     marker.setAttribute("markerWidth", "4")
     marker.setAttribute("markerHeight", "4")
-    marker.setAttribute("refX", "8")
+    marker.setAttribute("refX", "6")
     marker.setAttribute("refY", "2")
 
     const path = document.createElementNS(svg.namespaceURI, "path")

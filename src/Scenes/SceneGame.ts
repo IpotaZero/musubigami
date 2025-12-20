@@ -101,6 +101,10 @@ export class SceneGame extends Scene {
             })
         }
 
+        this.#game.onSwitch = () => {
+            SE.switch.play()
+        }
+
         this.#game.onMove = () => {
             SE.move.play()
         }
@@ -108,7 +112,7 @@ export class SceneGame extends Scene {
 
     #setupCanvas() {
         const cvs = Dom.container.querySelector("canvas")!
-        cvs.width = Dom.container.clientWidth
+        cvs.width = Dom.container.clientWidth * 0.9
         cvs.height = Dom.container.clientHeight
         const mv = new MusicVisualizer(cvs, BGM.wholeGain, BGM.context)
 
