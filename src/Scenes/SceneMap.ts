@@ -104,8 +104,10 @@ export class SceneMap extends Scene {
      * ステージがクリックされた時の処理
      */
     async #onStageClick(stageId: number) {
-        const commands = await fetch(`../../assets/stories/start.json`).then((r) => r.json())
-        await Serif.say(...commands[stageId])
+        const storyId = stageId * 2
+
+        const commands = await fetch(`../../assets/stories/story.json`).then((r) => r.json())
+        await Serif.say(...commands[storyId])
 
         const choice = await Serif.ask("やる?", ["やる", "やらない"])
         if (choice !== 0) return

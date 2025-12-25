@@ -7,8 +7,9 @@
         "ユユ:<br>……。",
         "スズ:<br>お願い! ユユの縁結びで探してくれない?"
     ],
+    ["スズ:<br>やったあ! ユユ! 見つかったよお!", "スズ:<br>ふぁぼ☆", "ユユ:<br>嬉しい。"],
     [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        "スズ:<br>キーホルダー、見つかるかなあ……。",
         "テル:<br>ねえ、ユユ。ちょっといい?",
         "ユユ:<br>なに? テル。",
         "テル:<br>ユユが縁を結ぶ力を持ってるって、ホント?",
@@ -16,6 +17,10 @@
         "テル:<br>え、じゃあさ、お願いできる? 私とキノの縁を繋いでほしいの……。",
         "ユユ:<br>キノと……?",
         "ユユ:<br>いいのかな、神様。"
+    ],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        "ユユ:<br>テル、上手くいったかな。"
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
@@ -29,6 +34,12 @@
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
+        "ユユ:<br>シン……。",
+        "ユユ:<br>ありがとう、神様。"
+    ],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         "施設……",
         { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "ユユ:<br>ただいま。",
@@ -39,6 +50,11 @@
         "寮母:<br>もっと国が税金を回してくれたらねえ。",
         "ユユ:<br>……。",
         "ユユ:<br>神様。"
+    ],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
+        "ユユ:<br>ありがとう、神様。"
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
@@ -58,6 +74,11 @@
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
+        "ユユ:<br>逃げるなっ!"
+    ],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         { "type": "portrait", "url": "assets/images/character/jaki.psd", "name": "jaki", "side": "right" },
         { "type": "portrait-change", "name": "yuyu", "layers": "angry" },
         "ユユ:<br>待てっ!",
@@ -67,6 +88,12 @@
         "ユユ:<br>なんだお前。",
         "???:<br>まあまあとりあえずは。",
         "ユユ:<br>神様!"
+    ],
+    [
+        "???:<br>なかなかやるね。",
+        "ユユ:<br>お前がジャキの親玉だというなら、私はお前を許さない。",
+        "???:<br>許さなかったらなんだというのさ。",
+        "ユユ:<br>貴様!"
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
@@ -79,6 +106,7 @@
         "縁切りの神:<br>笑えるな! 君も同じだと言うのに!",
         "ユユ:<br>黙れっ!"
     ],
+    ["縁切りの神:<br>思った以上に強いみたいだね。", "縁切りの神:<br>ここは一時撤退させてもらおう。"],
     ["ユユ:<br>"],
     ["ユユ:<br>"],
     [],
@@ -92,5 +120,29 @@
     [],
     [],
     [],
-    []
+    [],
+    [
+        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
+        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
+        "シン:<br>もう放っといてくれ! もう、何も見たくない……。",
+        "ユユ:<br>……。",
+        "ユユ:<br>こんなものがあるから!",
+        "(神の力を捨てる画像)",
+        "シン:<br>お前……!",
+        "ユユ:<br>独りぼっちでは生きていけない事、分かってるでしょ。",
+        "ユユ:<br>痛みから逃げずに、自分の為になることをしなくちゃ。",
+        "シン:<br>俺には、そんな勇気はないんだ。誰かに頼る勇気すら、持ち得ないんだ。",
+        "ユユ:<br>それでも、やらなくちゃあいけないんだ。",
+        "ユユ:<br>そうじゃなきゃあ、今生に夢以上の価値がなくなっちゃうでしょう?",
+        "シン:<br>……。",
+        "ユユ:<br>頼ってよ。私にさ。",
+        "シン:<br>お前に……?",
+        "ユユ:<br>まあ、年下の女の子になんて恥ずかしいかもしれないけどさ。頼ってよ。",
+        "シン:<br>……くそっ!",
+        "(神の力を捨てる画像)",
+        "(走り去るシン)",
+        "ユユ:<br>シン……。",
+        "(次第に薄くなっていくラﾞァ)",
+        "ユユ:<br>バイバイ、ラﾞァくん……。"
+    ]
 ]

@@ -47,8 +47,10 @@ export class SceneGame extends Scene {
             const { SceneMap } = await import("./SceneMap.js")
             await SceneChanger.goto(() => new SceneMap(ch))
 
-            const commands = await fetch(`../../assets/stories/end.json`).then((res) => res.json())
-            Serif.say(...commands[stageId])
+            const storyId = stageId * 2 + 1
+
+            const commands = await fetch(`../../assets/stories/story.json`).then((res) => res.json())
+            Serif.say(...commands[storyId])
         })
 
         this.#pages.before("retry", async () => {
