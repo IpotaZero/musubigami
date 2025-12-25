@@ -1,0 +1,2 @@
+import{v as l}from"./SceneGame.js";import"../run.js";import"./SceneTitle.js";function o(){const s=[],e=2*Math.PI;for(let t=0;t<3;t++)s.push(l.arg(e/3*t+e/4).scaled(130).plus(l(0,-20)).l);for(let t=0;t<3;t++)s.push([...l.arg(e/3*t+e/4+e/2).scaled(65).plus(l(0,-20)).l,{switch:!0}]);return{vertices:s,edges:[[1,5],[5,0],[0,4],[4,2],[2,3],[3,1],[3,5,{multiplicity:2,valid:!1}],[5,4,{valid:!1}],[4,3,{valid:!1}]]}}export{o as stage};
+//# sourceMappingURL=Stage10.js.map

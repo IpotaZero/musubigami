@@ -10,7 +10,11 @@ export class Vertex {
     private rect: SVGRectElement
     private text: SVGTextElement
 
-    constructor(v: VertexData) {
+    private index: number
+
+    constructor(v: VertexData, index: number) {
+        this.index = index
+
         this.svg = document.createElementNS(SVG_NS, "g")
         this.rect = createVertex(v)
         this.text = createText(v)
@@ -32,6 +36,7 @@ export class Vertex {
         this.rect.dataset.switch = String(this.switch)
 
         this.text.innerHTML = Number.isFinite(this.life) ? String(Math.max(this.life, 0)) : ""
+        // this.text.innerHTML = this.index + (Number.isFinite(this.life) ? String(Math.max(this.life, 0)) : "")
     }
 }
 
@@ -59,7 +64,7 @@ function createText(v: VertexData) {
     text.classList.add("game-text")
 
     text.setAttribute("x", String(v[0] - size / 2))
-    text.setAttribute("y", String(v[1] - size / 16))
+    text.setAttribute("y", String(v[1] - size / 8))
 
     return text
 }

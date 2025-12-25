@@ -52,7 +52,7 @@ export class Edge {
 
     private updateGraphic() {
         this.svg.dataset.left = String(this.left)
-        this.svg.setAttribute("stroke-dasharray", this.valid ? "" : "8")
+        this.svg.setAttribute("stroke-dasharray", this.valid ? "" : "6")
     }
 
     resetLeft() {
@@ -68,7 +68,6 @@ function createEdge(a: VertexData, b: VertexData, e: EdgeData) {
     line.setAttribute("points", `${a[0]},${a[1]} ${(a[0] + b[0]) / 2},${(a[1] + b[1]) / 2} ${b[0]},${b[1]}`)
     line.setAttribute("stroke", "currentColor")
     line.setAttribute("stroke-width", "3")
-    line.setAttribute("stroke-linecap", "round")
     line.setAttribute("data-from", String(e[0]))
     line.setAttribute("data-to", String(e[1]))
     line.classList.add("edge")

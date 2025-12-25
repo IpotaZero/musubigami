@@ -13,6 +13,10 @@ export class Vec {
         this.y = y
     }
 
+    get l(): [number, number] {
+        return [this.x, this.y]
+    }
+
     // 不変
     plus(v: Vec) {
         return vec(this.x + v.x, this.y + v.y)

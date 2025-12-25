@@ -1,14 +1,11 @@
 [
     [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         "学校……",
-        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "スズ:<br>おはよーユユ。ねえ聞いてよ!",
         "ユユ:<br>どうしたの。",
         "スズ:<br>あたしのキーホルダー、どっか行っちゃったの!",
         "ユユ:<br>……。",
-        "ユユ:<br>神様。",
-        "(縁結びの力で探してあげよう。)"
+        "スズ:<br>お願い! ユユの縁結びで探してくれない?"
     ],
     [
         { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
@@ -82,5 +79,18 @@
         "縁切りの神:<br>笑えるな! 君も同じだと言うのに!",
         "ユユ:<br>黙れっ!"
     ],
-    [""]
+    ["ユユ:<br>"],
+    ["ユユ:<br>"],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
 ]

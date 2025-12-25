@@ -60,7 +60,7 @@ button {
     cursor: pointer;
 
     &:hover {
-        scale: 0.95;
+        scale: 1.05;
         opacity: 0.5;
     }
 }

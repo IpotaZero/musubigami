@@ -32,7 +32,7 @@ export class Game {
 
     // simple renderer: clear groups and recreate elements
     render({ vertices, edges }: { vertices: VertexData[]; edges: EdgeData[] }) {
-        this.vertices = vertices.map((v) => new Vertex(v))
+        this.vertices = vertices.map((v, i) => new Vertex(v, i))
         this.edges = edges.map((e) => new Edge(vertices[e[0]], vertices[e[1]], e))
 
         this.#drawEdges()

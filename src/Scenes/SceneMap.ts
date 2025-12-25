@@ -132,6 +132,10 @@ export class SceneMap extends Scene {
         const { SceneGame } = await import("./SceneGame.js")
 
         BGM.ffp("assets/sounds/bgm/why_was_faith_lost.mp3", { loop: true, loopStartS: 1.276 })
+        // if ([6, 12, 17].includes(stageId)) {
+        // } else {
+        //     BGM.ffp("assets/sounds/bgm/puzzle.mp3", { loop: true })
+        // }
 
         await SceneChanger.goto(() => new SceneGame(this.#currentCh, stageId), {
             fadeOut: Awaits.valeOut,
