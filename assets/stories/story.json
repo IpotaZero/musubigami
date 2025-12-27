@@ -9,85 +9,59 @@
     ],
     ["スズ:<br>やったあ! ユユ! 見つかったよお!", "スズ:<br>ふぁぼ☆", "ユユ:<br>嬉しい。"],
     [
-        "スズ:<br>キーホルダー、見つかるかなあ……。",
         "テル:<br>ねえ、ユユ。ちょっといい?",
         "ユユ:<br>なに? テル。",
         "テル:<br>ユユが縁を結ぶ力を持ってるって、ホント?",
+        "スズ:<br>あんた、なんなのさ。",
         "ユユ:<br>……ホントだよ。",
         "テル:<br>え、じゃあさ、お願いできる? 私とキノの縁を繋いでほしいの……。",
-        "ユユ:<br>キノと……?",
-        "ユユ:<br>いいのかな、神様。"
+        "ユユ:<br>いいのかな。そんなこと。"
     ],
     [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        "ユユ:<br>テル、上手くいったかな。"
+        "ユユ:<br>テル、上手くいったかな。",
+        " スズ:<br>いいことするじゃん、ユユ!",
+        "スズ:<br>ふぁぼ☆",
+        "(スズに褒められるのは嬉しいけど、なんだか変な気分だ。)"
     ],
     [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait", "url": "assets/images/character/jaki.psd", "name": "jaki", "side": "right" },
         "放課後……",
+        "スズ:<br>じゃあねー、ユユ。",
+        "ユユ:<br>バイバイ、スズ。",
+        "ユユ:<br>……。",
         "(吐き気を催す臭いがする。)",
-        { "type": "portrait-change", "name": "jaki", "layers": "normal" },
+        "ツ",
         "(ジャキだ。)",
-        "ユユ:<br>ジャキは嫌いだ。ジャキは私から友を奪った。",
-        "ユユ:<br>神様。"
+        "ユユ:<br>ジャキは嫌いだ。ジャキは縁を切る。ジャキは私から友を奪った。",
+        "ユユ:<br>消してやる。"
     ],
+    ["ユユ:<br>シン……。"],
     [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
-        "ユユ:<br>シン……。",
-        "ユユ:<br>ありがとう、神様。"
-    ],
-    [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
         "施設……",
-        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "ユユ:<br>ただいま。",
         "寮母:<br>おかえり、ユユ。こっち手伝ってくれるかい?",
         "ユユ:<br>いいよ。",
         "寮母:<br>悪いねえ。いっつも手伝わせちゃって。",
         "ユユ:<br>別に。私も手伝いたいから。",
         "寮母:<br>もっと国が税金を回してくれたらねえ。",
-        "ユユ:<br>……。",
-        "ユユ:<br>神様。"
+        "ユユ:<br>……。"
     ],
+    ["ユユ:<br>……善いことをしたんだ。", "ユユ:<br>だから、私は悪くない。"],
     [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
-        "ユユ:<br>ありがとう、神様。"
-    ],
-    [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait", "url": "assets/images/character/jaki.psd", "name": "jaki", "side": "right" },
-        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "朝……",
-        "ユユ:<br>おはよう。神様。",
-        "(場面転換)",
         "ユユ:<br>おはよう、テル。",
         "テル:<br>ああ、うん……。",
         "テル:<br>……。",
-        "ユユ:<br>(うまくいかなかったのだろうか。)",
-        { "type": "portrait-change", "name": "jaki", "layers": "normal" },
-        "",
-        "ユユ:<br>お前のせいか。",
-        "ユユ:<br>お願い、神様。"
+        "スズ:<br>なんだろ、上手くいかなかったのかな。",
+        "ツ",
+        "ユユ:<br>お前のせいか。"
     ],
+    ["ユユ:<br>逃げるなっ!", "スズ:<br>あっ、待ってよ、ユユ!"],
     [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
-        "ユユ:<br>逃げるなっ!"
-    ],
-    [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait", "url": "assets/images/character/jaki.psd", "name": "jaki", "side": "right" },
-        { "type": "portrait-change", "name": "yuyu", "layers": "angry" },
         "ユユ:<br>待てっ!",
-        { "type": "portrait-change", "name": "jaki", "layers": "normal" },
         "ツ",
         "???:<br>あまり私の眷属を虐めないでくれるかな?",
         "ユユ:<br>なんだお前。",
-        "???:<br>まあまあとりあえずは。",
-        "ユユ:<br>神様!"
+        "???:<br>まあまあとりあえずは。"
     ],
     [
         "???:<br>なかなかやるね。",
@@ -96,8 +70,6 @@
         "ユユ:<br>貴様!"
     ],
     [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "ユユ:<be>お前何なんだ!",
         "縁切りの神:<br>俺は縁切りの神さ。そういう君は縁結びの神なんだろう?",
         "ユユ:<be>私は神じゃあない!",
@@ -106,7 +78,20 @@
         "縁切りの神:<br>笑えるな! 君も同じだと言うのに!",
         "ユユ:<br>黙れっ!"
     ],
-    ["縁切りの神:<br>思った以上に強いみたいだね。", "縁切りの神:<br>ここは一時撤退させてもらおう。"],
+    [
+        "縁切りの神:<br>思った以上に強いみたいだね。",
+        "縁切りの神:<br>ここは一時撤退させてもらおう。",
+        "ユユ:<br>お前みたいなやつが、世界を不幸にするんだ!"
+    ],
+    [
+        "ユユ:<br>あいつを探さなければ。",
+        "スズ:<br>ねえ、ユユ、聞いて。",
+        "スズ:<br>シンの事は分かるけど、落ち着きなよ。",
+        "ユユ:<br>分かってる。ちょっと、頭に血が上ってた。",
+        "町……",
+        "スズ:<br>とにかく、ジャキを追っていれば縁切りの神に会えるかも。",
+        "スズ:<br>どこかでトラブルは起きてないかな。"
+    ],
     ["ユユ:<br>"],
     ["ユユ:<br>"],
     [],
@@ -122,8 +107,6 @@
     [],
     [],
     [
-        { "type": "portrait", "url": "assets/images/character/yuyu.psd", "name": "yuyu" },
-        { "type": "portrait-change", "name": "yuyu", "layers": "normal" },
         "シン:<br>もう放っといてくれ! もう、何も見たくない……。",
         "ユユ:<br>……。",
         "ユユ:<br>こんなものがあるから!",
