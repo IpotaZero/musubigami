@@ -60,7 +60,7 @@ button {
     cursor: pointer;
 
     &:hover {
-        scale: 1.05;
+        scale: 0.95;
         opacity: 0.5;
     }
 }
@@ -75,4 +75,12 @@ a {
     &:hover {
         opacity: 0.5;
     }
+}
+
+ruby {
+    font-size: inherit;
+}
+
+rt {
+    font-size: 0.7em;
 }
