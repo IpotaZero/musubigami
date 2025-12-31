@@ -34,6 +34,11 @@ export class SceneMap extends Scene {
         this.#pages.on("ch[012]", (pages) => {
             const id = pages.getCurrentPageId()
 
+            if (id === "ch1" && !LocalStorage.getFlags().includes("ch1")) {
+                this.#a()
+                return
+            }
+
             switch (id) {
                 case "ch0":
                     this.#currentCh = 0
@@ -49,6 +54,14 @@ export class SceneMap extends Scene {
 
         this.#initializeMapState()
         this.#setupBackButton()
+        this.#setupEvents()
+    }
+
+    async #a() {
+        const commands = await fetch("../../assets/stories/event.json").then((res) => res.json())
+        await Serif.say(...commands["敵対"])
+
+        LocalStorage.addFlag("ch1")
     }
 
     /**
@@ -104,10 +117,8 @@ export class SceneMap extends Scene {
      * ステージがクリックされた時の処理
      */
     async #onStageClick(stageId: number) {
-        const storyId = stageId * 2
-
         const commands = await fetch(`../../assets/stories/story.json`).then((r) => r.json())
-        await Serif.say(...commands[storyId])
+        await Serif.say(...commands[stageId].start)
 
         const choice = await Serif.ask("やる?", ["やる", "やらない"])
         if (choice !== 0) return
@@ -118,7 +129,7 @@ export class SceneMap extends Scene {
             case 0:
                 await this.#playTutorial(0)
                 break
-            case 4:
+            case 2:
                 await this.#playTutorial(1)
                 break
             case 5:
@@ -150,6 +161,15 @@ export class SceneMap extends Scene {
     async #playTutorial(index: number) {
         const commands = await fetch("../../assets/stories/tutorial.json").then((res) => res.json())
         await Serif.say(...commands[index])
+    }
+
+    #setupEvents() {
+        Dom.container.querySelectorAll<SVGElement>(".event").forEach((eventElement, index) => {
+            eventElement.onclick = async () => {
+                const commands = await fetch("../../assets/stories/event.json").then((res) => res.json())
+                await Serif.say(...commands["event" + index])
+            }
+        })
     }
 }
 

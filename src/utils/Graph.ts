@@ -1,3 +1,9 @@
+type MapData = {
+    vertices: [number, number][]
+    edges: [number, number][]
+    events: [number, number, string][]
+}
+
 export class Graph extends HTMLElement {
     connectedCallback() {
         const svgNS = "http://www.w3.org/2000/svg"
@@ -30,13 +36,13 @@ export class Graph extends HTMLElement {
         if (url) {
             fetch(url)
                 .then((res) => res.json())
-                .then((data: { vertices: [number, number][]; edges: [number, number][] }) => {
-                    this.#renderGraph(svg, data.vertices, data.edges)
+                .then((data: MapData) => {
+                    this.#renderGraph(svg, data)
                 })
         }
     }
 
-    #renderGraph(svg: SVGSVGElement, vertices: [number, number][], edges: [number, number][]) {
+    #renderGraph(svg: SVGSVGElement, { vertices, edges, events }: MapData) {
         const svgNS = "http://www.w3.org/2000/svg"
 
         // Clear existing content
@@ -77,6 +83,18 @@ export class Graph extends HTMLElement {
             // text.setAttribute("fill", "#111")
             // text.textContent = `${index}`
             // svg.appendChild(text)
+        })
+
+        // Draw events
+        events.forEach(([x, y, url]) => {
+            const image = document.createElementNS(svgNS, "image")
+            image.setAttribute("href", url)
+            image.setAttribute("x", x.toString())
+            image.setAttribute("y", y.toString())
+            image.setAttribute("width", "64")
+            image.setAttribute("height", "64")
+            image.classList.add("event")
+            svg.appendChild(image)
         })
     }
 }

@@ -13,5 +13,6 @@
         [3, 5],
         [1, 2],
         [3, 4]
-    ]
+    ],
+    "events": [[80, 200, "assets/images/icon.png"]]
 }

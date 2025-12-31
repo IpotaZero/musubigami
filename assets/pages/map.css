@@ -65,3 +65,11 @@
 .star-icon {
     pointer-events: none;
 }
+
+.event {
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
