@@ -25,6 +25,7 @@ export class SceneTitle extends Scene {
 
         this.#setupFirstPage()
         this.#setupVolumeSetting()
+        this.#setupButtonSE()
 
         // this.#pages.on(".*", (pages) => {
         //     const page = pages.pages.get(pages.getCurrentPageId())
@@ -67,8 +68,8 @@ export class SceneTitle extends Scene {
     async #始まり() {
         LocalStorage.addFlag("始まり")
 
-        const commands = await fetch("../../assets/stories/始まり.json").then((res) => res.json())
-        await Serif.say(...commands)
+        const commands = await fetch("../../assets/stories/event.json").then((res) => res.json())
+        await Serif.say(...commands["始まり"])
     }
 
     #setupFirstPage() {
@@ -102,5 +103,13 @@ export class SceneTitle extends Scene {
             SE.setVolume(LocalStorage.getSEVolume() / 9)
             SE.move.play()
         }
+    }
+
+    #setupButtonSE() {
+        Dom.container.querySelectorAll("button").forEach((button) => {
+            button.addEventListener("click", () => {
+                SE.click.play()
+            })
+        })
     }
 }
