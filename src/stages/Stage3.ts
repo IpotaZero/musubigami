@@ -14,7 +14,7 @@ export function stage(): GraphData {
         edges: [
             [0, 1],
             [0, 2],
-            [1, 2],
+            [1, 2, { multiplicity: 3 }],
             [1, 3],
             [1, 4],
             [2, 3],

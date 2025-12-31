@@ -89,5 +89,5 @@ type StageData = {
     cleared: boolean
 }
 
-type Flag = "始まり"
+type Flag = "始まり" | "ch1"
 ;(window as any).LocalStorage = LocalStorage
