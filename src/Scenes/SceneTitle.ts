@@ -78,6 +78,7 @@ export class SceneTitle extends Scene {
         Awaits.ok().then(() => {
             // KeyboardOperation.update(page)
             page.classList.add("show")
+            BGM.ffp("assets/sounds/bgm/信仰の残り香.mp3")
         })
 
         // Serif.say("test")
