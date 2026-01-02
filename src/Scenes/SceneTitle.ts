@@ -79,6 +79,7 @@ export class SceneTitle extends Scene {
             // KeyboardOperation.update(page)
             page.classList.add("show")
             BGM.ffp("assets/sounds/bgm/信仰の残り香.mp3")
+            this.#setupParticles()
         })
 
         // Serif.say("test")
@@ -112,5 +113,20 @@ export class SceneTitle extends Scene {
                 SE.click.play()
             })
         })
+    }
+
+    #setupParticles() {
+        const page = Dom.container
+
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement("div")
+            particle.classList.add("particle")
+            particle.style.left = `${Math.random() * 100}%`
+            particle.style.width = `${20 + Math.random() * 30}px`
+            particle.style.height = particle.style.width
+            particle.style.animationDuration = `${5 + Math.random() * 5}s`
+            particle.style.animationDelay = `${Math.random() * 10}s`
+            page.appendChild(particle)
+        }
     }
 }

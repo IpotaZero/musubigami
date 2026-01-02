@@ -201,3 +201,31 @@
 #credit {
     flex-direction: column;
 }
+
+.particle {
+    position: absolute;
+
+    transform: translateY(-100dvh);
+
+    background: linear-gradient(270deg, rgb(240, 232, 129), rgb(243, 215, 146));
+
+    animation: particle linear forwards infinite;
+
+    z-index: -10;
+}
+
+@keyframes particle {
+    0% {
+        transform: translateY(-50dvh) rotate3d(1, 1, 1, 0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(50dvh) rotate3d(1, 1, 1, 360deg);
+        opacity: 0;
+    }
+}
