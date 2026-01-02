@@ -68,7 +68,7 @@ export class BGM {
     }
 
     static async ffp(path: string, options: BGMOptions = {}) {
-        await Promise.all([this.#fadeOut(1000), this.#fetch(path, options)])
+        await Promise.all([this.fadeOut(1000), this.#fetch(path, options)])
         if (this.getPath() === path) {
             this.#play(options.when ?? 0)
         }
@@ -90,7 +90,7 @@ export class BGM {
         this.wholeGain.gain.value = this.#volume
     }
 
-    static async #fadeOut(durationMS: number) {
+    static async fadeOut(durationMS: number) {
         if (!this.#currentBGM) return
         await this.#currentBGM.#localFadeOut(durationMS)
     }

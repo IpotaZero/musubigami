@@ -96,6 +96,18 @@
     }
 }
 
+#summary {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    p {
+        font-size: min(6dvh, 36px);
+        line-height: 1.4;
+    }
+}
+
 #how-to-play {
     flex-direction: column;
     gap: 1em;
@@ -104,6 +116,12 @@
 
     justify-content: flex-start;
     align-items: flex-start;
+
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
 }
 
 #story {
@@ -168,9 +186,22 @@
 
     gap: 1em;
 
+    & label {
+        white-space: nowrap;
+        width: 8em;
+    }
+
     & input {
         pointer-events: all;
         width: 100%;
+    }
+
+    & div[for="bgm-volume"],
+    & div[for="se-volume"] {
+        display: flex;
+        flex-direction: row;
+        width: 70%;
+        align-items: center;
     }
 }
 

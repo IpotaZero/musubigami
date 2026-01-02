@@ -75,6 +75,8 @@ export class SceneTitle extends Scene {
     #setupFirstPage() {
         const page = this.#pages.pages.get("first")!
 
+        BGM.fadeOut(1000)
+
         Awaits.ok().then(() => {
             // KeyboardOperation.update(page)
             page.classList.add("show")
