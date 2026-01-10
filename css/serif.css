@@ -36,8 +36,8 @@
     background-repeat: no-repeat;
     background-size: cover;
 
-    border-top: rgb(1, 14, 5) 1.8em solid;
-    border-bottom: rgb(1, 14, 5) 1.8em solid;
+    /* border-top: rgb(1, 14, 5) 1.8em solid; */
+    /* border-bottom: rgb(1, 14, 5) 1.8em solid; */
 
     transition: opacity 1s ease;
 
@@ -78,8 +78,6 @@
     height: 100%;
     width: 100%;
     line-height: 1.2em;
-
-    font-size: 40px;
 
     button {
         margin-top: 0.5em;

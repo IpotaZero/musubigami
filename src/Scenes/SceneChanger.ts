@@ -16,10 +16,14 @@ export class SceneChanger {
         {
             showLoading = this.#showLoading,
             hideLoading = this.#hideLoading,
+
             fadeOut = Awaits.fadeOut,
             fadeIn = Awaits.fadeIn,
+
             msIn = 500,
             msOut = 500,
+
+            afterLoad = () => {},
         }: {
             showLoading?: () => void
             hideLoading?: () => void
@@ -27,6 +31,8 @@ export class SceneChanger {
             fadeIn?: FadeFunction
             msIn?: number
             msOut?: number
+
+            afterLoad?: () => void
         } = {},
     ) {
         const container = document.getElementById("container")!
@@ -52,6 +58,8 @@ export class SceneChanger {
         if (showed) {
             hideLoading()
         }
+
+        afterLoad() // 読み込み後処理
 
         await fadeIn(container, msOut)
     }

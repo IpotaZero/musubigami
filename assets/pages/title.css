@@ -1,5 +1,13 @@
 .page {
     padding: 1em;
+
+    h3 {
+        white-space: nowrap;
+        width: 100%;
+        text-align: left;
+        line-height: 2;
+        border-bottom: #111 1px solid;
+    }
 }
 
 #first {
@@ -24,6 +32,8 @@
         h1 {
             left: 0.5em;
             transform: translateX(0);
+
+            transition: left 1s ease, transform 1s ease;
         }
 
         #click {
@@ -35,6 +45,8 @@
             opacity: 1;
             transform: translateX(0);
             pointer-events: auto;
+
+            transition: opacity 2s ease, transform 1s ease;
         }
     }
 
@@ -54,8 +66,6 @@
         line-height: 1.4em;
 
         writing-mode: vertical-rl;
-
-        transition: left 1s ease, transform 1s ease;
 
         background: linear-gradient(270deg, rgb(246, 242, 187), rgba(238, 192, 77, 1));
         background-clip: text;
@@ -86,7 +96,6 @@
         gap: 0.5em;
         opacity: 0;
         transform: translateX(100%);
-        transition: opacity 2s ease, transform 1s ease;
         pointer-events: none;
 
         & button {
@@ -183,8 +192,17 @@
 
 #setting {
     flex-direction: column;
+    align-items: flex-start;
 
-    gap: 1em;
+    padding: 1em 4em;
+
+    section {
+        display: flex;
+        flex-direction: column;
+        padding: 1em;
+        width: 100%;
+        gap: 0.5em;
+    }
 
     & label {
         white-space: nowrap;
@@ -200,7 +218,7 @@
     & div[for="se-volume"] {
         display: flex;
         flex-direction: row;
-        width: 70%;
+        width: 100%;
         align-items: center;
     }
 }

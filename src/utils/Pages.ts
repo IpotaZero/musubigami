@@ -25,6 +25,11 @@ export class Pages {
 
     #loaded = false
 
+    async loadFromFile(container: HTMLElement, path: string, options: { history?: string[] } = {}) {
+        const html = await fetch(path).then((res) => res.text())
+        await this.load(container, html, options)
+    }
+
     async load(container: HTMLElement, html: string, { history }: { history?: string[] } = {}) {
         if (this.#loaded) {
             throw new Error("Pages have already been loaded")

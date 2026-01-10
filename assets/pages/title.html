@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="assets/pages/title.css" />
+
 <div class="page" id="first">
     <h1>ムスビガミ</h1>
 
@@ -49,7 +51,7 @@
     <p>プロット</p>
     <div id="story-container">
         <h3>序</h3>
-        <p>宗教という概念が人々の記憶から薄れつつある世界。その時代になってもなお、人は分かり合えないものであった。</p>
+        <p>宗教という概念が人々の記憶から薄れつつある世界。その時代になってもなお、人は分かり合えない物であった。</p>
         <p>
             かつて栄えた国ニッポン。 トウキョウという田舎町に、ひとりの少女が住んでいた。
             親はいない。彼女は前世紀の非倫理的な科学の遺産だ。
@@ -69,7 +71,7 @@
         <h3>破</h3>
         <p>縁を結ぶ日々。人の思いを実現させるのは心地よかった。</p>
         <p>だが、なぜ、信仰は失われたのか？ その疑問が少女の心を捉えて離さない。</p>
-        <p>ジャキ。 それは、人と人との縁を断ち切る精霊のようなものだった。</p>
+        <p>ジャキ。 それは、人と人との縁を断ち切る精霊のような物だった。</p>
         <p>
             人類は資本主義と科学主義を突き詰めた果てに、人の思いを増幅する機械と兵器を作り上げた。
             人間は単純だった。アルゴリズムによって刺激された感情は、ついには人類を世界大戦へと導いた。
@@ -92,16 +94,23 @@
 </div>
 
 <div class="page" id="setting">
-    <div for="bgm-volume">
-        <label for="bgm-volume"> BGM Volume </label>
-        <input type="range" name="bgm-volume" id="bgm-volume" min="0" max="9" value="9" />
-    </div>
-    <div for="se-volume">
-        <label for="bgm-volume"> SE Volume </label>
-        <input type="range" name="se-volume" id="se-volume" min="0" max="9" value="9" />
-    </div>
-    <!-- <button data-link="delete-adventure-data" data-position="0,0">探索データを消す</button> -->
-    <button data-link="delete-data" data-position="1,0">データを消す</button>
+    <h3>Volume Setting</h3>
+    <section>
+        <div for="bgm-volume">
+            <label for="bgm-volume"> BGM Volume </label>
+            <input type="range" name="bgm-volume" id="bgm-volume" min="0" max="9" value="9" />
+        </div>
+        <div for="se-volume">
+            <label for="bgm-volume"> SE Volume </label>
+            <input type="range" name="se-volume" id="se-volume" min="0" max="9" value="9" />
+        </div>
+    </section>
+
+    <h3>Data Management</h3>
+    <section>
+        <!-- <button data-link="delete-adventure-data" data-position="0,0">探索データを消す</button> -->
+        <button data-link="delete-data" data-position="1,0">データを消す</button>
+    </section>
 
     <button data-back="1">戻る</button>
 </div>
@@ -109,10 +118,9 @@
 <div class="page" id="credit">
     <button data-back="1">戻る</button>
 
+    <p>SE: <a href="https://soundeffect-lab.info/" target="_blank">効果音ラボ</a></p>
     <p>フォント: <a href="http://jikasei.me/font/kh-dotfont/" target="_blank">日比谷32(明朝体)</a></p>
     <br />
-    <p>企画: いぽた</p>
+    <p>企画: <a href="https://x.com/ipota_zero" target="_blank">いぽた</a></p>
     <p>制作: <a href="https://x.com/ocu_mcr" target="_blank">MCR</a></p>
 </div>
-
-<link rel="stylesheet" href="assets/pages/title.css" />

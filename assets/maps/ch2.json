@@ -12,5 +12,5 @@
         [2, 3],
         [3, 4]
     ],
-    "events": [[180, 20, "assets/images/icon.png"]]
+    "events": [[30, 100, "assets/images/icon.png", "歪み"]]
 }

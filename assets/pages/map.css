@@ -1,3 +1,7 @@
+#container {
+    box-shadow: 0 0 20dvh 1dvh #ffffff44 inset;
+}
+
 #back {
     position: absolute;
     top: 0;
@@ -72,4 +76,26 @@
     &:hover {
         opacity: 0.5;
     }
+}
+
+#yuyu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16dvh;
+    height: 16dvh;
+    pointer-events: none;
+
+    /* transition: all 1s ease; */
+    display: none;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+psd-viewer {
+    position: absolute;
+    height: 50%;
+    pointer-events: none;
 }

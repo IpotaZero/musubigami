@@ -20,8 +20,7 @@ export class SceneTitle extends Scene {
     }
 
     async #setup() {
-        const html = await fetch("assets/pages/title.html").then((res) => res.text())
-        await this.#pages.load(Dom.container, html)
+        await this.#pages.loadFromFile(Dom.container, "assets/pages/title.html")
 
         this.#setupFirstPage()
         this.#setupVolumeSetting()
@@ -34,7 +33,7 @@ export class SceneTitle extends Scene {
         // })
 
         this.#pages.before("start", async (pages) => {
-            const { SceneMap } = await import("./SceneMap.js")
+            const { SceneMap } = await import("./SceneMap/SceneMap.js")
             await SceneChanger.goto(() => new SceneMap(0))
 
             if (!LocalStorage.getFlags().includes("始まり")) {
@@ -68,8 +67,9 @@ export class SceneTitle extends Scene {
     async #始まり() {
         LocalStorage.addFlag("始まり")
 
-        const commands = await fetch("../../assets/stories/event.json").then((res) => res.json())
-        await Serif.say(...commands["始まり"])
+        // @ts-ignore
+        const commands = await import("../../assets/stories/event.js")
+        await Serif.say(...commands.default["始まり"])
     }
 
     #setupFirstPage() {

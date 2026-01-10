@@ -1,10 +1,16 @@
 type MapData = {
     vertices: [number, number][]
     edges: [number, number][]
-    events: [number, number, string][]
+    events: [number, number, string, string][]
 }
 
 export class Graph extends HTMLElement {
+    private resolve = () => {}
+
+    readonly ready = new Promise<void>((resolve) => {
+        this.resolve = resolve
+    })
+
     connectedCallback() {
         const svgNS = "http://www.w3.org/2000/svg"
         const svg = document.createElementNS(svgNS, "svg")
@@ -30,11 +36,11 @@ export class Graph extends HTMLElement {
         return vertices.map((i) => vertexElements[i])
     }
 
-    #render(svg: SVGSVGElement) {
+    async #render(svg: SVGSVGElement) {
         const url = this.getAttribute("src")
 
         if (url) {
-            fetch(url)
+            await fetch(url)
                 .then((res) => res.json())
                 .then((data: MapData) => {
                     this.#renderGraph(svg, data)
@@ -86,16 +92,19 @@ export class Graph extends HTMLElement {
         })
 
         // Draw events
-        events.forEach(([x, y, url]) => {
+        events.forEach(([x, y, url, id]) => {
             const image = document.createElementNS(svgNS, "image")
             image.setAttribute("href", url)
             image.setAttribute("x", x.toString())
             image.setAttribute("y", y.toString())
-            image.setAttribute("width", "64")
-            image.setAttribute("height", "64")
+            image.setAttribute("width", "32")
+            image.setAttribute("height", "32")
+            image.dataset["eventName"] = id
             image.classList.add("event")
             svg.appendChild(image)
         })
+
+        this.resolve()
     }
 }
 

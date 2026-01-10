@@ -3,7 +3,6 @@ import { PsdElement } from "./PsdElement"
 
 export type SerifCommand =
     | string
-    | { type: "character"; icon: string }
     | { type: "background"; image: string }
     | { type: "portrait"; url: string; name: string; side?: string }
     | { type: "portrait-change"; name: string; layers: string }
@@ -63,6 +62,10 @@ export class Serif {
                     this.#say()
                 }
             }
+
+            if (e.code === "KeyX") {
+                this.#window.classList.toggle("hidden")
+            }
         })
     }
 
@@ -95,6 +98,10 @@ export class Serif {
     }
 
     static say(...texts: SerifCommand[]) {
+        if (texts.length === 0) {
+            return Promise.resolve()
+        }
+
         this.#mode = "say"
         this.#ZHint.classList.remove("hidden")
         this.#reset()
@@ -135,15 +142,6 @@ export class Serif {
             requestAnimationFrame(() => {
                 this.#textContainer.classList.add("fade-in")
             })
-        } else if (command.type === "character") {
-            if (command.icon === "none") {
-                this.#iconContainer.classList.add("hidden")
-            } else {
-                this.#iconContainer.innerHTML = `<img src="${command.icon}" alt="" />`
-                this.#iconContainer.classList.remove("hidden")
-            }
-
-            this.#say()
         } else if (command.type === "background") {
             this.#background.innerHTML = `<img src="${command.image}" alt="" class="fade-in"/>`
             this.#say()
@@ -163,6 +161,7 @@ export class Serif {
     }
 
     static #reset() {
+        this.#window.classList.remove("hidden")
         this.#container.style.cursor = { "say": "pointer", "ask": "default" }[this.#mode]
         this.#background.innerHTML = ""
         this.#iconContainer.classList.add("hidden")

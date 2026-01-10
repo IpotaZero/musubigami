@@ -29,8 +29,7 @@ export class SceneGame extends Scene {
     }
 
     async #setup(ch: Chapters, stageId: number) {
-        const html = await fetch("assets/pages/game.html").then((res) => res.text())
-        await this.#pages.load(Dom.container, html)
+        await this.#pages.loadFromFile(Dom.container, "assets/pages/game.html")
 
         this.#setupButtons(ch, stageId)
         this.#setupGame(ch, stageId)
@@ -39,16 +38,17 @@ export class SceneGame extends Scene {
 
     #setupButtons(ch: Chapters, stageId: number) {
         this.#pages.before("back", async () => {
-            const { SceneMap } = await import("./SceneMap.js")
+            const { SceneMap } = await import("./SceneMap/SceneMap.js")
             SceneChanger.goto(() => new SceneMap(ch))
         })
 
         this.#pages.before("next", async () => {
-            const { SceneMap } = await import("./SceneMap.js")
-            await SceneChanger.goto(() => new SceneMap(ch))
-
-            const commands = await fetch(`../../assets/stories/story.json`).then((res) => res.json())
-            Serif.say(...commands[stageId].end)
+            const { SceneMap } = await import("./SceneMap/SceneMap.js")
+            // @ts-ignore
+            const commands = await import(`../../assets/stories/story.js`)
+            await SceneChanger.goto(() => new SceneMap(ch), {
+                afterLoad: () => Serif.say(...commands.default[stageId].end),
+            })
         })
 
         this.#pages.before("retry", async () => {
