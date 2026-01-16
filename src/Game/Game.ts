@@ -171,7 +171,7 @@ function createMarker(svg: SVGSVGElement) {
     marker.setAttribute("orient", "auto")
     marker.setAttribute("markerWidth", "4")
     marker.setAttribute("markerHeight", "4")
-    marker.setAttribute("refX", "6")
+    marker.setAttribute("refX", "2")
     marker.setAttribute("refY", "2")
 
     const path = document.createElementNS(svg.namespaceURI, "path")

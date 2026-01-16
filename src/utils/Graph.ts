@@ -1,7 +1,7 @@
 type MapData = {
     vertices: [number, number][]
     edges: [number, number][]
-    events: [number, number, string, string][]
+    events: [number, number, string, string, { bgm?: string }?][]
 }
 
 export class Graph extends HTMLElement {
@@ -74,10 +74,10 @@ export class Graph extends HTMLElement {
         // Draw vertices
         vertices.forEach(([x, y], index) => {
             const rect = document.createElementNS(svgNS, "rect")
-            rect.setAttribute("x", (x - 16).toString())
-            rect.setAttribute("y", (y - 16).toString())
-            rect.setAttribute("width", "32")
-            rect.setAttribute("height", "32")
+            rect.setAttribute("x", (x - 20).toString())
+            rect.setAttribute("y", (y - 20).toString())
+            rect.setAttribute("width", "40")
+            rect.setAttribute("height", "40")
             rect.classList.add("stage", "hidden")
             svg.appendChild(rect)
 
@@ -92,14 +92,15 @@ export class Graph extends HTMLElement {
         })
 
         // Draw events
-        events.forEach(([x, y, url, id]) => {
+        events.forEach(([x, y, url, id, option]) => {
             const image = document.createElementNS(svgNS, "image")
             image.setAttribute("href", url)
             image.setAttribute("x", x.toString())
             image.setAttribute("y", y.toString())
-            image.setAttribute("width", "32")
-            image.setAttribute("height", "32")
+            image.setAttribute("width", "40")
+            image.setAttribute("height", "40")
             image.dataset["eventName"] = id
+            image.dataset["bgm"] = option ? option.bgm : ""
             image.classList.add("event")
             svg.appendChild(image)
         })

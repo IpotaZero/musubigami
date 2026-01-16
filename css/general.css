@@ -10,7 +10,7 @@
     image-rendering: pixelated;
 
     /* 文字 */
-    font-size: 6dvh;
+    font-size: max(32px, 6dvh);
     font-family: mincho, serif;
 
     /* 選択系 */
@@ -54,7 +54,7 @@ button {
     background: none;
     color: #111;
     border: none;
-    font-size: 6dvh;
+    font-size: max(32px, 6dvh);
     padding-top: 0.15em;
 
     cursor: pointer;
@@ -62,6 +62,8 @@ button {
     &:hover {
         scale: 0.95;
         opacity: 0.5;
+        animation: theta 0.4s linear infinite;
+        transform: translate(calc(sin(var(--theta) * 3) * 0.1dvh), calc(sin(var(--theta) * 2) * 0.1dvh));
     }
 }
 

@@ -1,7 +1,7 @@
 import { Dom } from "./Dom"
 import { LocalStorage } from "./LocalStorage"
 import { SceneChanger } from "./Scenes/SceneChanger"
-import { BGM } from "./utils/BGM"
+import { BGM } from "./utils/BGM/BGM"
 
 import { Graph } from "./utils/Graph"
 import { KeyboardOperation } from "./utils/KeyboardOperation"
@@ -12,15 +12,20 @@ PsdElement
 Graph
 
 document.addEventListener("DOMContentLoaded", async () => {
+    BGM.init()
     Serif.init()
     Dom.init()
-    // KeyboardOperation.init()
+    KeyboardOperation.init()
+
+    Dom.container.innerHTML = '<p class="loading">Loading</p>'
 
     const params = new URLSearchParams(window.location.search)
 
     if (params.get("delete") === "true") {
         LocalStorage.clear()
     }
+
+    await document.fonts.ready
 
     const { SceneTitle } = await import("./Scenes/SceneTitle.js")
     SceneChanger.init(new SceneTitle())

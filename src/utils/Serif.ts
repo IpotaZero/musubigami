@@ -74,9 +74,10 @@ export class Serif {
         this.#ZHint.classList.add("hidden")
         this.#reset()
 
-        this.#textContainer.innerHTML = title + "<br/>"
+        this.#textContainer.innerHTML = title
 
         requestAnimationFrame(() => {
+            this.#textContainer.dataset["mode"] = "ask"
             this.#textContainer.classList.add("fade-in")
         })
 
@@ -102,6 +103,7 @@ export class Serif {
             return Promise.resolve()
         }
 
+        this.#textContainer.dataset["mode"] = "say"
         this.#mode = "say"
         this.#ZHint.classList.remove("hidden")
         this.#reset()

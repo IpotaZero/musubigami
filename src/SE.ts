@@ -28,6 +28,7 @@ export class SE {
     static reset = new Sound("assets/sounds/se/窓を開ける.mp3", 1)
     static switch = new Sound("assets/sounds/se/引き戸を閉める.mp3", 1)
     static click = new Sound("assets/sounds/se/カーソル移動2.mp3", 1)
+    static suzu = new Sound("assets/sounds/se/鈴が鳴る.mp3", 1)
 
     static setVolume(volume: number) {
         Object.values(this).forEach((se) => {

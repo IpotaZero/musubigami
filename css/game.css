@@ -54,6 +54,10 @@
     &[data-left="3"] {
         stroke: rgb(116, 41, 126);
     }
+
+    &[data-left="4"] {
+        stroke: rgb(41, 126, 69);
+    }
 }
 
 .game-pen {

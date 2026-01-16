@@ -2,12 +2,13 @@ import { Dom } from "../Dom"
 import { Game } from "../Game/Game"
 import { LocalStorage } from "../LocalStorage"
 import { SE } from "../SE"
-import { BGM } from "../utils/BGM"
+import { BGM } from "../utils/BGM/BGM"
 import { MusicVisualizer } from "../utils/MusicVisualizer"
 import { Pages } from "../utils/Pages"
 import { Serif, SerifCommand } from "../utils/Serif"
 import { Scene } from "./Scene"
 import { SceneChanger } from "./SceneChanger"
+import { MapConfig } from "./SceneMap/MapConfig"
 
 type Chapters = 0 | 1 | 2
 
@@ -32,8 +33,12 @@ export class SceneGame extends Scene {
         await this.#pages.loadFromFile(Dom.container, "assets/pages/game.html")
 
         this.#setupButtons(ch, stageId)
-        this.#setupGame(ch, stageId)
         this.#setupCanvas()
+        await this.#setupGame(ch, stageId)
+
+        if (stageId === 0) {
+            this.#firstStageTutorial()
+        }
     }
 
     #setupButtons(ch: Chapters, stageId: number) {
@@ -43,12 +48,17 @@ export class SceneGame extends Scene {
         })
 
         this.#pages.before("next", async () => {
-            const { SceneMap } = await import("./SceneMap/SceneMap.js")
-            // @ts-ignore
-            const commands = await import(`../../assets/stories/story.js`)
-            await SceneChanger.goto(() => new SceneMap(ch), {
-                afterLoad: () => Serif.say(...commands.default[stageId].end),
-            })
+            if (stageId === MapConfig.BOSSES[3]) {
+                const { SceneEnd } = await import("./SceneEnd.js")
+                await SceneChanger.goto(() => new SceneEnd())
+            } else {
+                const { SceneMap } = await import("./SceneMap/SceneMap.js")
+                // @ts-ignore
+                const commands = await import(`../../assets/stories/story.js`)
+                await SceneChanger.goto(() => new SceneMap(ch), {
+                    afterLoad: () => Serif.say(...commands.default[stageId].end),
+                })
+            }
         })
 
         this.#pages.before("retry", async () => {
@@ -114,7 +124,7 @@ export class SceneGame extends Scene {
         const cvs = Dom.container.querySelector("canvas")!
         cvs.width = Dom.container.clientWidth * 0.9
         cvs.height = Dom.container.clientHeight
-        const mv = new MusicVisualizer(cvs, BGM.wholeGain, BGM.context)
+        const mv = new MusicVisualizer(cvs, BGM.gain, BGM.context)
 
         const loop = () => {
             mv.drawFrequency("rgba(212, 209, 168, 0.07)", cvs.width / 2, cvs.height / 2, cvs.height / 4, cvs.height)
@@ -122,5 +132,28 @@ export class SceneGame extends Scene {
         }
 
         requestAnimationFrame(loop)
+    }
+
+    #firstStageTutorial() {
+        const v = Dom.container.querySelector("rect")
+
+        if (!v) throw new Error()
+
+        const rect = v.getClientRects()?.[0]
+
+        const arrow = document.createElement("span")
+        arrow.classList.add("tutorial-arrow")
+        arrow.style.top = `${rect.top}px`
+        arrow.style.left = `${rect.left}px`
+
+        Dom.container.appendChild(arrow)
+
+        v.addEventListener(
+            "click",
+            () => {
+                arrow.style.opacity = "0"
+            },
+            { once: true },
+        )
     }
 }

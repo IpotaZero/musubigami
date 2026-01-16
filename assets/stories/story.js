@@ -79,7 +79,7 @@ export default [
     {
         start: [
             { type: "portrait", url: "assets/images/character/imi.psd", name: "imi", side: "right" },
-            { type: "portrait-change", name: "imi", layers: "レイヤー 1" },
+            { type: "portrait-change", name: "imi", layers: "レイヤー 1,レイヤー 2" },
             "???:<br>ふぁぼ☆",
             "ユユ:<br>誰?",
             "意味付けの神:<br>あたしは意味付けの神……の<ruby>仮想体<rt>アバター</rt></ruby>!",
@@ -94,7 +94,7 @@ export default [
         ],
         end: [
             { type: "portrait", url: "assets/images/character/imi.psd", name: "imi", side: "right" },
-            { type: "portrait-change", name: "imi", layers: "レイヤー 1" },
+            { type: "portrait-change", name: "imi", layers: "レイヤー 1,レイヤー 2" },
             "意味付けの神:<br>あー、楽しかった! ありがとっ縁結び。",
             "ユユ:<br>つ、疲れた……。",
             "ユユ:<br>(けど、やっぱり縁結びは気持ちいい。)",
@@ -127,7 +127,9 @@ export default [
     },
     {
         start: [
+            { type: "portrait", url: "assets/images/character/tsuihou.psd", name: "tsuihou", side: "right" },
             "ユユ:<br>うーん、どこに行ったんだろう。",
+            { type: "portrait-change", name: "tsuihou", layers: "レイヤー 1" },
             "???:<br>お困りのようですね、お嬢さん。",
             "ユユ:<br>怪しいやつ発見!",
             "???:<br>怪しくないですよっ! ",
@@ -136,6 +138,8 @@ export default [
             "ユユ:<br>アンタの正体も、アイツの行方も教えてもらいます!",
         ],
         end: [
+            { type: "portrait", url: "assets/images/character/tsuihou.psd", name: "tsuihou", side: "right" },
+            { type: "portrait-change", name: "tsuihou", layers: "レイヤー 1" },
             "???:<br>やーらーれーたー。",
             "ユユ:<br>万事解決っ! さあ、教えてもらいましょう!",
             "返答の神:<br>僕は返答。君や意味付けと同じ物さ。",
@@ -152,8 +156,6 @@ export default [
             "ユユ:<br>やあ、ヨウ。この辺りで黒いやつを見なかった?",
             "ヨウ:<br>あーいや、知らないな。じゃあな。",
             "ユユ:<br>待って、隠し事してるでしょ。",
-            "ヨウ:<br>なんだよ、しつこいなあ。",
-            "ユユ:<br>怪しい!",
             "ヨウ:<br>うるさいなあ、もう!",
             "ツ",
             "ユユ:<br>やっぱりか!",
@@ -173,7 +175,7 @@ export default [
         end: [
             "追放の神:<br>……。",
             "ユユ:<br>ぶはー。何するのさ!",
-            "追放の神:<br>素晴らしい権能だ! これで我々も安泰だ!",
+            "追放の神:<br>素晴らしい権能! これで私達も安泰だ!",
             "ユユ:<br>何言ってるのさ?",
             "追放の神:<br>我々もタダでは生きていけないって事ですよ。",
             "ユユ:<br>神も難しいんだね。",
@@ -198,12 +200,14 @@ export default [
     // エコーチャンバーで増幅された思想が暴走を始めた。
     {
         start: [
+            { type: "portrait", url: "assets/images/character/tsuihou.psd", name: "tsuihou", side: "right" },
             "ユユ:<br>シン……。ルビ……。何なんだ一体……。",
             "ユユ:<br>如何してこんな事に?",
             "ツ",
             "ユユ:<br>ジャキ……。",
             "ユユ:<br>……私は、もう何も……してはいけないんだ。",
-            "返答の神:<br>そんな事は無いですよ。",
+            { type: "portrait-change", name: "tsuihou", layers: "レイヤー 1" },
+            "返答の神:<br>そんな事は無いよ!",
             "ユユ:<br>返答さん。",
             "返答の神:<br>思い出して、君は自由だ。",
         ],
@@ -218,7 +222,7 @@ export default [
             { type: "portrait", url: "assets/images/character/imi.psd", name: "imi", side: "right" },
             "ツ",
             "ユユ:<br>私に出来る事……。",
-            { type: "portrait-change", name: "imi", layers: "レイヤー 1" },
+            { type: "portrait-change", name: "imi", layers: "レイヤー 1,レイヤー 2" },
             "意味付けの神:<br>君がすごい人だって、あたしは知ってるよ。",
             "ユユ:<br>意味付けさん……。",
             "意味付けの神:<br>何度だって、何時からだってやり直せる。",
@@ -243,7 +247,7 @@ export default [
             "ユユ:<br>だから、君を止めるよ。",
             "縁切りの神:<br>出来る物ならなあ!",
         ],
-        end: ["縁切りの神:<br>まだまだあ!"],
+        end: ["縁切りの神:<br>まだ終わりじゃあない! 俺は間違ってない!"],
     },
     // 第二形態
     {
@@ -273,7 +277,7 @@ export default [
             "ユユ:<br>頼ってよ。私にさ。",
             "シン:<br>お前に……?",
             "ユユ:<br>まあ、年下の女の子になんて恥ずかしいかもしれないけどさ。頼っていいんだよ。",
-            "ユユ:<br>私は、シンの事、今でも友達だと思ってるから。",
+            "ユユ:<br>私はシンの事、今でも友達だと思ってるから。",
             "シン:<br>……。",
             "シン:<br>……くそっ!",
             "(走り去るシン)",
@@ -282,3 +286,6 @@ export default [
         ],
     },
 ]
+
+// <!-- テーマ: 「人は決して分かり合えない。けど、人は独立して存在しているわけじゃあない。だから、せめて喧嘩しないように誤解を生むキカイを捨てていこう」 -->
+// <!-- テーマ: 「嫌な事に立ち向かう勇気を持とう」 -->

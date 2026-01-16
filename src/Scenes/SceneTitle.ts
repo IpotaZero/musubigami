@@ -2,10 +2,9 @@ import { Dom } from "../Dom"
 import { LocalStorage } from "../LocalStorage"
 import { SE } from "../SE"
 import { Awaits } from "../utils/Awaits"
-import { BGM } from "../utils/BGM"
+import { BGM } from "../utils/BGM/BGM"
 import { KeyboardOperation } from "../utils/KeyboardOperation"
 import { Pages } from "../utils/Pages"
-import { PsdElement } from "../utils/PsdElement"
 import { Serif } from "../utils/Serif"
 import { Scene } from "./Scene"
 import { SceneChanger } from "./SceneChanger"
@@ -25,19 +24,32 @@ export class SceneTitle extends Scene {
         this.#setupFirstPage()
         this.#setupVolumeSetting()
         this.#setupButtonSE()
+        this.#setupButton()
+        this.#showWomake()
+    }
 
+    #setupButton() {
         // this.#pages.on(".*", (pages) => {
-        //     const page = pages.pages.get(pages.getCurrentPageId())
-        //     if (!page) return
-        //     // KeyboardOperation.update(page)
+        //     KeyboardOperation.update(pages.getCurrentPage())
         // })
 
         this.#pages.before("start", async (pages) => {
             const { SceneMap } = await import("./SceneMap/SceneMap.js")
-            await SceneChanger.goto(() => new SceneMap(0))
+
+            SE.suzu.play()
+            BGM.stop()
+            BGM.unload("assets/sounds/bgm/信仰の残り香.mp3")
 
             if (!LocalStorage.getFlags().includes("始まり")) {
-                this.#始まり()
+                await SceneChanger.goto(() => new SceneMap(0), {
+                    msIn: 1800,
+                    msOut: 1800,
+                    afterLoad: async () => {
+                        this.#始まり()
+                    },
+                })
+            } else {
+                await SceneChanger.goto(() => new SceneMap(0))
             }
 
             return true
@@ -75,13 +87,15 @@ export class SceneTitle extends Scene {
     #setupFirstPage() {
         const page = this.#pages.pages.get("first")!
 
-        BGM.fadeOut(1000)
+        BGM.fadeOutAndPause()
 
         Awaits.ok().then(() => {
-            // KeyboardOperation.update(page)
             page.classList.add("show")
-            BGM.ffp("assets/sounds/bgm/信仰の残り香.mp3")
+            BGM.change("assets/sounds/bgm/信仰の残り香.mp3")
             this.#setupParticles()
+            // requestAnimationFrame(() => {
+            //     KeyboardOperation.update(page)
+            // })
         })
 
         // Serif.say("test")
@@ -110,11 +124,11 @@ export class SceneTitle extends Scene {
     }
 
     #setupButtonSE() {
-        Dom.container.querySelectorAll("button").forEach((button) => {
-            button.addEventListener("click", () => {
-                SE.click.play()
-            })
-        })
+        // Dom.container.querySelectorAll("button").forEach((button) => {
+        //     button.addEventListener("click", () => {
+        //         SE.click.play()
+        //     })
+        // })
     }
 
     #setupParticles() {
@@ -129,6 +143,12 @@ export class SceneTitle extends Scene {
             particle.style.animationDuration = `${5 + Math.random() * 5}s`
             particle.style.animationDelay = `${Math.random() * 10}s`
             page.appendChild(particle)
+        }
+    }
+
+    #showWomake() {
+        if (LocalStorage.getStageData().every((stage) => stage.cleared)) {
+            Dom.container.querySelector("[data-link=story]")?.classList.remove("hidden")
         }
     }
 }

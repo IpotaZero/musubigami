@@ -4,7 +4,9 @@ export const MapConfig = {
         TO_CH1: 6,
         TO_CH2: 12,
     },
-    TUTORIAL_STAGES: [0, 2, 5, 7],
+    TUTORIAL_STAGES: [0, 2, 5, 7, 17],
+
+    BOSSES: [6, 12, 16, 17],
 
     getGlobalStageId(chapterIndex: number, localStageIndex: number): number {
         return localStageIndex + (this.STAGE_OFFSETS[chapterIndex] || 0)

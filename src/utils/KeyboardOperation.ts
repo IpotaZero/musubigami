@@ -1,19 +1,19 @@
 export class KeyboardOperation {
-    static #ok = ["KeyZ"]
-    static #cancel = ["KeyX"]
+    static #ok = ["KeyZ", "Enter", "Space"]
+    static #cancel = ["KeyX", "Escape", "Backspace"]
 
     static #maxIndex: [row: number, col: number] = [0, 0]
     static #currentPosition: [row: number, col: number] = [0, 0]
 
-    static #container: HTMLElement
+    static #container: HTMLElement | null = null
     static #ac = new AbortController()
 
     static init() {
         window.addEventListener("keydown", this.#onKeydown.bind(this), { signal: this.#ac.signal })
     }
 
-    static update(container: HTMLElement) {
-        this.#container = container
+    static update(container: HTMLElement | null | undefined) {
+        this.#container = container ?? null
         this.#setupCurrentPosition()
         this.#setupMaxIndex()
         this.#updateClass()
@@ -26,14 +26,22 @@ export class KeyboardOperation {
     static #setupCurrentPosition() {
         this.#currentPosition = [0, 0]
 
-        const b = Array.from(this.#container.querySelectorAll("button")).find((c) => c.classList.contains("active"))
+        if (!this.#container) return
 
-        if (b && b instanceof HTMLElement) {
+        const b = Array.from(this.#container.querySelectorAll("button"))
+            .filter((e) => e instanceof HTMLElement)
+            .find((c) => c.classList.contains("active"))
+
+        if (b) {
             this.#currentPosition = JSON.parse(`[${b.dataset["position"]!}]`)
         }
     }
 
     static #setupMaxIndex() {
+        if (!this.#container) return
+
+        this.#maxIndex = [0, 0]
+
         Array.from(this.#container.querySelectorAll("button"))
             .filter((c) => c.dataset["position"])
             .forEach((c) => {
@@ -94,6 +102,8 @@ export class KeyboardOperation {
     }
 
     static #updateClass() {
+        if (!this.#container) return
+
         Array.from(this.#container.querySelectorAll("button"))
             .filter((c) => c.dataset["position"])
             .forEach((c) => {
@@ -107,6 +117,8 @@ export class KeyboardOperation {
     }
 
     static #findButtonFromPosition(position: [number, number]) {
+        if (!this.#container) return
+
         return Array.from(this.#container.querySelectorAll("button"))
             .filter((c) => c.dataset["position"])
             .find((c) => {
@@ -119,6 +131,8 @@ export class KeyboardOperation {
     }
 
     static #findBackButton() {
+        if (!this.#container) return
+
         return Array.from(this.#container.querySelectorAll("button")).find(
             (c) => c.dataset["back"] || c.classList.contains("back"),
         )

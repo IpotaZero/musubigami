@@ -14,5 +14,8 @@
         [1, 2],
         [3, 4]
     ],
-    "events": [[30, 100, "assets/images/icon.png", "敵対"]]
+    "events": [
+        [30, 100, "assets/images/icon.png", "敵対"],
+        [360, 20, "assets/images/star.png", "もこた", { "bgm": "assets/sounds/bgm/puzzle.mp3" }]
+    ]
 }

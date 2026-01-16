@@ -57,7 +57,7 @@
     min-height: 5em;
     background-color: rgba(255, 255, 255, 0.9);
     border: 0.1em solid #111;
-    padding: 0.25em;
+    padding: 0.5em;
     gap: 0.5em;
     z-index: 10;
 }
@@ -78,15 +78,25 @@
     height: 100%;
     width: 100%;
     line-height: 1.2em;
+    gap: 0.5em;
 
     button {
-        margin-top: 0.5em;
         display: block;
         width: 100%;
         border: #111 0.05em solid;
         padding: 0.2em;
         font-size: 1em;
         cursor: pointer;
+    }
+
+    &[data-mode="say"] {
+        display: block;
+        flex-direction: column;
+    }
+
+    &[data-mode="ask"] {
+        display: flex;
+        flex-direction: row;
     }
 }
 

@@ -5,9 +5,10 @@ type OnHandler = (pages: Pages) => void
 type BeforeHandler = (pages: Pages) => Promise<void | boolean>
 type LeftHandler = (pages: Pages) => void
 
-type FadeOption = Partial<{ msIn: number; msOut: number }>
-
 type PageButton = HTMLElement | SVGElement
+
+type FadeOption = Partial<{ msIn: number; msOut: number }>
+type LoadOption = Partial<{ history: string[] }>
 
 export class Pages {
     static readonly #defaultMSIn = 250
@@ -25,12 +26,12 @@ export class Pages {
 
     #loaded = false
 
-    async loadFromFile(container: HTMLElement, path: string, options: { history?: string[] } = {}) {
+    async loadFromFile(container: HTMLElement, path: string, options: LoadOption = {}) {
         const html = await fetch(path).then((res) => res.text())
         await this.load(container, html, options)
     }
 
-    async load(container: HTMLElement, html: string, { history }: { history?: string[] } = {}) {
+    async load(container: HTMLElement, html: string, { history }: LoadOption = {}) {
         if (this.#loaded) {
             throw new Error("Pages have already been loaded")
         }
@@ -39,16 +40,21 @@ export class Pages {
         // Initialize container
         this.#container = container
         this.#container.innerHTML = html
+        this.#container.style.display = "none"
+        await waitCSSLoad(this.#container)
+        this.#container.style.display = ""
 
         // Initialize history
         const first = history && history.length ? history.at(-1)! : "first"
         this.#history = history && history.length ? history.slice(0, -1) : []
 
         // Initialize pages
-        container.querySelectorAll<HTMLElement>(".page").forEach((page) => {
-            this.pages.add(page.id, page)
-            page.classList.add("hidden")
-        })
+        Array.from(container.querySelectorAll(".page"))
+            .filter((e) => e instanceof HTMLElement)
+            .forEach((page) => {
+                this.pages.add(page.id, page)
+                page.classList.add("hidden")
+            })
 
         await this.goto(first, { msIn: 0, msOut: 0 })
         this.setupButtonsOnclick()
@@ -118,35 +124,47 @@ export class Pages {
         await this.goto(this.#history.pop()!, option)
     }
 
-    async goto(id: string, { msIn = Pages.#defaultMSIn, msOut = Pages.#defaultMSOut }: FadeOption = {}) {
-        // 入る前に実行される物。キャンセルされたら入らない。
-        const canceled = await this.#runBefore(id)
-        if (canceled) return
+    async goto(id: string, option: FadeOption = {}) {
+        const { msIn = Pages.#defaultMSIn, msOut = Pages.#defaultMSOut } = option
 
-        // 現在のページを去る際に実行される物。
+        // 1. 遷移可能かチェック（ガード節）
+        if (await this.#runBefore(id)) return
+
+        // 2. 現在のページから退場
+        await this.#leaveCurrentPage(msOut)
+
+        // 3. 状態の更新
+        this.#updateState(id)
+
+        // 4. 新しいページへの入場
+        await this.#enterNewPage(id, msIn)
+    }
+
+    // --- 内部手続きを細分化 ---
+
+    async #leaveCurrentPage(msOut: number) {
         this.#runLeft(this.#currentPageId)
 
-        const from = this.pages.get(this.#currentPageId)
-        const to = this.pages.get(id)
-
-        // fade out
+        const from = this.getCurrentPage()
         if (from) {
             await Awaits.fadeOut(from, msOut)
             from.classList.add("hidden")
         }
+    }
 
-        // 更新
-        this.#history.push(id)
-        this.#currentPageId = id
+    #updateState(nextId: string) {
+        this.#history.push(nextId)
+        this.#currentPageId = nextId
+    }
 
-        // 新しいページに入った時に実行される物。
-        this.#runOn(this.#currentPageId)
+    async #enterNewPage(nextId: string, msIn: number) {
+        this.#runOn(nextId)
 
-        // fade in
-        if (to) {
-            to.classList.remove("hidden")
-            await Awaits.fadeIn(to, msIn)
-        }
+        const to = this.pages.get(nextId)
+        if (!to) return
+
+        to.classList.remove("hidden")
+        await Awaits.fadeIn(to, msIn)
     }
 
     async #runBefore(id: string) {
@@ -182,4 +200,17 @@ function parseToNumber(str: string | undefined | null, defaultValue: number) {
     if (Number.isNaN(Number(str))) return defaultValue
 
     return Number(str)
+}
+
+function waitCSSLoad(container: Element) {
+    const links = Array.from(container.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'))
+    return Promise.all(
+        links.map((link) => {
+            if (link.sheet) return Promise.resolve() // すでに読み込み済み
+            return new Promise((resolve) => {
+                link.onload = resolve
+                link.onerror = resolve // エラー時も進めるようにする
+            })
+        }),
+    )
 }

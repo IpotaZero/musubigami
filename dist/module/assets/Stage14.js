@@ -1,2 +1,2 @@
-function i(){return{vertices:[[-100,-100],[100,-100],[100,100],[-100,100],[0,0,{switch:!0}]],edges:[[0,1],[1,2],[2,3],[3,0],[0,4,{multiplicity:2}],[1,4,{multiplicity:2}],[2,4,{multiplicity:2}],[3,4,{multiplicity:2}]]}}export{i as stage};
+function l(){return{vertices:[[-150,120],[-50,60],[50,60],[150,120],[150,40,{switch:!0}],[150,-40],[150,-120],[50,-60],[-50,-60],[-150,-120],[-100,0,{switch:!0}]],edges:[[0,1],[0,9],[1,2,{valid:!1,multiplicity:3}],[1,8,{valid:!1}],[1,10,{multiplicity:3,valid:!1,arrow:!0}],[2,3,{valid:!1}],[2,4,{valid:!1}],[2,7,{valid:!1}],[3,4,{valid:!1}],[4,5],[5,6],[5,7],[6,7],[7,8,{multiplicity:3}],[8,9],[8,10,{multiplicity:3}]]}}export{l as stage};
 //# sourceMappingURL=Stage14.js.map

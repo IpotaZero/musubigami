@@ -1,7 +1,7 @@
 import { Dom } from "../../Dom.js"
 import { LocalStorage } from "../../LocalStorage.js"
 import { Awaits } from "../../utils/Awaits.js"
-import { BGM } from "../../utils/BGM.js"
+import { BGM } from "../../utils/BGM/BGM.js"
 import { Graph } from "../../utils/Graph.js"
 import { Pages } from "../../utils/Pages.js"
 import { Serif } from "../../utils/Serif.js"
@@ -10,6 +10,7 @@ import { MapStoryHandler } from "./MapStoryHandler.js"
 import { Scene } from "../Scene.js"
 import { SceneChanger } from "../SceneChanger.js"
 import { MapConfig } from "./MapConfig.js"
+import { KeyboardOperation } from "../../utils/KeyboardOperation.js"
 
 export class SceneMap extends Scene {
     readonly ready: Promise<void>
@@ -25,6 +26,8 @@ export class SceneMap extends Scene {
         this.#renderer = new MapRenderer(Dom.container)
         this.#story = new MapStoryHandler()
         this.ready = this.#setup()
+
+        // KeyboardOperation.update(null)
     }
 
     async #setup() {
@@ -47,6 +50,8 @@ export class SceneMap extends Scene {
         this.#refreshMap()
         this.#setupEvents()
         this.#renderer.moveYuyu(0)
+
+        BGM.change("assets/sounds/bgm/仲介行脚.mp3", { loop: true, loopEndS: 118.125 })
     }
 
     #handleChapterChange(pageId: string) {
@@ -80,8 +85,8 @@ export class SceneMap extends Scene {
         await this.#story.playStageIntro(stageId)
 
         // 2. 意思確認
-        const choice = await Serif.ask("やる?", ["はい", "いいえ"])
-        if (choice !== 0) return
+        const choice = await Serif.ask("", ["やらない", "やる"])
+        if (choice !== 1) return
 
         // 3. ゲーム本編へ移動
         await this.#launchGame(stageId)
@@ -89,13 +94,15 @@ export class SceneMap extends Scene {
 
     async #launchGame(stageId: number) {
         const { SceneGame } = await import("../SceneGame.js")
-        BGM.ffp("assets/sounds/bgm/why_was_faith_lost.mp3", { loop: true, loopStartS: 1.276 })
+        this.#startBGM(stageId)
+
+        const ms = MapConfig.BOSSES.includes(stageId) ? 1300 : 850
 
         await SceneChanger.goto(() => new SceneGame(this.#currentCh as 0 | 1 | 2, stageId), {
             fadeOut: Awaits.valeOut,
             fadeIn: Awaits.valeIn,
-            msOut: 850,
-            msIn: 850,
+            msOut: ms,
+            msIn: ms,
 
             afterLoad: () => {
                 // 4. チュートリアル再生
@@ -104,14 +111,41 @@ export class SceneMap extends Scene {
         })
     }
 
-    #setupEvents() {
-        // ...（省略：MapStoryHandlerのplayEventを使って整理可能）
+    async #startBGM(stageId: number) {
+        if (stageId === MapConfig.BOSSES[0] || stageId === MapConfig.BOSSES[1] || stageId === MapConfig.BOSSES[2]) {
+            await BGM.change("assets/sounds/bgm/まるでパズル感覚で.mp3", {
+                loop: true,
+                loopStartS: 11.111,
+                loopEndS: 82.222,
+                volume: 0.8,
+            })
+        } else if (stageId === MapConfig.BOSSES[3]) {
+            await BGM.change("assets/sounds/bgm/block.mp3", {
+                loop: true,
+                loopStartS: 13.333,
+                loopEndS: 95,
+                volume: 0.5,
+            })
+        } else {
+            await BGM.change("assets/sounds/bgm/why_was_faith_lost.mp3", { loop: true, loopStartS: 1.276 })
+        }
+    }
 
+    #setupEvents() {
         Dom.container.querySelectorAll<HTMLElement>(".event").forEach((el) => {
-            el.addEventListener("click", () => {
+            el.addEventListener("click", async () => {
                 const eventName = el.dataset.eventName
                 if (!eventName) throw new Error("イベント名が指定されていません")
-                this.#story.playEvent(eventName)
+
+                if (el.dataset.bgm) {
+                    BGM.glance(el.dataset.bgm)
+                }
+
+                await this.#story.playEvent(eventName)
+
+                if (el.dataset.bgm) {
+                    BGM.back()
+                }
             })
         })
     }
