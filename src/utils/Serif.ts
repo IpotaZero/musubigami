@@ -7,6 +7,7 @@ export type SerifCommand =
     | { type: "background"; image: string }
     | { type: "portrait"; url: string; name: string; side?: string }
     | { type: "portrait-change"; name: string; layers: string }
+    | { type: "voice"; url: string | null }
 
 export class Serif {
     static readonly #container = document.createElement("div")
@@ -15,6 +16,8 @@ export class Serif {
     static #iconContainer: HTMLDivElement
     static #textContainer: HTMLDivElement
     static #ZHint: HTMLSpanElement
+
+    static #voice: HTMLAudioElement | null = null
 
     static #mode: "say" | "ask" = "say"
 
@@ -104,6 +107,7 @@ export class Serif {
             return Promise.resolve()
         }
 
+        this.#voice = null
         this.#textContainer.dataset["mode"] = "say"
         this.#mode = "say"
         this.#ZHint.classList.remove("hidden")
@@ -140,7 +144,7 @@ export class Serif {
         const command = this.#cue.shift()!
 
         if (typeof command === "string") {
-            SE.voice.play()
+            this.#voice?.play()
             this.#textContainer.innerHTML = command
             this.#textContainer.classList.remove("fade-in")
             requestAnimationFrame(() => {
@@ -160,6 +164,9 @@ export class Serif {
             const psd = this.#container.querySelector<PsdElement>(`#${command.name}`)!
             psd.layers = command.layers
             psd.classList.remove("hidden")
+            this.#say()
+        } else if (command.type === "voice") {
+            this.#voice = command.url ? new Audio(command.url) : null
             this.#say()
         }
     }
