@@ -115,8 +115,8 @@ export class Game {
 
     #updatePenPosition() {
         if (!this.firstClicked) {
-            this.pen.style.left = `calc(100% - 13dvh)`
-            this.pen.style.top = `calc(100% - 13dvh)`
+            this.pen.style.left = `calc(100% - 15dvh)`
+            this.pen.style.top = `calc(100% - 26dvh)`
             return
         }
 

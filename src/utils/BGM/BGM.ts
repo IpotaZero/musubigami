@@ -1,4 +1,5 @@
 import { Awaits } from "../Awaits"
+import { Tasks } from "../Task"
 import { Player } from "./Player"
 
 export type BGMOptions = Partial<{
@@ -13,7 +14,7 @@ export class BGM {
     static gain: GainNode
 
     private static cache = new Map<string, AudioBuffer>()
-    private static bgmList: Player[] = []
+    private static bgmList: { bgm: Player; url: string }[] = []
 
     static async init() {
         if (this.context) throw new Error("BGM has already been initialized.")
@@ -45,10 +46,11 @@ export class BGM {
      * @param url 削除したいBGMのURL
      */
     static unload(url: string) {
+        // 再生しようとしているものをキャンセルする。
+        Tasks.cancel(url)
+
         if (this.cache.has(url)) {
             this.cache.delete(url)
-            // JavaScriptのガベージコレクションによって、
-            // どこからも参照されなくなったAudioBufferは自動的にメモリから解放されます。
         }
     }
 
@@ -61,50 +63,58 @@ export class BGM {
     }
 
     static async change(url: string, options: BGMOptions = {}) {
-        await Promise.all([this.load(url), this.fadeOutAndStop()])
+        const task = Tasks.register(url)
+        await Promise.all([this.load(url), this.fadeOut()])
+        if (task.canceled) return
+        this.pause()
 
-        this.bgmList = [new Player(this.cache.get(url)!, options)]
-        this.play()
+        const bgm = new Player(this.cache.get(url)!, options)
+        bgm.play()
+        this.bgmList = [{ bgm, url }]
     }
 
+    // キャンセル不可
     static async glance(url: string, options: BGMOptions = {}) {
-        await Promise.all([this.load(url), this.fadeOutAndPause()])
+        const task = Tasks.register(url)
+        await Promise.all([this.load(url), this.fadeOut()])
+        if (task.canceled) return
+        this.pause()
 
-        this.bgmList.push(new Player(this.cache.get(url)!, options))
-        this.play()
+        const bgm = new Player(this.cache.get(url)!, options)
+        bgm.play()
+        this.bgmList.push({ bgm, url })
     }
 
-    static async back() {
-        await this.fadeOutAndStop()
-        this.bgmList.pop()
-        this.play()
+    static back() {
+        if (this.bgmList.length <= 1) {
+            console.warn("戻る場所が無いよ!")
+            return
+        }
+
+        const current = this.bgmList.pop()!
+        current.bgm.fade(2000, 1, 0.001).then(() => {
+            current.bgm.stop()
+        })
+
+        const nei = this.bgmList.at(-1)!
+        nei.bgm.fade(1000, 0.001, 1)
+        nei.bgm.play()
+    }
+
+    static async fadeOut(ms = 1000) {
+        await this.bgmList.at(-1)?.bgm.fade(ms, 1, 0.001)
     }
 
     static stop() {
-        this.bgmList.at(-1)?.stop()
+        this.bgmList.at(-1)?.bgm.stop()
     }
 
-    private static async play() {
-        if (this.bgmList.length === 0) return
-        const current = this.bgmList.at(-1)!
-
-        await current.setFadeVolume(0.1)
-        current.play()
-        current.fade(1000, 1)
+    static pause() {
+        this.bgmList.at(-1)?.bgm.pause()
     }
 
     static setVolume(volume: number) {
         if (this.gain) this.gain.gain.value = volume
-    }
-
-    static async fadeOutAndPause() {
-        this.bgmList.at(-1)?.fadeOutAndPause(2000)
-        await Awaits.sleep(1000)
-    }
-
-    static async fadeOutAndStop() {
-        this.bgmList.at(-1)?.fadeOutAndStop(2000)
-        await Awaits.sleep(1000)
     }
 }
 

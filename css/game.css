@@ -62,7 +62,7 @@
 
 .game-pen {
     position: absolute;
-    height: 13dvh;
+    height: 15dvh;
     aspect-ratio: 1;
 
     pointer-events: none;

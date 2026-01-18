@@ -15,7 +15,7 @@
 
     /* 選択系 */
     user-select: none;
-    touch-action: manipulation;
+    touch-action: none;
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
@@ -60,10 +60,9 @@ button {
     cursor: pointer;
 
     &:hover {
-        scale: 0.95;
         opacity: 0.5;
         animation: theta 0.4s linear infinite;
-        transform: translate(calc(sin(var(--theta) * 3) * 0.1dvh), calc(sin(var(--theta) * 2) * 0.1dvh));
+        transform: scale(0.95) translate(calc(sin(var(--theta) * 3) * 0.1dvh), calc(sin(var(--theta) * 2) * 0.1dvh));
     }
 }
 

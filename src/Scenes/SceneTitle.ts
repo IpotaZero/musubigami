@@ -37,8 +37,10 @@ export class SceneTitle extends Scene {
             const { SceneMap } = await import("./SceneMap/SceneMap.js")
 
             SE.suzu.play()
-            BGM.stop()
+            BGM.pause()
             BGM.unload("assets/sounds/bgm/信仰の残り香.mp3")
+
+            BGM.change("assets/sounds/bgm/仲介行脚.mp3", { loop: true, loopEndS: 118.125 })
 
             if (!LocalStorage.getFlags().includes("始まり")) {
                 await SceneChanger.goto(() => new SceneMap(0), {
@@ -87,7 +89,7 @@ export class SceneTitle extends Scene {
     #setupFirstPage() {
         const page = this.#pages.pages.get("first")!
 
-        BGM.fadeOutAndPause()
+        BGM.fadeOut()
 
         Awaits.ok().then(() => {
             page.classList.add("show")

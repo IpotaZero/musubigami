@@ -10,7 +10,7 @@ export class Player {
 
     private state: "yet" | "running" | "paused" = "yet"
     private startTime = 0
-    private elapsedTime = 0
+    private offset = 0
 
     constructor(buffer: AudioBuffer, options: BGMOptions = {}) {
         this.buffer = buffer
@@ -27,59 +27,50 @@ export class Player {
         this.source.connect(this.fadeGain)
     }
 
-    async setFadeVolume(volume: number) {
-        this.fadeGain.gain.cancelScheduledValues(BGM.context.currentTime)
-        this.fadeGain.gain.setValueAtTime(this.fadeGain.gain.value, BGM.context.currentTime)
-        this.fadeGain.gain.linearRampToValueAtTime(volume, BGM.context.currentTime + 0.1)
-        await Awaits.sleep(100)
-    }
-
     play() {
-        if (this.state === "running") return
+        if (this.state === "running") {
+            console.warn("既に再生中!")
+            return
+        }
 
-        this.state = "running"
         this.resetSource()
-
-        this.fadeGain.gain.value = 1
+        this.state = "running"
 
         // 再生位置を計算
-        const offset = this.elapsedTime % this.buffer.duration
-        this.source.start(0, offset)
-        this.startTime = BGM.context.currentTime - offset
-    }
-
-    stop() {
-        this.state = "yet"
-        this.elapsedTime = 0
-        this.source.stop()
+        this.source.start(0, this.offset)
+        this.startTime = BGM.context.currentTime - this.offset
     }
 
     pause() {
-        if (this.state !== "running") return
+        if (this.state == "yet") {
+            console.warn("まだ再生されていない!")
+            return
+        }
 
         this.state = "paused"
-        // 停止した瞬間の再生位置を記録
-        this.elapsedTime = BGM.context.currentTime - this.startTime
         this.source.stop()
+
+        // 停止した瞬間の再生位置を記録
+        this.offset = BGM.context.currentTime - this.startTime
     }
 
-    async fadeOutAndPause(ms: number) {
-        if (this.state !== "running") return
-        await this.fade(ms, 0.001)
-        this.pause()
+    stop() {
+        if (this.state == "yet") {
+            console.warn("まだ再生されていない!")
+            return
+        }
+
+        this.state = "yet"
+        this.source.stop()
+
+        this.offset = 0
     }
 
-    async fadeOutAndStop(ms: number) {
-        if (this.state !== "running") return
-        await this.fade(ms, 0.001)
-        this.stop()
-    }
-
-    async fade(ms: number, volume: number) {
+    async fade(ms: number, from: number, to: number) {
         const now = BGM.context.currentTime
         this.fadeGain.gain.cancelScheduledValues(now)
-        this.fadeGain.gain.setValueAtTime(this.fadeGain.gain.value, now)
-        this.fadeGain.gain.exponentialRampToValueAtTime(volume, now + ms / 1000)
+        this.fadeGain.gain.setValueAtTime(from, now)
+        this.fadeGain.gain.exponentialRampToValueAtTime(to, now + ms / 1000)
         await Awaits.sleep(ms)
     }
 

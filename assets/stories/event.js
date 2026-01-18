@@ -33,7 +33,7 @@ export default {
     "もこた": [
         { type: "portrait", url: "assets/images/character/mokota.psd", name: "mokota", side: "right" },
         { type: "portrait-change", name: "mokota", layers: "レイヤー 3" },
-        "ゆゆ:<br>これは一体なんだろう?",
+        "ユユ:<br>これは一体なんだろう?",
         "もこた:<br>どうも。もこたです。",
         "ユユ:<br>うわ、喋った。",
         "もこた:<br>MCRの他のゲームも遊んでね!",

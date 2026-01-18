@@ -50,8 +50,6 @@ export class SceneMap extends Scene {
         this.#refreshMap()
         this.#setupEvents()
         this.#renderer.moveYuyu(0)
-
-        BGM.change("assets/sounds/bgm/仲介行脚.mp3", { loop: true, loopEndS: 118.125 })
     }
 
     #handleChapterChange(pageId: string) {
@@ -113,21 +111,21 @@ export class SceneMap extends Scene {
 
     async #startBGM(stageId: number) {
         if (stageId === MapConfig.BOSSES[0] || stageId === MapConfig.BOSSES[1] || stageId === MapConfig.BOSSES[2]) {
-            await BGM.change("assets/sounds/bgm/まるでパズル感覚で.mp3", {
+            await BGM.glance("assets/sounds/bgm/まるでパズル感覚で.mp3", {
                 loop: true,
                 loopStartS: 11.111,
                 loopEndS: 82.222,
                 volume: 0.8,
             })
         } else if (stageId === MapConfig.BOSSES[3]) {
-            await BGM.change("assets/sounds/bgm/block.mp3", {
+            await BGM.glance("assets/sounds/bgm/block.mp3", {
                 loop: true,
                 loopStartS: 13.333,
                 loopEndS: 95,
-                volume: 0.5,
+                volume: 0.6,
             })
         } else {
-            await BGM.change("assets/sounds/bgm/why_was_faith_lost.mp3", { loop: true, loopStartS: 1.276 })
+            await BGM.glance("assets/sounds/bgm/why_was_faith_lost.mp3", { loop: true, loopStartS: 1.276 })
         }
     }
 
@@ -137,11 +135,15 @@ export class SceneMap extends Scene {
                 const eventName = el.dataset.eventName
                 if (!eventName) throw new Error("イベント名が指定されていません")
 
+                const ps = []
+
                 if (el.dataset.bgm) {
-                    BGM.glance(el.dataset.bgm)
+                    ps.push(BGM.glance(el.dataset.bgm))
                 }
 
-                await this.#story.playEvent(eventName)
+                ps.push(this.#story.playEvent(eventName))
+
+                await Promise.all(ps)
 
                 if (el.dataset.bgm) {
                     BGM.back()

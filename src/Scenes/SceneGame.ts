@@ -3,6 +3,7 @@ import { Game } from "../Game/Game"
 import { LocalStorage } from "../LocalStorage"
 import { SE } from "../SE"
 import { BGM } from "../utils/BGM/BGM"
+import { startConfetti } from "../utils/confetti"
 import { MusicVisualizer } from "../utils/MusicVisualizer"
 import { Pages } from "../utils/Pages"
 import { Serif, SerifCommand } from "../utils/Serif"
@@ -43,6 +44,7 @@ export class SceneGame extends Scene {
 
     #setupButtons(ch: Chapters, stageId: number) {
         this.#pages.before("back", async () => {
+            BGM.back()
             const { SceneMap } = await import("./SceneMap/SceneMap.js")
             SceneChanger.goto(() => new SceneMap(ch))
         })
@@ -52,6 +54,8 @@ export class SceneGame extends Scene {
                 const { SceneEnd } = await import("./SceneEnd.js")
                 await SceneChanger.goto(() => new SceneEnd())
             } else {
+                BGM.back()
+
                 const { SceneMap } = await import("./SceneMap/SceneMap.js")
                 // @ts-ignore
                 const commands = await import(`../../assets/stories/story.js`)
@@ -102,6 +106,7 @@ export class SceneGame extends Scene {
 
         this.#game.onClear = () => {
             SE.clear.play()
+            SE.kansei.play()
             LocalStorage.setStageData(stageId, { cleared: true })
             const nextButton = container.querySelector("[data-link=next]")!
             nextButton.classList.add("fade-in")
@@ -109,6 +114,8 @@ export class SceneGame extends Scene {
             requestAnimationFrame(() => {
                 followed.classList.add("fade")
             })
+
+            startConfetti(Dom.container, { durationMs: 2500 })
         }
 
         this.#game.onSwitch = () => {

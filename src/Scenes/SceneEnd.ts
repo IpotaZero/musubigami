@@ -18,7 +18,9 @@ export class SceneEnd extends Scene {
 
     async #setup() {
         Dom.container.innerHTML = ""
-        await BGM.fadeOutAndPause()
+        BGM.fadeOut(5000).then(() => {
+            BGM.stop()
+        })
 
         // @ts-ignore
         const commands = await import(`../../assets/stories/story.js`)

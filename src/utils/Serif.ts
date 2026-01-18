@@ -1,3 +1,4 @@
+import { SE } from "../SE"
 import { Awaits } from "./Awaits"
 import { PsdElement } from "./PsdElement"
 
@@ -139,6 +140,7 @@ export class Serif {
         const command = this.#cue.shift()!
 
         if (typeof command === "string") {
+            SE.voice.play()
             this.#textContainer.innerHTML = command
             this.#textContainer.classList.remove("fade-in")
             requestAnimationFrame(() => {
