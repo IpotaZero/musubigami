@@ -13,6 +13,11 @@ class PsdElement extends HTMLElement {
     private baseWidth = 0
     private baseHeight = 0
 
+    private resolve!: () => void
+    readonly ready = new Promise<void>((resolve) => {
+        this.resolve = resolve
+    })
+
     constructor(options: PsdElementOptions = {}) {
         super()
         this.#setupAttribute(options)
@@ -104,6 +109,8 @@ class PsdElement extends HTMLElement {
         } catch (error) {
             this.renderError(error)
         }
+
+        this.resolve()
     }
 
     private async fetchPsdData(url: string): Promise<ArrayBuffer> {

@@ -1,4 +1,5 @@
 import { Awaits } from "../utils/Awaits.js"
+import { Transition } from "../utils/Transition.js"
 import { Scene } from "./Scene.js"
 
 type FadeFunction = (container: HTMLElement, ms: number) => Promise<void>
@@ -12,13 +13,13 @@ export class SceneChanger {
     }
 
     static async goto(
-        newScene: () => Scene,
+        newScene: () => Promise<Scene>,
         {
             showLoading = this.#showLoading,
             hideLoading = this.#hideLoading,
 
-            fadeOut = Awaits.fadeOut,
-            fadeIn = Awaits.fadeIn,
+            fadeOut = Transition.fadeOut,
+            fadeIn = Transition.fadeIn,
 
             msIn = 500,
             msOut = 500,
@@ -37,10 +38,9 @@ export class SceneChanger {
     ) {
         const container = document.getElementById("container")!
 
-        await fadeOut(container, msIn)
-        await this.#currentScene.end()
+        await Promise.all([this.#currentScene.end(), fadeOut(container, msIn)])
 
-        this.#currentScene = newScene()
+        this.#currentScene = await newScene()
 
         let showed = false
 

@@ -36,7 +36,10 @@ export function startConfetti(
             { top: "100%", left: `${left + offset}%`, transform: "rotate3D(1,1,1,720deg)", opacity: "0.5" },
         ]
 
-        const animation = particle.animate(keyframes, { delay: Math.random() * 1500, duration: durationMs })
+        const animation = particle.animate(keyframes, {
+            delay: Math.random() * 1500,
+            duration: durationMs * (1 + (Math.random() * 2 - 1) * 0.2),
+        })
 
         animation.onfinish = () => {
             particle.remove()

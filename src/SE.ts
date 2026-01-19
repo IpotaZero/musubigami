@@ -6,6 +6,7 @@ export class Sound {
         this.#audio = new Audio(path)
         this.#baseVolume = volume
         this.#audio.volume = volume
+        this.#audio.preload = "auto"
     }
 
     get duration() {
@@ -30,7 +31,6 @@ export class SE {
     static click = new Sound("assets/sounds/se/カーソル移動2.mp3", 1)
     static suzu = new Sound("assets/sounds/se/鈴が鳴る.mp3", 1)
     static kansei = new Sound("assets/sounds/se/歓声.mp3", 1)
-    static voice = new Sound("assets/sounds/se/voice.mp3", 0.5)
 
     static setVolume(volume: number) {
         Object.values(this).forEach((se) => {

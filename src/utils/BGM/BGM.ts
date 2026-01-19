@@ -102,7 +102,11 @@ export class BGM {
     }
 
     static async fadeOut(ms = 1000) {
-        await this.bgmList.at(-1)?.bgm.fade(ms, 1, 0.001)
+        const current = this.bgmList.at(-1)?.bgm
+        if (!current) return
+
+        await current.fade(ms, 1, 0.001)
+        return current
     }
 
     static stop() {

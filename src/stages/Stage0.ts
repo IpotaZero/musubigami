@@ -1,18 +1,35 @@
 import { GraphData, VertexData } from "../Game/Graph"
 
 export function stage(): GraphData {
-    const vertices: VertexData[] = []
+    const vertices: VertexData[] = [
+        [0, -80],
 
-    for (let i = 0; i < 3; i++) {
-        vertices.push([Math.sin((i * 2 * Math.PI) / 3) * 140, 40 - Math.cos((i * 2 * Math.PI) / 3) * 140])
-    }
+        [-65, -120],
+        [-130, -100],
+        [-130, 0],
+        [-65, 75],
+
+        [0, 120],
+
+        [65, 75],
+        [130, 0],
+        [130, -100],
+        [65, -120],
+    ]
 
     return {
         vertices,
         edges: [
             [0, 1],
             [1, 2],
-            [2, 0],
+            [2, 3],
+            [3, 4],
+            [4, 5],
+            [5, 6],
+            [6, 7],
+            [7, 8],
+            [8, 9],
+            [9, 0],
         ],
     }
 }

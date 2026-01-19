@@ -3,7 +3,7 @@ import { LocalStorage } from "../../LocalStorage.js"
 import { Awaits } from "../../utils/Awaits.js"
 import { BGM } from "../../utils/BGM/BGM.js"
 import { Graph } from "../../utils/Graph.js"
-import { Pages } from "../../utils/Pages.js"
+import { Pages } from "../../utils/Pages/Pages.js"
 import { Serif } from "../../utils/Serif.js"
 import { MapRenderer } from "./MapRenderer.js"
 import { MapStoryHandler } from "./MapStoryHandler.js"
@@ -11,13 +11,14 @@ import { Scene } from "../Scene.js"
 import { SceneChanger } from "../SceneChanger.js"
 import { MapConfig } from "./MapConfig.js"
 import { KeyboardOperation } from "../../utils/KeyboardOperation.js"
+import { Transition } from "../../utils/Transition.js"
 
 export class SceneMap extends Scene {
     readonly ready: Promise<void>
     readonly #pages = new Pages()
     readonly #renderer: MapRenderer
     readonly #story: MapStoryHandler
-    #currentCh: number
+    #currentCh: 0 | 1 | 2
     #yuyuPosition = 0
 
     constructor(ch: 0 | 1 | 2) {
@@ -33,15 +34,13 @@ export class SceneMap extends Scene {
     async #setup() {
         await this.#pages.loadFromFile(Dom.container, "assets/pages/map.html", { history: ["ch" + this.#currentCh] })
 
-        this.#pages.on("ch[012]", (pages) => {
+        this.#pages.onEnter("ch[012]", (pages) => {
             const id = pages.getCurrentPageId()
             this.#handleChapterChange(id)
         })
 
-        this.#pages.before("back", async () => {
-            const { SceneTitle } = await import("../SceneTitle.js")
-            SceneChanger.goto(() => new SceneTitle())
-            return true
+        this.#pages.beforeEnter("back", async () => {
+            SceneChanger.goto(() => import("../SceneTitle.js").then(({ SceneTitle }) => new SceneTitle()))
         })
 
         const graphs = Dom.container.querySelectorAll<Graph>("x-graph")
@@ -55,8 +54,8 @@ export class SceneMap extends Scene {
     #handleChapterChange(pageId: string) {
         if (pageId === "ch1") this.#story.playEvent("敵対", "ch1")
         if (pageId === "ch2") this.#story.playEvent("歪み", "ch2")
-        this.#currentCh = parseInt(pageId.replace("ch", ""))
-        this.#renderer.moveYuyu(MapConfig.STAGE_OFFSETS[this.#currentCh])
+        this.#currentCh = parseInt(pageId.replace("ch", "")) as 0 | 1 | 2
+        // this.#renderer.moveYuyu(MapConfig.STAGE_OFFSETS[this.#currentCh])
     }
 
     #refreshMap() {
@@ -91,42 +90,22 @@ export class SceneMap extends Scene {
     }
 
     async #launchGame(stageId: number) {
-        const { SceneGame } = await import("../SceneGame.js")
-        this.#startBGM(stageId)
+        const ms = 600
 
-        const ms = MapConfig.BOSSES.includes(stageId) ? 1300 : 850
+        await SceneChanger.goto(
+            () => import("../SceneGame.js").then(({ SceneGame }) => new SceneGame(this.#currentCh, stageId)),
+            {
+                fadeOut: Transition.valeOut,
+                fadeIn: Transition.valeIn,
+                msOut: ms,
+                msIn: ms,
 
-        await SceneChanger.goto(() => new SceneGame(this.#currentCh as 0 | 1 | 2, stageId), {
-            fadeOut: Awaits.valeOut,
-            fadeIn: Awaits.valeIn,
-            msOut: ms,
-            msIn: ms,
-
-            afterLoad: () => {
-                // 4. チュートリアル再生
-                this.#story.playTutorial(stageId)
+                afterLoad: () => {
+                    // 4. チュートリアル再生
+                    this.#story.playTutorial(stageId)
+                },
             },
-        })
-    }
-
-    async #startBGM(stageId: number) {
-        if (stageId === MapConfig.BOSSES[0] || stageId === MapConfig.BOSSES[1] || stageId === MapConfig.BOSSES[2]) {
-            await BGM.glance("assets/sounds/bgm/まるでパズル感覚で.mp3", {
-                loop: true,
-                loopStartS: 11.111,
-                loopEndS: 82.222,
-                volume: 0.8,
-            })
-        } else if (stageId === MapConfig.BOSSES[3]) {
-            await BGM.glance("assets/sounds/bgm/block.mp3", {
-                loop: true,
-                loopStartS: 13.333,
-                loopEndS: 95,
-                volume: 0.6,
-            })
-        } else {
-            await BGM.glance("assets/sounds/bgm/why_was_faith_lost.mp3", { loop: true, loopStartS: 1.276 })
-        }
+        )
     }
 
     #setupEvents() {

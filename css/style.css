@@ -33,9 +33,11 @@
 
 .loading {
     position: absolute;
-    bottom: 0;
+    bottom: 0.2em;
     left: 0.5em;
-    color: rgb(0, 0, 0);
+    color: #ffffff;
+    z-index: 100000;
+    mix-blend-mode: difference;
 
     &::after {
         content: "";

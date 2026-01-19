@@ -4,7 +4,7 @@ import { SE } from "../SE"
 import { Awaits } from "../utils/Awaits"
 import { BGM } from "../utils/BGM/BGM"
 import { KeyboardOperation } from "../utils/KeyboardOperation"
-import { Pages } from "../utils/Pages"
+import { Pages } from "../utils/Pages/Pages"
 import { Serif } from "../utils/Serif"
 import { Scene } from "./Scene"
 import { SceneChanger } from "./SceneChanger"
@@ -33,48 +33,44 @@ export class SceneTitle extends Scene {
         //     KeyboardOperation.update(pages.getCurrentPage())
         // })
 
-        this.#pages.before("start", async (pages) => {
-            const { SceneMap } = await import("./SceneMap/SceneMap.js")
-
+        this.#pages.beforeEnter("start", async (pages) => {
             SE.suzu.play()
+
             BGM.pause()
             BGM.unload("assets/sounds/bgm/信仰の残り香.mp3")
-
             BGM.change("assets/sounds/bgm/仲介行脚.mp3", { loop: true, loopEndS: 118.125 })
 
             if (!LocalStorage.getFlags().includes("始まり")) {
-                await SceneChanger.goto(() => new SceneMap(0), {
-                    msIn: 1800,
-                    msOut: 1800,
-                    afterLoad: async () => {
-                        this.#始まり()
+                await SceneChanger.goto(
+                    () => import("./SceneMap/SceneMap.js").then(({ SceneMap }) => new SceneMap(0)),
+                    {
+                        msIn: 1800,
+                        msOut: 1800,
+                        afterLoad: async () => {
+                            this.#始まり()
+                        },
                     },
-                })
+                )
             } else {
-                await SceneChanger.goto(() => new SceneMap(0))
+                await SceneChanger.goto(() => import("./SceneMap/SceneMap.js").then(({ SceneMap }) => new SceneMap(0)))
             }
-
-            return true
         })
 
-        this.#pages.before("delete-data", async () => {
+        this.#pages.beforeEnter("delete-data", async () => {
             const choice = await Serif.ask("ほんとに?", ["はい", "いいえ"])
 
             if (choice === 0) {
                 LocalStorage.clear()
-                SceneChanger.goto(() => new SceneTitle())
+                SceneChanger.goto(async () => new SceneTitle())
             }
-
-            return true
         })
 
-        this.#pages.before("fullscreen", async (pages) => {
+        this.#pages.beforeEnter("fullscreen", (pages) => {
             if (document.fullscreenElement) {
                 document.exitFullscreen()
             } else {
                 document.documentElement.requestFullscreen()
             }
-            return true
         })
     }
 
@@ -87,7 +83,7 @@ export class SceneTitle extends Scene {
     }
 
     #setupFirstPage() {
-        const page = this.#pages.pages.get("first")!
+        const page = this.#pages.getPage("first")
 
         BGM.fadeOut()
 
@@ -104,7 +100,7 @@ export class SceneTitle extends Scene {
     }
 
     #setupVolumeSetting() {
-        const page = this.#pages.pages.get("setting")!
+        const page = this.#pages.getPage("setting")
 
         const bgmV = page.querySelector<HTMLInputElement>("#bgm-volume")!
         const seV = page.querySelector<HTMLInputElement>("#se-volume")!

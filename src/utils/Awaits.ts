@@ -1,73 +1,4 @@
 export class Awaits {
-    static async fadeOut(container: HTMLElement, ms: number = 200) {
-        container.style.transition = "opacity 0s"
-        container.style.pointerEvents = "none"
-
-        await Awaits.frame(() => {
-            container.style.opacity = "1"
-        })
-
-        await Awaits.frame(() => {
-            container.style.transition = `opacity ${ms}ms`
-            container.style.opacity = "0"
-        })
-
-        await Awaits.sleep(ms)
-    }
-
-    static async fadeIn(container: HTMLElement, ms: number = 200) {
-        container.style.transition = "opacity 0s"
-        container.style.pointerEvents = "none"
-
-        await Awaits.frame(() => {
-            container.style.opacity = "0"
-        })
-
-        await Awaits.frame(() => {
-            container.style.transition = `opacity ${ms}ms`
-            container.style.opacity = "1"
-        })
-
-        await Awaits.sleep(ms)
-
-        await Awaits.frame(() => {
-            container.style.pointerEvents = ""
-        })
-    }
-
-    static async valeOut(container: HTMLElement, ms: number = 200) {
-        container.style.pointerEvents = "none"
-
-        const vale = document.createElement("div")
-        vale.classList.add("vale")
-        vale.style.transition = `left ${ms}ms cubic-bezier(0.37, 0, 0.63, 1)`
-
-        document.body.appendChild(vale)
-
-        await Awaits.frame()
-
-        await Awaits.frame(() => {
-            vale.style.left = "0"
-        })
-
-        await Awaits.sleep(ms)
-    }
-
-    static async valeIn(container: HTMLElement, ms: number = 200) {
-        const vale = document.querySelector<HTMLDivElement>(".vale")
-        if (!vale) return
-        vale.style.transition = `left ${ms}ms cubic-bezier(0.12, 0, 0.39, 0)`
-
-        await Awaits.frame(() => {
-            vale.style.left = "calc(100dvw + 4em)"
-        })
-        await Awaits.sleep(ms)
-
-        document.body.removeChild(vale)
-
-        container.style.pointerEvents = ""
-    }
-
     static sleep(ms: number) {
         return new Promise<void>((resolve) => {
             setTimeout(resolve, ms)
@@ -168,5 +99,28 @@ export class Awaits {
         done = true
 
         return value
+    }
+
+    static waitElementReady(container: Element) {
+        type ElementWithReady = Element & { ready: Promise<unknown> }
+
+        const hasReadyPromise = Array.from(container.querySelectorAll("*")).filter(
+            (e: any): e is ElementWithReady => e.ready instanceof Promise,
+        )
+
+        return Promise.all(hasReadyPromise.map((e) => e.ready))
+    }
+
+    static waitCSSLoad(container: Element) {
+        const links = Array.from(container.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]'))
+        return Promise.all(
+            links.map((link) => {
+                if (link.sheet) return Promise.resolve() // すでに読み込み済み
+                return new Promise((resolve) => {
+                    link.onload = resolve
+                    link.onerror = resolve // エラー時も進めるようにする
+                })
+            }),
+        )
     }
 }

@@ -2,7 +2,7 @@ import { GraphData, VertexData } from "../Game/Graph"
 
 export function stage(): GraphData {
     const vertices: VertexData[] = [
-        [-150, 120],
+        [-150, 120, { switch: true }],
         [-50, 60],
         [50, 60],
         [150, 120],
@@ -18,20 +18,20 @@ export function stage(): GraphData {
     return {
         vertices,
         edges: [
-            [0, 1],
-            [0, 9],
+            [0, 1, { valid: false }],
+            [9, 0, { arrow: true }],
             [1, 2, { valid: false, multiplicity: 3 }],
             [1, 8, { valid: false }],
-            [1, 10, { multiplicity: 3, valid: false, arrow: true }],
+            [1, 10, { multiplicity: 3, valid: false }],
             [2, 3, { valid: false }],
             [2, 4, { valid: false }],
             [2, 7, { valid: false }],
             [3, 4, { valid: false }],
             [4, 5],
-            [5, 6],
+            [5, 6, { arrow: true }],
             [5, 7],
             [6, 7],
-            [7, 8, { multiplicity: 3 }],
+            [7, 8, { multiplicity: 3, valid: false }],
             [8, 9],
             [8, 10, { multiplicity: 3 }],
         ],

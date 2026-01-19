@@ -59,6 +59,8 @@ button {
 
     cursor: pointer;
 
+    width: fit-content;
+
     &:hover {
         opacity: 0.5;
         animation: theta 0.4s linear infinite;

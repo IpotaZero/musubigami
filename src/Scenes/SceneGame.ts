@@ -5,7 +5,7 @@ import { SE } from "../SE"
 import { BGM } from "../utils/BGM/BGM"
 import { startConfetti } from "../utils/confetti"
 import { MusicVisualizer } from "../utils/MusicVisualizer"
-import { Pages } from "../utils/Pages"
+import { Pages } from "../utils/Pages/Pages"
 import { Serif, SerifCommand } from "../utils/Serif"
 import { Scene } from "./Scene"
 import { SceneChanger } from "./SceneChanger"
@@ -31,49 +31,73 @@ export class SceneGame extends Scene {
     }
 
     async #setup(ch: Chapters, stageId: number) {
+        const p = this.#startBGM(stageId)
         await this.#pages.loadFromFile(Dom.container, "assets/pages/game.html")
 
         this.#setupButtons(ch, stageId)
         this.#setupCanvas()
         await this.#setupGame(ch, stageId)
+        await p
 
         if (stageId === 0) {
             this.#firstStageTutorial()
         }
     }
 
+    async #startBGM(stageId: number) {
+        if (stageId === MapConfig.BOSSES[0] || stageId === MapConfig.BOSSES[1] || stageId === MapConfig.BOSSES[2]) {
+            await BGM.load("assets/sounds/bgm/まるでパズル感覚で.mp3")
+            BGM.glance("assets/sounds/bgm/まるでパズル感覚で.mp3", {
+                loop: true,
+                loopStartS: 11.111,
+                loopEndS: 82.222,
+                volume: 0.8,
+            })
+        } else if (stageId === MapConfig.BOSSES[3]) {
+            await BGM.load("assets/sounds/bgm/block.mp3")
+            BGM.glance("assets/sounds/bgm/block.mp3", {
+                loop: true,
+                loopStartS: 13.333,
+                loopEndS: 95,
+                volume: 0.6,
+            })
+        } else {
+            await BGM.load("assets/sounds/bgm/why_was_faith_lost.mp3")
+            BGM.glance("assets/sounds/bgm/why_was_faith_lost.mp3", { loop: true, loopStartS: 1.276 })
+        }
+    }
+
     #setupButtons(ch: Chapters, stageId: number) {
-        this.#pages.before("back", async () => {
+        this.#pages.beforeEnter("back", async () => {
             BGM.back()
-            const { SceneMap } = await import("./SceneMap/SceneMap.js")
-            SceneChanger.goto(() => new SceneMap(ch))
+            SceneChanger.goto(() => import("./SceneMap/SceneMap.js").then(({ SceneMap }) => new SceneMap(ch)))
         })
 
-        this.#pages.before("next", async () => {
+        this.#pages.beforeEnter("next", async () => {
             if (stageId === MapConfig.BOSSES[3]) {
-                const { SceneEnd } = await import("./SceneEnd.js")
-                await SceneChanger.goto(() => new SceneEnd())
+                await SceneChanger.goto(async () => import("./SceneEnd.js").then(({ SceneEnd }) => new SceneEnd()))
             } else {
                 BGM.back()
 
-                const { SceneMap } = await import("./SceneMap/SceneMap.js")
                 // @ts-ignore
                 const commands = await import(`../../assets/stories/story.js`)
-                await SceneChanger.goto(() => new SceneMap(ch), {
-                    afterLoad: () => Serif.say(...commands.default[stageId].end),
-                })
+                await SceneChanger.goto(
+                    () => import("./SceneMap/SceneMap.js").then(({ SceneMap }) => new SceneMap(ch)),
+                    {
+                        afterLoad: () => Serif.say(...commands.default[stageId].end),
+                    },
+                )
             }
         })
 
-        this.#pages.before("retry", async () => {
+        this.#pages.beforeEnter("retry", async () => {
             this.#game.retry()
             SE.reset.play()
-            return true
         })
     }
 
     async #setupGame(ch: Chapters, stageId: number) {
-        const container = this.#pages.pages.get("first")!
+        const container = this.#pages.getPage("first")
 
         // if式欲しい......欲しくない?
         const s = (() => {

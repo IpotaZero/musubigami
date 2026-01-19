@@ -1,2 +1,2 @@
-function s(){const e=[];for(let t=0;t<3;t++)e.push([Math.sin(t*2*Math.PI/3)*140,40-Math.cos(t*2*Math.PI/3)*140]);return{vertices:e,edges:[[0,1],[1,2],[2,0]]}}export{s as stage};
+function t(){return{vertices:[[0,-80],[-65,-120],[-130,-100],[-130,0],[-65,75],[0,120],[65,75],[130,0],[130,-100],[65,-120]],edges:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,0]]}}export{t as stage};
 //# sourceMappingURL=Stage0.js.map
