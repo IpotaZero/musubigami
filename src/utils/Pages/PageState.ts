@@ -20,6 +20,8 @@ export class PageState {
     }
 
     back(depth: number): string {
+        if (!Number.isInteger(depth) || depth <= 0) throw new Error("depth must be an integer (>= 1).")
+
         if (this.history.length <= depth) {
             this.history = []
             return "first"

@@ -127,9 +127,9 @@ export default [
     },
     {
         start: [
-            { type: "portrait", url: "assets/images/character/tsuihou.psd", name: "tsuihou", side: "right" },
+            { type: "portrait", url: "assets/images/character/hentou.psd", name: "hentou", side: "right" },
             "ユユ:<br>うーん、どこに行ったんだろう。",
-            { type: "portrait-change", name: "tsuihou", layers: "レイヤー 1" },
+            { type: "portrait-change", name: "hentou", layers: "レイヤー 1" },
             "???:<br>お困りのようですね、お嬢さん。",
             "ユユ:<br>怪しいやつ発見!",
             "???:<br>怪しくないですよっ! ",
@@ -138,8 +138,8 @@ export default [
             "ユユ:<br>アンタの正体も、アイツの行方も教えてもらいます!",
         ],
         end: [
-            { type: "portrait", url: "assets/images/character/tsuihou.psd", name: "tsuihou", side: "right" },
-            { type: "portrait-change", name: "tsuihou", layers: "レイヤー 1" },
+            { type: "portrait", url: "assets/images/character/hentou.psd", name: "hentou", side: "right" },
+            { type: "portrait-change", name: "hentou", layers: "レイヤー 1" },
             "???:<br>やーらーれーたー。",
             "ユユ:<br>万事解決っ! さあ、教えてもらいましょう!",
             "返答の神:<br>僕は返答。君や意味付けと同じ物さ。",
@@ -164,22 +164,17 @@ export default [
     },
     {
         start: [
+            { type: "portrait", url: "assets/images/character/tsuuhou.psd", name: "tsuuhou", side: "right" },
             "ユユ:<br>うーん、こっちからアイツっぽい気配がする。",
-            "???:<br>ばんっ!",
+            "???:<br>ぴぴーっ!",
             "ユユ:<br>!?",
-            "追放の神:<br>こんにちは、縁結び。私は追放。新たな同胞の誕生を祝福すると同時に、",
-            "追放の神:<br>君に試練を与えよう!",
-            "ユユ:<br>ーーーッ!",
-            "ユユ:<br>(声が出ない!?)",
+            { type: "portrait-change", name: "tsuuhou", layers: "レイヤー 2,レイヤー 3" },
+            "通報の神:<br>おい、お前! 何みてんのサ!",
+            "ユユ:<br>君が呼び止めたんでしょ!",
+            "通報の神:<br>通報しちゃうぞ!",
+            "ユユ:<br>なんで!?",
         ],
-        end: [
-            "追放の神:<br>……。",
-            "ユユ:<br>ぶはー。何するのさ!",
-            "追放の神:<br>素晴らしい権能! これで私達も安泰だ!",
-            "ユユ:<br>何言ってるのさ?",
-            "追放の神:<br>我々もタダでは生きていけないって事ですよ。",
-            "ユユ:<br>神も難しいんだね。",
-        ],
+        end: ["通報の神:<br>なんだ、欠片持ちか。", "ユユ:<br>なんだとは何さ。", "通報の神:<br>"],
     },
     {
         start: [
@@ -214,7 +209,7 @@ export default [
         end: [],
     },
     {
-        start: ["ツ", "ユユ:<br>でも、私に何が……。", "追放の神:<br>思い出してっ。君は何でも出来るって事を。"],
+        start: ["ツ", "ユユ:<br>でも、私に何が……。", "通報の神:<br>思い出せっ! 君は何でも出来るって事!"],
         end: [],
     },
     {

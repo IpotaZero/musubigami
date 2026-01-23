@@ -64,33 +64,26 @@ export class Awaits {
         )
     }
 
-    static async timeOver<T>(ms: number, promise: Promise<T>, whenOver: () => T): Promise<T> {
-        let timeoutId: ReturnType<typeof setTimeout>
+    static async timeOver(ms: number, promise: Promise<unknown>, whenOver: () => void): Promise<void> {
+        let done = false
 
-        // 1. タイムアウト用の Promise
-        const timeoutPromise = new Promise<T>((resolve) => {
-            timeoutId = setTimeout(() => {
-                resolve(whenOver())
-            }, ms)
+        const timeoutPromise = Awaits.sleep(ms).then(() => {
+            if (!done) {
+                whenOver()
+            }
         })
 
-        try {
-            // 2. 本来の処理とタイマーを競わせる
-            // Promise.race 自体は先に終わった方を返すが、
-            // どちらの結果になっても finally でタイマーを解除する
-            return await Promise.race([promise, timeoutPromise])
-        } finally {
-            // 3. どちらかが完了したらタイマーをクリアする
-            // 本来の処理が ms 以内に終われば、whenOver の実行を阻止できる
-            clearTimeout(timeoutId!)
-        }
+        await Promise.race([promise, timeoutPromise])
+        done = true
     }
 
-    static async loading<T>(ms: 1000, promise: Promise<T>, whenOver: () => void) {
+    static async loading<T>(ms: number, promise: Promise<T>, whenOver: () => void) {
         let done = false
+        let over = false
 
         Awaits.sleep(ms).then(() => {
             if (!done) {
+                over = true
                 whenOver()
             }
         })
@@ -98,7 +91,7 @@ export class Awaits {
         const value = await promise
         done = true
 
-        return value
+        return { value, over }
     }
 
     static waitElementReady(container: Element) {

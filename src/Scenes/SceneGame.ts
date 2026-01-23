@@ -2,6 +2,7 @@ import { Dom } from "../Dom"
 import { Game } from "../Game/Game"
 import { LocalStorage } from "../LocalStorage"
 import { SE } from "../SE"
+import { Awaits } from "../utils/Awaits"
 import { BGM } from "../utils/BGM/BGM"
 import { startConfetti } from "../utils/confetti"
 import { MusicVisualizer } from "../utils/MusicVisualizer"
@@ -31,13 +32,15 @@ export class SceneGame extends Scene {
     }
 
     async #setup(ch: Chapters, stageId: number) {
-        const p = this.#startBGM(stageId)
+        const loadBGM = this.#startBGM(stageId)
         await this.#pages.loadFromFile(Dom.container, "assets/pages/game.html")
 
         this.#setupButtons(ch, stageId)
         this.#setupCanvas()
         await this.#setupGame(ch, stageId)
-        await p
+        await Awaits.timeOver(5000, loadBGM, () => {
+            console.warn("BGMの読み込みに時間掛かり過ぎ! スキップしました。")
+        })
 
         if (stageId === 0) {
             this.#firstStageTutorial()

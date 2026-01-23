@@ -1,11 +1,12 @@
 import { Dom } from "./Dom"
 import { LocalStorage } from "./LocalStorage"
 import { SceneChanger } from "./Scenes/SceneChanger"
+import { Awaits } from "./utils/Awaits"
 import { BGM } from "./utils/BGM/BGM"
 
 import { Graph } from "./utils/Graph"
 import { KeyboardOperation } from "./utils/KeyboardOperation"
-import { PsdElement } from "./utils/PsdElement"
+import { PsdElement } from "./utils/PsdElement/PsdElement"
 import { Serif } from "./utils/Serif"
 
 PsdElement
@@ -25,7 +26,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         LocalStorage.clear()
     }
 
-    await document.fonts.ready
+    await Awaits.timeOver(5000, document.fonts.ready, () => {
+        console.warn("fontの読み込みに時間掛かり過ぎ! スキップしました。")
+    })
 
     const { SceneTitle } = await import("./Scenes/SceneTitle.js")
     SceneChanger.init(new SceneTitle())

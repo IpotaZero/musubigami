@@ -46,6 +46,12 @@ export class MapRenderer {
         })
     }
 
+    changeBackground(layerName: string) {
+        const bg = this.container.querySelector(".background")!
+
+        bg.setAttribute("layers", layerName)
+    }
+
     #drawStar(svg: SVGSVGElement, button: SVGRectElement) {
         if (button.dataset.hasStar) return
         button.dataset.hasStar = "true"

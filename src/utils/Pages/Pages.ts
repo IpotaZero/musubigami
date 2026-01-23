@@ -1,20 +1,17 @@
 import { PageDom } from "./PageDom"
+import { PageEventSetter } from "./PageEventSetter"
 import { PageRun } from "./PageRun"
 import { PageState } from "./PageState"
 
-export type PageButton = HTMLElement | SVGElement
-
 export type FadeOption = Partial<{ msIn: number; msOut: number }>
+type GotoOption = FadeOption & { back?: boolean }
 type LoadOption = Partial<{ history: string[] }>
 
 /**
- * Pages <- Dom, Run, State
+ * Pages <- Dom, Run, State, EventSetter
  */
 
 export class Pages {
-    private static readonly DEFAULT_IN_MS = 250
-    private static readonly DEFAULT_OUT_MS = 250
-
     private dom!: PageDom
     private state!: PageState
 
@@ -33,10 +30,16 @@ export class Pages {
             throw new Error("Pages have already been loaded")
         }
 
-        this.state = new PageState(history)
         this.dom = new PageDom(container, html)
         await this.dom.ready
-        this.setupButtonsOnclick()
+
+        // イベントバインドを外部に委譲
+        PageEventSetter.setOnclick(this.dom.container, {
+            enter: this.enter.bind(this),
+            back: this.back.bind(this),
+        })
+
+        this.state = new PageState(history)
 
         await this.goto(this.state.currentPageId, { msIn: 0, msOut: 0 })
     }
@@ -51,6 +54,10 @@ export class Pages {
         }
     }
 
+    getAllPages(pageId: string) {
+        return this.dom.getAllPages(pageId)
+    }
+
     getCurrentPage() {
         return this.dom.getPage(this.state.currentPageId)
     }
@@ -59,32 +66,15 @@ export class Pages {
         return this.state.currentPageId
     }
 
-    private setupButtonsOnclick() {
-        this.dom.container.querySelectorAll<PageButton>("[data-link]").forEach(this.setupLinkButton.bind(this))
-        this.dom.container.querySelectorAll<PageButton>("[data-back]").forEach(this.setupBackButton.bind(this))
-    }
-
-    private setupLinkButton(button: PageButton) {
-        const id = button.dataset.link || "first"
-        const msIn = parseToNumber(button.dataset["msIn"], Pages.DEFAULT_IN_MS)
-        const msOut = parseToNumber(button.dataset["msOut"], Pages.DEFAULT_OUT_MS)
-
-        button.onclick = () => this.goto(id, { msIn, msOut })
-    }
-
-    private setupBackButton(button: PageButton) {
-        const depth = Number(button.dataset.back) || 1
-        const msIn = parseToNumber(button.dataset["msIn"], Pages.DEFAULT_IN_MS)
-        const msOut = parseToNumber(button.dataset["msOut"], Pages.DEFAULT_OUT_MS)
-
-        button.onclick = () => this.back(depth, { msIn, msOut })
-    }
-
     async back(depth: number, option: FadeOption = {}) {
-        await this.goto(this.state.back(depth), option)
+        await this.goto(this.state.back(depth), Object.assign(option, { back: true }))
     }
 
-    async goto(id: string, { msIn = Pages.DEFAULT_IN_MS, msOut = Pages.DEFAULT_OUT_MS }: FadeOption = {}) {
+    async enter(id: string, option: FadeOption = {}) {
+        await this.goto(id, Object.assign(option, { back: false }))
+    }
+
+    private async goto(id: string, option: GotoOption) {
         // 0. 遷移中に別の遷移が発生しないように
         if (this.state.isTransitioning()) return
         this.state.startTransition()
@@ -96,23 +86,44 @@ export class Pages {
             return
         }
 
-        // 2. 現在のページを去る
-        await this.dom.fadeOut(this.state.currentPageId, { msOut })
-        await this.run.onLeft(this, this.state.currentPageId)
-
-        // 3. 状態の更新
-        this.state.goto(id)
-
-        // 4. 新しいページに入る
-        await this.run.onEnter(this, id)
-        await this.dom.fadeIn(id, { msIn })
+        // layerに応じて場合分け
+        const layerFrom = parseToNumber(this.dom.getPage(this.state.currentPageId).dataset["layer"], 0)
+        const layerTo = parseToNumber(this.dom.getPage(id).dataset["layer"], 0)
+        await this.transition(layerFrom, layerTo, id, option)
 
         // 5. 遷移完了
         this.state.endTransition()
     }
+
+    private async transition(layerFrom: number, layerTo: number, id: string, { msIn, msOut, back }: GotoOption) {
+        if (layerFrom === layerTo) {
+            // 2. 現在のページを去る
+            await this.dom.fadeOut(this.state.currentPageId, { msOut })
+            await this.run.onLeft(this, this.state.currentPageId)
+
+            // 3. 状態の更新
+            this.state.goto(id)
+
+            // 4. 新しいページに入る
+            await this.run.onEnter(this, id)
+            await this.dom.fadeIn(id, { msIn })
+        } else if (layerFrom < layerTo) {
+            this.state.goto(id)
+
+            await this.run.onEnter(this, id)
+            await this.dom.fadeIn(id, { msIn })
+        } else {
+            if (!back) throw new Error("下のlayerにback以外でgotoしようとした。")
+
+            await this.dom.fadeOut(this.state.currentPageId, { msOut })
+            await this.run.onLeft(this, this.state.currentPageId)
+
+            this.state.goto(id)
+        }
+    }
 }
 
-function parseToNumber(str: string | undefined | null, defaultValue: number) {
+export function parseToNumber(str: string | undefined | null, defaultValue: number) {
     if (!str) return defaultValue
 
     if (Number.isNaN(Number(str))) return defaultValue

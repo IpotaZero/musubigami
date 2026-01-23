@@ -7,7 +7,7 @@ import { FadeOption } from "./Pages"
  * domのセットアップ、保持、フェードを行う。
  */
 export class PageDom {
-    container: HTMLElement
+    readonly container: HTMLElement
     private readonly pages = new RegExpDict<HTMLElement>({})
 
     readonly ready
@@ -18,18 +18,18 @@ export class PageDom {
         this.ready = this.setup(html)
     }
 
-    async fadeOut(currentPageId: string, { msOut }: FadeOption) {
+    async fadeOut(currentPageId: string, { msOut }: FadeOption = {}) {
         const from = this.getPage(currentPageId)
 
-        await Transition.fadeOut(from, msOut)
+        await Transition.fadeOut(this.container, msOut)
         from.classList.add("hidden")
     }
 
-    async fadeIn(nextPageId: string, { msIn }: FadeOption) {
+    async fadeIn(nextPageId: string, { msIn }: FadeOption = {}) {
         const to = this.getPage(nextPageId)
 
         to.classList.remove("hidden")
-        await Transition.fadeIn(to, msIn)
+        await Transition.fadeIn(this.container, msIn)
     }
 
     getPage(pageId: string, option: { noError: true }): HTMLElement | undefined
@@ -48,6 +48,10 @@ export class PageDom {
         return page
     }
 
+    getAllPages(pageId: string) {
+        return this.pages.getAll(pageId)
+    }
+
     private async setup(html: string) {
         this.container.style.display = "none"
         this.container.innerHTML = html
@@ -60,11 +64,15 @@ export class PageDom {
                 page.classList.add("hidden")
             })
 
-        await Promise.all([
+        const load = Promise.all([
             Awaits.waitCSSLoad(this.container),
             Awaits.waitElementReady(this.container),
             //
         ])
+
+        await Awaits.timeOver(5000, load, () => {
+            console.warn("pageの読み込みに時間掛かり過ぎ! スキップしました。")
+        })
 
         this.container.style.display = ""
     }

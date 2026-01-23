@@ -42,14 +42,11 @@ export class SceneChanger {
 
         this.#currentScene = await newScene()
 
-        let showed = false
-
-        await Awaits.loading(1000, this.#currentScene.ready, () => {
+        const { over } = await Awaits.loading(1000, this.#currentScene.ready, () => {
             showLoading() // ローディング画面表示
-            showed = true
         })
 
-        if (showed) {
+        if (over) {
             hideLoading()
         }
 

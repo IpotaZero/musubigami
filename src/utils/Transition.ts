@@ -2,6 +2,13 @@ import { Awaits } from "./Awaits"
 
 export class Transition {
     static async fadeOut(container: HTMLElement, ms: number = 200) {
+        if (ms === 0) {
+            container.style.transition = "opacity 0s"
+            container.style.opacity = "0"
+            container.style.pointerEvents = "none"
+            return
+        }
+
         container.style.transition = "opacity 0s"
         container.style.pointerEvents = "none"
 
@@ -18,6 +25,13 @@ export class Transition {
     }
 
     static async fadeIn(container: HTMLElement, ms: number = 200) {
+        if (ms === 0) {
+            container.style.transition = "opacity 0s"
+            container.style.opacity = "1"
+            container.style.pointerEvents = ""
+            return
+        }
+
         container.style.transition = "opacity 0s"
         container.style.pointerEvents = "none"
 

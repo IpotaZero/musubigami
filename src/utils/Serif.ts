@@ -1,6 +1,6 @@
 import { SE } from "../SE"
 import { Awaits } from "./Awaits"
-import { PsdElement } from "./PsdElement"
+import { PsdElement } from "./PsdElement/PsdElement"
 
 export type SerifCommand =
     | string
@@ -154,7 +154,7 @@ export class Serif {
             this.#background.innerHTML = `<img src="${command.image}" alt="" class="fade-in"/>`
             this.#say()
         } else if (command.type === "portrait") {
-            const psd = new PsdElement({ url: `${command.url}`, layers: "normal" })
+            const psd = new PsdElement({ src: `${command.url}`, layers: "normal" })
             psd.classList.add("serif-portrait", "hidden")
             psd.classList.add(command.side ?? "left")
             psd.id = command.name

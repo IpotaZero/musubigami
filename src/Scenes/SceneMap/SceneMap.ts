@@ -55,6 +55,9 @@ export class SceneMap extends Scene {
         if (pageId === "ch1") this.#story.playEvent("敵対", "ch1")
         if (pageId === "ch2") this.#story.playEvent("歪み", "ch2")
         this.#currentCh = parseInt(pageId.replace("ch", "")) as 0 | 1 | 2
+
+        this.#renderer.changeBackground(pageId)
+
         // this.#renderer.moveYuyu(MapConfig.STAGE_OFFSETS[this.#currentCh])
     }
 
