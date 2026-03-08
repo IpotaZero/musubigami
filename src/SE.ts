@@ -30,7 +30,7 @@ export class SE {
     static switch = new Sound("assets/sounds/se/引き戸を閉める.mp3", 1)
     static click = new Sound("assets/sounds/se/カーソル移動2.mp3", 1)
     static suzu = new Sound("assets/sounds/se/鈴が鳴る.mp3", 1)
-    static kansei = new Sound("assets/sounds/se/歓声.mp3", 1)
+    static kansei = new Sound("assets/sounds/se/歓声.mp3", 0.5)
 
     static setVolume(volume: number) {
         Object.values(this).forEach((se) => {
@@ -38,3 +38,7 @@ export class SE {
         })
     }
 }
+
+const list = [1, 2, 3, 4, 5].values()
+
+list.map(() => 0).find(() => false)

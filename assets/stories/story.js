@@ -78,8 +78,6 @@ export default [
     },
     {
         start: [
-            { type: "portrait", url: "assets/images/character/imi.psd", name: "imi", side: "right" },
-            { type: "portrait-change", name: "imi", layers: "レイヤー 1,レイヤー 2" },
             "???:<br>ふぁぼ☆",
             "ユユ:<br>誰?",
             "意味付けの神:<br>あたしは意味付けの神……の<ruby>仮想体<rt>アバター</rt></ruby>!",
@@ -93,8 +91,6 @@ export default [
             "ユユ:<br>いきなり過ぎっ!",
         ],
         end: [
-            { type: "portrait", url: "assets/images/character/imi.psd", name: "imi", side: "right" },
-            { type: "portrait-change", name: "imi", layers: "レイヤー 1,レイヤー 2" },
             "意味付けの神:<br>あー、楽しかった! ありがとっ縁結び。",
             "ユユ:<br>つ、疲れた……。",
             "ユユ:<br>(けど、やっぱり縁結びは気持ちいい。)",
@@ -127,9 +123,7 @@ export default [
     },
     {
         start: [
-            { type: "portrait", url: "assets/images/character/hentou.psd", name: "hentou", side: "right" },
             "ユユ:<br>うーん、どこに行ったんだろう。",
-            { type: "portrait-change", name: "hentou", layers: "レイヤー 1" },
             "???:<br>お困りのようですね、お嬢さん。",
             "ユユ:<br>怪しいやつ発見!",
             "???:<br>怪しくないですよっ! ",
@@ -138,8 +132,6 @@ export default [
             "ユユ:<br>アンタの正体も、アイツの行方も教えてもらいます!",
         ],
         end: [
-            { type: "portrait", url: "assets/images/character/hentou.psd", name: "hentou", side: "right" },
-            { type: "portrait-change", name: "hentou", layers: "レイヤー 1" },
             "???:<br>やーらーれーたー。",
             "ユユ:<br>万事解決っ! さあ、教えてもらいましょう!",
             "返答の神:<br>僕は返答。君や意味付けと同じ物さ。",
@@ -164,15 +156,12 @@ export default [
     },
     {
         start: [
-            { type: "portrait", url: "assets/images/character/tsuuhou.psd", name: "tsuuhou", side: "right" },
-            "ユユ:<br>うーん、こっちからアイツっぽい気配がする。",
+            "ユユ:<br>こっちからアイツっぽい気配がするかも。",
             "???:<br>ぴぴーっ!",
             "ユユ:<br>!?",
-            { type: "portrait-change", name: "tsuuhou", layers: "レイヤー 2,レイヤー 3" },
             "通報の神:<br>おい、お前! 何みてんのサ!",
-            "ユユ:<br>君が呼び止めたんでしょ!",
+            "ユユ:<br>君が呼び止めたんでしょ。",
             "通報の神:<br>通報しちゃうぞ!",
-            "ユユ:<br>なんで!?",
         ],
         end: ["通報の神:<br>なんだ、欠片持ちか。", "ユユ:<br>なんだとは何さ。", "通報の神:<br>"],
     },
@@ -195,13 +184,11 @@ export default [
     // エコーチャンバーで増幅された思想が暴走を始めた。
     {
         start: [
-            { type: "portrait", url: "assets/images/character/tsuihou.psd", name: "tsuihou", side: "right" },
             "ユユ:<br>シン……。ルビ……。何なんだ一体……。",
             "ユユ:<br>如何してこんな事に?",
             "ツ",
             "ユユ:<br>ジャキ……。",
             "ユユ:<br>……私は、もう何も……してはいけないんだ。",
-            { type: "portrait-change", name: "tsuihou", layers: "レイヤー 1" },
             "返答の神:<br>そんな事は無いよ!",
             "ユユ:<br>返答さん。",
             "返答の神:<br>思い出して、君は自由だ。",
@@ -209,15 +196,19 @@ export default [
         end: [],
     },
     {
-        start: ["ツ", "ユユ:<br>でも、私に何が……。", "通報の神:<br>思い出せっ! 君は何でも出来るって事!"],
+        start: [
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
+            "ツ",
+            "ユユ:<br>でも、私に何が……。",
+            "通報の神:<br>思い出せっ! 君は何でも出来るって事!",
+        ],
         end: [],
     },
     {
         start: [
-            { type: "portrait", url: "assets/images/character/imi.psd", name: "imi", side: "right" },
             "ツ",
             "ユユ:<br>私に出来る事……。",
-            { type: "portrait-change", name: "imi", layers: "レイヤー 1,レイヤー 2" },
             "意味付けの神:<br>君がすごい人だって、あたしは知ってるよ。",
             "ユユ:<br>意味付けさん……。",
             "意味付けの神:<br>何度だって、何時からだってやり直せる。",

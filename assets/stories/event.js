@@ -1,12 +1,6 @@
 export default {
-    "始まり": [
-        "これは、神と友達になった少女の物語。",
-        { type: "background", image: "assets/images/backgrounds/始まり.png" },
-        "ユユ:<br>行こう、ラﾞァくんっ!",
-        "<0>",
-    ],
+    "始まり": ["これは、神と友達になった少女の物語。", "ユユ:<br>行こう、ラﾞァくんっ!", "<0>"],
     "敵対": [
-        { type: "portrait", url: "assets/images/character/jaki.psd", name: "jaki", side: "right" },
         "ユユ:<br>ふんふーん。人の縁を結ぶのは気持ちいいね。",
         "???:<br>やあ、君が縁結びだね?",
         "ユユ:<br>そうだけど。",
@@ -15,7 +9,6 @@ export default {
         "縁切りの神:<br>このまま縁を結び続けると云うのなら、君を止めないといけない。",
         "ユユ:<br>そんな! 人の縁を切って可い筈がない!",
         "縁切りの神:<br>そういうのなら! 行けっ! ジャキ!",
-        { type: "portrait-change", name: "jaki", layers: "normal" },
         "ツ",
         "ユユ:<br>私が全て結び直してやる!",
     ],
@@ -31,8 +24,6 @@ export default {
     "kari": ["そんな訳は無かったんだ。", "相手の事何も知らないで、指を動かすだけで友達になれるなんて!"],
     "kari2": ["情熱を忘れないで。", "初めてFollowされたときの温度を思い出して。"],
     "もこた": [
-        { type: "portrait", url: "assets/images/character/mokota.psd", name: "mokota", side: "right" },
-        { type: "portrait-change", name: "mokota", layers: "レイヤー 3" },
         "ユユ:<br>これは一体なんだろう?",
         "もこた:<br>どうも。もこたです。",
         "ユユ:<br>うわ、喋った。",

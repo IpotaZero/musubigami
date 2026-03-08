@@ -5,7 +5,7 @@ import { PsdElement } from "./PsdElement/PsdElement"
 export type SerifCommand =
     | string
     | { type: "background"; image: string }
-    | { type: "portrait"; url: string; name: string; side?: string }
+    | { type: "portrait"; url: string; name: string; side?: string; style?: string }
     | { type: "portrait-change"; name: string; layers: string }
     | { type: "voice"; url: string | null }
 
@@ -158,6 +158,9 @@ export class Serif {
             psd.classList.add("serif-portrait", "hidden")
             psd.classList.add(command.side ?? "left")
             psd.id = command.name
+
+            command.style && (psd.style = command.style)
+
             this.#container.appendChild(psd)
             this.#say()
         } else if (command.type === "portrait-change") {

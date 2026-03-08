@@ -78,22 +78,6 @@
     }
 }
 
-#yuyu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 16dvh;
-    height: 16dvh;
-    pointer-events: none;
-
-    /* transition: all 1s ease; */
-    display: none;
-
-    &:hover {
-        opacity: 0.5;
-    }
-}
-
 psd-viewer {
     position: absolute;
     height: 50%;

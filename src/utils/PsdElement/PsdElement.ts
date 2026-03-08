@@ -130,8 +130,9 @@ class PsdElement extends HTMLElement {
             .map((name) => PsdElement.findLayerByName(this.psd!.children!, name))
             .forEach((layer) => {
                 if (!layer) {
+                    console.log(this.getAttribute("src"))
                     console.error("存在しないlayer名")
-                    console.error(this)
+                    console.error(layerNames)
                     return
                 }
 
@@ -144,6 +145,9 @@ class PsdElement extends HTMLElement {
     private updateScale() {
         const mode = this.getAttribute("mode") ?? "contain"
         if (mode !== "contain" && mode !== "cover") throw new Error("不正なモード")
+
+        console.log(this.getAttribute("src"))
+        console.log(this.clientWidth, this.clientHeight)
 
         this.renderer.updateScale(this.clientWidth, this.clientHeight, {
             mode,

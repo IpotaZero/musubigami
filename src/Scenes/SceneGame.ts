@@ -60,8 +60,8 @@ export class SceneGame extends Scene {
             await BGM.load("assets/sounds/bgm/block.mp3")
             BGM.glance("assets/sounds/bgm/block.mp3", {
                 loop: true,
-                loopStartS: 13.333,
-                loopEndS: 95,
+                loopStartS: 13.714,
+                loopEndS: 97.714,
                 volume: 0.6,
             })
         } else {
