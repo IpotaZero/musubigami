@@ -33,7 +33,7 @@ export default [
             "ヨウ:<br>本当か? ありがとう。",
             "ユユ:<br>まっかせて!",
         ],
-        end: ["ユユ:<br>きっと、うまくいくよ。", "ヨウ:<br>ありがとな、ユユ。"],
+        end: ["ユユ:<br>きっと、うまくいくよ。"],
     },
     {
         start: [
@@ -62,7 +62,7 @@ export default [
             "ルビ:<br>でも、一人じゃあできない気がして、仲間が欲しいんだ。",
             "ユユ:<br>だったら、縁を結んであげましょう!",
         ],
-        end: ["ユユ:<br>きっと、いい仲間が見つかるよ。", "ルビ:<br>そっか。頑張ろう!"],
+        end: [],
     },
     {
         start: [
@@ -74,11 +74,15 @@ export default [
             "ギン:<br>実は昔、大切な友人と喧嘩して、それから話してないんだ。",
             "ユユ:<br>そっか。だったら、その縁を繋ぎ直してあげましょう。",
         ],
-        end: ["ギン:<br>ありがとう。本当に助かるよ。", "ユユ:<br>頑張ってね、ギン。"],
+        end: [],
     },
     {
         start: [
+            { type: "portrait", url: "assets/images/character/imi.psd", name: "imi", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "imi", layers: "レイヤー 1,レイヤー 2" },
             "???:<br>ふぁぼ☆",
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
             "ユユ:<br>誰?",
             "意味付けの神:<br>あたしは意味付けの神……の<ruby>仮想体<rt>アバター</rt></ruby>!",
             "意味付けの神:<br>……と、ぐなぼれっとに!",
@@ -91,6 +95,10 @@ export default [
             "ユユ:<br>いきなり過ぎっ!",
         ],
         end: [
+            { type: "portrait", url: "assets/images/character/imi.psd", name: "imi", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "imi", layers: "レイヤー 1,レイヤー 2" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
             "意味付けの神:<br>あー、楽しかった! ありがとっ縁結び。",
             "ユユ:<br>つ、疲れた……。",
             "ユユ:<br>(けど、やっぱり縁結びは気持ちいい。)",
@@ -123,7 +131,11 @@ export default [
     },
     {
         start: [
+            { type: "portrait", url: "assets/images/character/hentou.psd", name: "hentou", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
             "ユユ:<br>うーん、どこに行ったんだろう。",
+            { type: "portrait-change", name: "hentou", layers: "レイヤー 1,レイヤー 2" },
             "???:<br>お困りのようですね、お嬢さん。",
             "ユユ:<br>怪しいやつ発見!",
             "???:<br>怪しくないですよっ! ",
@@ -156,14 +168,26 @@ export default [
     },
     {
         start: [
+            { type: "portrait", url: "assets/images/character/tsuuhou.psd", name: "tsuuhou", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
             "ユユ:<br>こっちからアイツっぽい気配がするかも。",
+            { type: "portrait-change", name: "tsuuhou", layers: "レイヤー 2,レイヤー 3" },
             "???:<br>ぴぴーっ!",
             "ユユ:<br>!?",
             "通報の神:<br>おい、お前! 何みてんのサ!",
             "ユユ:<br>君が呼び止めたんでしょ。",
             "通報の神:<br>通報しちゃうぞ!",
         ],
-        end: ["通報の神:<br>なんだ、欠片持ちか。", "ユユ:<br>なんだとは何さ。", "通報の神:<br>"],
+        end: [
+            { type: "portrait", url: "assets/images/character/tsuuhou.psd", name: "tsuuhou", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
+            { type: "portrait-change", name: "tsuuhou", layers: "レイヤー 2,レイヤー 3" },
+            "通報の神:<br>なんだ、欠片持ちか。",
+            "ユユ:<br>なんだとは何さ。",
+            "通報の神:<br>ぽく無いなあって思っただけ。傲慢さが足りないんじゃない?",
+        ],
     },
     {
         start: [
@@ -196,13 +220,7 @@ export default [
         end: [],
     },
     {
-        start: [
-            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
-            { type: "portrait-change", name: "yuyu", layers: "normal" },
-            "ツ",
-            "ユユ:<br>でも、私に何が……。",
-            "通報の神:<br>思い出せっ! 君は何でも出来るって事!",
-        ],
+        start: ["ツ", "ユユ:<br>でも、私に何が……。", "通報の神:<br>思い出せっ! オマエは何でも出来るって事!"],
         end: [],
     },
     {
