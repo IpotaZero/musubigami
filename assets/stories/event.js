@@ -30,7 +30,7 @@ export default {
     "kari2": ["情熱を忘れないで。", "初めてFollowされたときの温度を思い出して。"],
     "もこた": [
         { type: "portrait", url: "assets/images/character/mokota.psd", name: "mokota", side: "right" },
-        { type: "portrait-change", name: "mokota", layers: "レイヤー 1,レイヤー 2,レイヤー 3" },
+        { type: "portrait-change", name: "mokota", layers: "normal" },
         "もこ子:<br>MCRの他のゲームも遊んでね!",
     ],
 }

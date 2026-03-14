@@ -26,12 +26,12 @@ export class SceneMap extends Scene {
         this.#currentCh = ch
         this.#renderer = new MapRenderer(Dom.container)
         this.#story = new MapStoryHandler()
-        this.ready = this.#setup()
+        this.ready = this.#setup(ch)
 
         // KeyboardOperation.update(null)
     }
 
-    async #setup() {
+    async #setup(ch: 0 | 1 | 2) {
         await this.#pages.loadFromFile(Dom.container, "assets/pages/map.html", { history: ["ch" + this.#currentCh] })
 
         this.#pages.onEnter("ch[012]", (pages) => {
@@ -49,6 +49,7 @@ export class SceneMap extends Scene {
         this.#refreshMap()
         this.#setupEvents()
         this.#renderer.moveYuyu(0)
+        this.#renderer.changeBackground(["ch0", "ch1", "ch2"][ch])
     }
 
     #handleChapterChange(pageId: string) {

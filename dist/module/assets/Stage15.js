@@ -1,2 +1,2 @@
-function i(){return{vertices:[[-100,-100],[100,-100],[100,100],[-100,100],[0,0,{switch:!0}]],edges:[[0,1],[1,2],[2,3],[3,0],[0,4,{multiplicity:2}],[1,4,{multiplicity:2}],[2,4,{multiplicity:2}],[3,4,{multiplicity:2}]]}}export{i as stage};
+function i(){const r=[];for(let t=0;t<5;t++)r.push([Math.sin((t-1)*2*Math.PI/5)*120,20-Math.cos((t-1)*2*Math.PI/5)*120]);return r.push([-120,-90],[120,-90]),{vertices:r,edges:[[0,1],[1,2],[2,3],[3,4,{arrow:!0}],[4,0],[0,2],[5,1],[6,1],[6,2],[0,3,{multiplicity:3}],[0,5,{arrow:!0,multiplicity:3}],[0,6],[1,3],[1,4,{arrow:!0}],[2,4],[2,5,{arrow:!0}],[3,5,{multiplicity:2}]]}}export{i as stage};
 //# sourceMappingURL=Stage15.js.map
