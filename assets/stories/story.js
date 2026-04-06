@@ -26,12 +26,11 @@ export default [
     {
         start: [
             "ユユ:<br>あ、ヨウだ。",
-            "ユユ:<br>ねえ、ヨウ、探したい物とか、無いかな?",
-            "ヨウ:<br>探したい物か……。",
-            "ヨウ:<br>ああ、実はさ。最近妹と喧嘩しちゃってさ。",
+            "ユユ:<br>ねえ、ヨウ、お困りごととか、無いかな?",
+            "ヨウ:<br>お困りごとか……。ああ、実はさ。最近妹と喧嘩しちゃってさ。",
             "ユユ:<br>なるほどなるほど。だったら、縁を結び直してあげようか?",
-            "ヨウ:<br>本当か? ありがとう。",
-            "ユユ:<br>まっかせて!",
+            "ヨウ:<br>どういうことだ?",
+            "ユユ:<br>まあまあ、まっかせて!",
         ],
         end: ["ユユ:<br>きっと、うまくいくよ。"],
     },
@@ -144,6 +143,10 @@ export default [
             "ユユ:<br>アンタの正体も、アイツの行方も教えてもらいます!",
         ],
         end: [
+            { type: "portrait", url: "assets/images/character/hentou.psd", name: "hentou", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
+            { type: "portrait-change", name: "hentou", layers: "レイヤー 1,レイヤー 2" },
             "???:<br>やーらーれーたー。",
             "ユユ:<br>万事解決っ! さあ、教えてもらいましょう!",
             "返答の神:<br>僕は返答。君や意味付けと同じ物さ。",
@@ -191,6 +194,10 @@ export default [
     },
     {
         start: [
+            { type: "portrait", url: "assets/images/character/sin.psd", name: "sin", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
+            { type: "portrait-change", name: "sin", layers: "normal,omake" },
             "ユユ:<br>追い詰めたよ! 人の縁を切りやがって!",
             "縁切りの神:<br>……僕が何故縁を切るのか話そう。",
             "縁切りの神:<br>君は、人の諍いの原因は何だと思う?",
@@ -202,17 +209,30 @@ export default [
             "縁切りの神:<br>誰かの繋がらない権利を保障するのが僕だ。それを邪魔するというのなら、",
             "2人:<br>消し飛ばしてやる!",
         ],
-        end: ["縁切りの神:<br>ぐっ……。", "ユユ:<br>……シン?", "縁切りの神:<br>……。", "ユユ:<br>ねえ、シン! どうして!"],
+        end: [
+            { type: "portrait", url: "assets/images/character/sin.psd", name: "sin", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
+            { type: "portrait-change", name: "sin", layers: "normal" },
+            "縁切りの神:<br>ぐっ……。",
+            "ユユ:<br>……シン?",
+            "縁切りの神:<br>……。",
+            "ユユ:<br>ねえ、シン! どうして!",
+        ],
     },
     // ch2 ユユの結び続けた縁が歪な形で結実する。
     // エコーチャンバーで増幅された思想が暴走を始めた。
     {
         start: [
+            { type: "portrait", url: "assets/images/character/hentou.psd", name: "hentou", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
             "ユユ:<br>シン……。ルビ……。何なんだ一体……。",
             "ユユ:<br>如何してこんな事に?",
             "ツ",
             "ユユ:<br>ジャキ……。",
             "ユユ:<br>……私は、もう何も……してはいけないんだ。",
+            { type: "portrait-change", name: "hentou", layers: "レイヤー 1,レイヤー 2" },
             "返答の神:<br>そんな事は無いよ!",
             "ユユ:<br>返答さん。",
             "返答の神:<br>思い出して、君は自由だ。",
@@ -220,11 +240,23 @@ export default [
         end: [],
     },
     {
-        start: ["ツ", "ユユ:<br>でも、私に何が……。", "通報の神:<br>思い出せっ! オマエは何でも出来るって事!"],
+        start: [
+            { type: "portrait", url: "assets/images/character/tsuuhou.psd", name: "tsuuhou", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
+            "ツ",
+            "ユユ:<br>でも、私に何が……。",
+            { type: "portrait-change", name: "tsuuhou", layers: "レイヤー 2,レイヤー 3" },
+            "通報の神:<br>思い出せっ! オマエは何でも出来るって事!",
+        ],
         end: [],
     },
     {
         start: [
+            { type: "portrait", url: "assets/images/character/imi.psd", name: "imi", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "imi", layers: "レイヤー 1,レイヤー 2" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
             "ツ",
             "ユユ:<br>私に出来る事……。",
             "意味付けの神:<br>君がすごい人だって、あたしは知ってるよ。",
@@ -233,6 +265,10 @@ export default [
             "意味付けの神:<br>さ、君のしたい事は?",
         ],
         end: [
+            { type: "portrait", url: "assets/images/character/imi.psd", name: "imi", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "imi", layers: "レイヤー 1,レイヤー 2" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
             "意味付けの神:<br>これが君のしたい事?",
             "ユユ:<br>うん。でも、これは私のすべき事でもあると思うんだ。",
             "ユユ:<br>ありがとう、意味付けさん。",
@@ -242,6 +278,10 @@ export default [
     },
     {
         start: [
+            { type: "portrait", url: "assets/images/character/sin.psd", name: "sin", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
+            { type: "portrait-change", name: "sin", layers: "normal,omake" },
             "ユユ:<br>やあ、シン。久しぶり。",
             "縁切りの神:<br>やっぱり、君は間違っていたな。",
             "ユユ:<br>うん。そうだね。",
@@ -251,17 +291,26 @@ export default [
             "ユユ:<br>だから、君を止めるよ。",
             "縁切りの神:<br>出来る物ならなあ!",
         ],
-        end: ["縁切りの神:<br>まだ終わりじゃあない! 俺は間違ってない!"],
+        end: [
+            { type: "portrait", url: "assets/images/character/sin.psd", name: "sin", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
+            { type: "portrait-change", name: "sin", layers: "normal,omake" },
+            "縁切りの神:<br>まだ終わりじゃあない! 俺は間違ってない!",
+        ],
     },
     // 第二形態
     {
         start: [],
         end: [
+            { type: "portrait", url: "assets/images/character/sin.psd", name: "sin", side: "right" },
+            { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+            { type: "portrait-change", name: "yuyu", layers: "normal" },
+            { type: "portrait-change", name: "sin", layers: "normal,omake" },
             "縁切りの神:<br>はは、ははは、終わり、か。",
             "縁切りの神:<br>ほら、その力でどうにでもしたらいいじゃないか、ユユ。",
             "ユユ:<br>……。",
             "ユユ:<br>こんな力があるから!",
-            "(神の力を捨てる画像)",
             "縁切りの神:<br>お前……!",
             "ユユ:<br>そんな訳は無かったんだ。指を動かすだけで友達になれるなんて。",
             "ユユ:<br>だからルビ達はあんなことをしたんだね。",

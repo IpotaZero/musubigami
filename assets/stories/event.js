@@ -6,7 +6,11 @@ export default {
         "<0>",
     ],
     "敵対": [
+        { type: "portrait", url: "assets/images/character/sin.psd", name: "sin", side: "right" },
+        { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
+        { type: "portrait-change", name: "yuyu", layers: "normal" },
         "ユユ:<br>ふんふーん。人の縁を結ぶのは気持ちいいね。",
+        { type: "portrait-change", name: "sin", layers: "normal,omake" },
         "???:<br>やあ、君が縁結びだね?",
         "ユユ:<br>そうだけど。",
         "縁切りの神:<br>僕は縁切り。君に忠告しに来た。",
@@ -18,10 +22,15 @@ export default {
         "ユユ:<br>私が全て結び直してやる!",
     ],
     "歪み": [
+        { type: "portrait", url: "assets/images/character/sin.psd", name: "sin", side: "right" },
+        { type: "portrait", url: "assets/images/character/yuyu.psd", name: "yuyu" },
         // シンは独りぼっちでは生きていけない事を理解していない。
         // followとblock両方が人を排他的にするというのに。
         //
+
         "(教室の隅から、刺すような鋭い声が聞こえる。)",
+        { type: "portrait-change", name: "yuyu", layers: "normal" },
+        { type: "portrait-change", name: "sin", layers: "normal,omake" },
         "縁切りの神:<br>君が指先一つで作ったその縁は、ただ愚者を生み出しただけだ。",
         "ユユ:<br>私は、そんな、そんな事をしたかった訳じゃ、ただ、仲よくして欲しくて。",
         "縁切りの神:<br>……僕は縁を切りに行く。反省したのなら、邪魔しないでよ。",
