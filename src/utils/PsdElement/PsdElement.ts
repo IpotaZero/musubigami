@@ -117,7 +117,7 @@ class PsdElement extends HTMLElement {
         if (!this.psd || !this.psd.children) return
 
         const layersAttr = this.getAttribute("layers")
-        if (!layersAttr) {
+        if (layersAttr === null) {
             this.container.innerHTML += '<p>Please specify a "layers" attribute.</p>'
             return
         }
