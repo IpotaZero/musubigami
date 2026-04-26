@@ -33,5 +33,6 @@ export function stage(): GraphData {
             [4, 6],
             [5, 6],
         ],
+        firstIndex: 0,
     }
 }

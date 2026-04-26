@@ -1,5 +1,6 @@
 import { Dom } from "../Dom"
 import { Game } from "../Game/Game"
+import { GraphData } from "../Game/Graph"
 import { LocalStorage } from "../LocalStorage"
 import { SE } from "../SE"
 import { Awaits } from "../utils/Awaits"
@@ -92,31 +93,10 @@ export class SceneGame extends Scene {
                 )
             }
         })
-
-        this.#pages.beforeEnter("retry", async () => {
-            this.#game.retry()
-            SE.reset.play()
-        })
     }
 
     async #setupGame(ch: Chapters, stageId: number) {
         const container = this.#pages.getPage("first")
-
-        // if式欲しい......欲しくない?
-        const s = (() => {
-            if (stageId >= 13) {
-                return stageId - 13
-            }
-
-            if (stageId >= 7) {
-                return stageId - 7
-            }
-
-            return stageId
-        })()
-
-        const stageLabel = container.querySelector("#stage-id")!
-        stageLabel.textContent = `Stage: ${ch}-${s}`
 
         const center = container.querySelector("#center")!
         center.appendChild(this.#game.svg)
@@ -127,7 +107,8 @@ export class SceneGame extends Scene {
         const url = `../stages/Stage${stageId}.ts`
         const { stage } = await modules[url]()
 
-        this.#game.render(stage())
+        const stageData: GraphData = stage()
+        this.#game.render(stageData)
 
         const followed = container.querySelector("#followed")!
 
@@ -151,7 +132,21 @@ export class SceneGame extends Scene {
 
         this.#game.onMove = () => {
             SE.move.play()
+            hintButton.disabled = true
         }
+
+        const hintButton = container.querySelector(".hint") as HTMLButtonElement
+        hintButton.addEventListener("click", () => {
+            const hint = stageData.firstIndex
+            this.#game.select(hint)
+            hintButton.disabled = true
+        })
+
+        this.#pages.beforeEnter("retry", async () => {
+            this.#game.retry()
+            SE.reset.play()
+            hintButton.disabled = false
+        })
     }
 
     #setupCanvas() {

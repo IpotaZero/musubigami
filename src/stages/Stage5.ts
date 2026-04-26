@@ -17,5 +17,6 @@ export function stage(): GraphData {
 
             [4, 1, { multiplicity: 1, arrow: true }],
         ],
+        firstIndex: 1,
     }
 }

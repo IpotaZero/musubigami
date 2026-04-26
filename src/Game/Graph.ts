@@ -4,6 +4,7 @@ export type EdgeData = [from: number, to: number, option?: { multiplicity?: numb
 export type GraphData = {
     vertices: VertexData[]
     edges: EdgeData[]
+    firstIndex: number
 }
 
 export const SVG_NS = "http://www.w3.org/2000/svg"

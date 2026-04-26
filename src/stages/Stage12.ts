@@ -30,5 +30,6 @@ export function stage(): GraphData {
             [6, 8, { valid: false }],
             [7, 8, { valid: false }],
         ],
+        firstIndex: 2,
     }
 }

@@ -85,3 +85,8 @@
     opacity: 1;
     transition: opacity 0.5s linear;
 }
+
+button:disabled {
+    opacity: 0.1;
+    pointer-events: none;
+}

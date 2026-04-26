@@ -26,6 +26,10 @@ export class Game {
         this.resizeObserver.observe(document.body)
     }
 
+    select(index: number) {
+        this.vertices[index].svg.dispatchEvent(new Event("click"))
+    }
+
     remove() {
         this.resizeObserver.unobserve(document.body)
     }
